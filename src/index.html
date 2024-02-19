@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>New Tab</title>
+    <script>
+      const searchParams = new URLSearchParams(location.search)
+      document.documentElement.lang = searchParams.get("lang")
+    </script>
+  </head>
+  <body>
+    <div id="wrap"></div>
+  </body>
+</html>
