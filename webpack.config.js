@@ -2,7 +2,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: {
+    'new-tab': './src/pages/new-tab/index.tsx',
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name]/bundle.js',
+  },
   module: {
     rules: [
       {
@@ -15,9 +21,11 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
   },
-  output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
+  plugins: [
+    new HtmlWebpackPlugin({ 
+      filename: 'new-tab/index.html',
+      template: './src/pages/new-tab/index.html',
+      chunks: ['new-tab'] 
+    })
+  ],
 }

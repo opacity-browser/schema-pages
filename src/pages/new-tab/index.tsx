@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom/client'
 import { Global, css } from '@emotion/react'
-import { Copyright } from './components/Copyright'
-import { Logo } from './components/Logo'
-import { Search } from './components/Search'
-import { Clock } from './components/Clock'
+import { Copyright } from '../../components/Copyright'
+import { Logo } from '../../components/Logo'
+import { Search } from '../../components/Search'
+import { Clock } from '../../components/Clock'
 
 const container = document.getElementById('wrap')
 const root = ReactDOM.createRoot(container as HTMLElement)
@@ -43,7 +43,7 @@ const App = () => {
             width: 50%;
             min-width: 400px;
           `}>
-            <Search />
+            {/* <Search /> */}
             <Clock />
           </div>
         </div>
