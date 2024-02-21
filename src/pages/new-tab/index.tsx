@@ -23,7 +23,7 @@ const App = () => {
         left: 0;
         bottom: 0;
         right: 0;
-        background: url(/imgs/tab_bg.avif);
+        background: url(/imgs/tab_bg.avif) #000;
         background-size: cover;
         background-position: center;
       `}>
