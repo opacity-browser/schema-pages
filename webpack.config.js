@@ -3,7 +3,7 @@ const path = require('path')
 
 module.exports = {
   entry: {
-    'new-tab': './src/pages/new-tab/index.tsx',
+    'new-tab': './src/pages/new-tab/index.tsx'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -26,6 +26,26 @@ module.exports = {
       filename: 'new-tab/index.html',
       template: './src/pages/new-tab/index.html',
       chunks: ['new-tab'] 
+    }),
+    new HtmlWebpackPlugin({ 
+      filename: 'not-connect-host/index.html',
+      template: './src/pages/not-connect-host/index.html',
+      chunks: ['not-connect-host'] 
+    }),
+    new HtmlWebpackPlugin({ 
+      filename: 'not-connect-internet/index.html',
+      template: './src/pages/not-connect-internet/index.html',
+      chunks: ['not-connect-internet'] 
+    }),
+    new HtmlWebpackPlugin({ 
+      filename: 'not-find-host/index.html',
+      template: './src/pages/not-find-host/index.html',
+      chunks: ['not-find-host'] 
+    }),
+    new HtmlWebpackPlugin({ 
+      filename: 'unknown/index.html',
+      template: './src/pages/unknown/index.html',
+      chunks: ['unknown'] 
     })
   ],
 }

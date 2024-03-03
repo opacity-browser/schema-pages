@@ -1,9 +1,10 @@
 import ReactDOM from 'react-dom/client'
-import { Global, css } from '@emotion/react'
+import { css } from '@emotion/react'
 import { Copyright } from '../../components/Copyright'
 import { Logo } from '../../components/Logo'
-import { Search } from '../../components/Search'
+// import { Search } from '../../components/Search'
 import { Clock } from '../../components/Clock'
+import Styles from './Styles'
 
 const container = document.getElementById('wrap')
 const root = ReactDOM.createRoot(container as HTMLElement)
@@ -11,12 +12,7 @@ const root = ReactDOM.createRoot(container as HTMLElement)
 const App = () => {
   return (
     <>
-    <Global styles={css`
-      * {
-        -webkit-user-select: none;
-        box-sizing: border-box;
-      }
-    `} />
+      <Styles />
       <div css={css`
         position: fixed;
         top: 0;
