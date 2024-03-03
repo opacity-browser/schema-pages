@@ -70,16 +70,14 @@
         const button = document.getElementById('refresh-btn')
 
         document.documentElement.lang = pageData.lang
-        document.head.getElementsByTagName("title")[0].innerHTML = pageData.title
+        document.head.getElementsByTagName("title")[0].innerHTML = pageData.headTitle
         document.getElementById('title').innerText = pageData.title
         document.getElementById('message').innerText = pageData.message
         button.innerText = pageData.refreshBtn
         
-        window.onload = () => {
-          button.addEventListener('click', () => {
-            window.location.replace(pageData.href)
-          })
-        }
+        button.addEventListener('click', () => {
+          window.location.replace(pageData.href)
+        })
       }
     </script>
   </head>
