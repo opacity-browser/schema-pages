@@ -43,7 +43,17 @@ const App = () => {
             <Clock />
           </div>
         </div>
-        <Logo />
+        <div css={css`
+          padding: 15px 20px;
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          color: #bbb;
+          font-size: 12px;
+          line-height: 16px;
+        `}>
+          <Logo />
+        </div>
         <Copyright />
       </div>
     </>
