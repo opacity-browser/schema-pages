@@ -93,36 +93,38 @@ export default () => {
       <h2>Search History</h2>
       {searchHistories.map(({ yearMonth, list }) => {
         return (
-          <$historyBox key={yearMonth}>
+          <>
             <p className='title'>{yearMonth}</p>
-            {list.length > 0 ? (
-              <ul>
-                {list.map(({ id, searchText, createDate }) => {
-                  return (
-                    <li key={id}>
-                      <div>
-                        <$checkbox 
-                          className={choiceIds.find((choiceId) => choiceId == id) ? "active" : ""}
-                          onClick={() => handleClickCheckbox(id)}
-                        >
-                          <Check />
-                        </$checkbox>
-                        <span>{createDate}</span>
-                        <p>{searchText}</p>
-                        <$closeBtnBox onClick={() => handleClickDeleteBtn(yearMonth, id)}>
-                          <Close />
-                        </$closeBtnBox>
-                      </div>
-                    </li>
-                  )
-                })}
-              </ul>
-            ) : (
-              <$empty>
-                <p>There is no search history.</p>
-              </$empty>
-            )}
-          </$historyBox>
+            <$historyBox key={yearMonth}>
+              {list.length > 0 ? (
+                <ul>
+                  {list.map(({ id, searchText, createDate }) => {
+                    return (
+                      <li key={id}>
+                        <div>
+                          <$checkbox 
+                            className={choiceIds.find((choiceId) => choiceId == id) ? "active" : ""}
+                            onClick={() => handleClickCheckbox(id)}
+                          >
+                            <Check />
+                          </$checkbox>
+                          <span>{createDate}</span>
+                          <p>{searchText}</p>
+                          <$closeBtnBox onClick={() => handleClickDeleteBtn(yearMonth, id)}>
+                            <Close />
+                          </$closeBtnBox>
+                        </div>
+                      </li>
+                    )
+                  })}
+                </ul>
+              ) : (
+                <$empty>
+                  <p>There is no search history.</p>
+                </$empty>
+              )}
+            </$historyBox>
+          </>
         )
       })}
       {(firstYearMonth !== "" && firstYearMonth !== yearMonth) && (
@@ -145,6 +147,12 @@ const $area = styled.div`
     font-size: 18px;
     color: #222;
     line-height: 35px;
+  }
+
+  .title {
+    font-size: 12px;
+    margin: 5px 32px;
+    color: #888;
   }
 `
 
@@ -220,7 +228,7 @@ const $checkbox = styled.div`
 `
 
 const $historyBox = styled.div`
-  padding: 8px 15px 5px;
+  padding: 6px 15px 6px;
   margin: 0 30px 15px;
   font-size: 14px;
   border: 1px solid rgb(228, 228, 228);
@@ -228,12 +236,6 @@ const $historyBox = styled.div`
   border-radius: 10px;
   font-weight: 400;
   color: #444;
-
-  & > p {
-    font-size: 12px;
-    margin: 5px 0;
-    color: #888;
-  }
 
   ul {
     li {
