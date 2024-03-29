@@ -71,7 +71,7 @@ const $logoArea = styled.div`
 
 const $menuArea = styled.div`
   padding: 0 30px;
-  font-size: 15px;
+  font-size: 14px;
   li {
     line-height: 40px;
     margin-bottom: 5px;
