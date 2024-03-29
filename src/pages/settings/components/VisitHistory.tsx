@@ -94,7 +94,7 @@ export default () => {
 
 const $area = styled.div`
   h2 {
-    padding: 43px 30px 27px;
+    padding: 41px 30px 29px;
     font-size: 18px;
     color: #222;
     line-height: 35px;

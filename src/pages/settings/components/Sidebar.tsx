@@ -21,7 +21,7 @@ export default ({ pageName, setPageName, menuList }) => {
         <ul>
           { menuList.map(({ name, link }) => {
             return (
-              <li>
+              <li key={name}>
                 <p 
                   className={pageName === link ? "active-menu" : ""}
                   onClick={() => handleClickMenu(link)} 
@@ -60,12 +60,12 @@ const $logoArea = styled.div`
 
   & > h1 {
     margin-left: 10px;
-    font-size: 24px;
+    font-size: 20px;
     vertical-align: middle;
-    line-height: 30px;
+    line-height: 33px;
     color: #222;
     font-weight: 500;
-    padding-top: 5px;
+    padding-top: 2px;
   }
 `
 

@@ -13,6 +13,7 @@ export default () => {
         padding: 0;
         height: 100%;
         color: #666;
+        font-family: sans-serif;
       }
 
       #wrap {
