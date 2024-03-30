@@ -1,8 +1,7 @@
-import styled from '@emotion/styled'
-import Close from '../icons/Close'
 import { useEffect, useState } from 'react'
-import BrowserMessageManager from '../../../managers/message'
-import { ISearchHistoriesDTO } from '../interfaces/searchHistories'
+import styled from '@emotion/styled'
+import PostMessages from '../adapters/PostMessages'
+import Close from '../icons/Close'
 import Check from '../icons/Check'
 
 const getYearMonth = () => {
@@ -33,14 +32,17 @@ export default () => {
   const [choiceIds, setChoiceIds] = useState([])
 
   const getSearchHistories = async () => {
-    const resSearchHistories: ISearchHistoriesDTO = await BrowserMessageManager.request("getSearchHistoryList", yearMonth)
-    setFirestYearMonth(resSearchHistories.firstDate)
-    resSearchHistories.list.sort((a, b) => getDateObj(b.createDate).getTime() - getDateObj(a.createDate).getTime())
-    const newHistories = [{
-      yearMonth: yearMonth,
-      list: resSearchHistories.list
-    }]
-    setSearchHistories([...searchHistories, ...newHistories])
+    const res = await PostMessages.getSearchHistoryList(yearMonth)
+    if(res === "error") {
+
+    } else {
+      setFirestYearMonth(res.firstDate)
+      res.list.sort((a, b) => getDateObj(b.createDate).getTime() - getDateObj(a.createDate).getTime())
+      setSearchHistories([...searchHistories, {
+        yearMonth: yearMonth,
+        list: res.list
+      }])
+    }
   }
 
   useEffect(() => {
@@ -52,8 +54,10 @@ export default () => {
   }
 
   const handleClickDeleteBtn = async (yearMonth: string, id: string) => {
-    const res = await BrowserMessageManager.request("deleteSearchHistory", JSON.stringify([id]))
-    if(res === "success") {
+    const res = await PostMessages.deleteSearchHistory([id])
+    if(res === "error") {
+
+    } else {
       const newSearchHistories = searchHistories.map(d => {
         if(d.yearMonth != yearMonth) return d
         return {
@@ -74,8 +78,10 @@ export default () => {
   }
 
   const handleClickDeleteCheck = async () => {
-    const res = await BrowserMessageManager.request("deleteSearchHistory", JSON.stringify(choiceIds))
-    if(res === "success") {
+    const res = await PostMessages.deleteSearchHistory(choiceIds)
+    if(res === "error") {
+      
+    } else {
       const newSearchHistories = searchHistories.map(d => {
         if(d.yearMonth != yearMonth) return d
         return {

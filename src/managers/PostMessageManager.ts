@@ -1,5 +1,5 @@
-class BrowserMessageManager {
-  request(name: string, value: string = ""): any {
+class PostMessageManager {
+  request<T>(name: string, value: string = ""): Promise<T> {
     return new Promise(resolve => {
       ;(window as any).opacityResponse[name] = ({ data }) => {
         console.log(data)
@@ -11,4 +11,4 @@ class BrowserMessageManager {
   }
 }
 
-export default new BrowserMessageManager()
+export default PostMessageManager

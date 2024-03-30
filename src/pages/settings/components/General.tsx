@@ -1,43 +1,58 @@
-import styled from '@emotion/styled'
 import { useEffect, useState } from 'react'
+import styled from '@emotion/styled'
+import PostMessages from '../adapters/PostMessages'
+import { IGeneralSettingList, IGeneralSettings } from '../interfaces/general'
 import ArrowDown from '../icons/ArrowDown'
-import BrowserMessageManager from '../../../managers/message'
-
-const themeList = ["System", "Light", "Dark"]
 
 export default () => {
-  const [browserSettings, setBrowserSettings] = useState({
-    searchEngine: "Google",
-    theme: "System",
-    retentionPeriod: "1 Week"
+  const [browserSettings, setBrowserSettings] = useState<IGeneralSettings>({
+    searchEngine: null,
+    theme: null,
+    retentionPeriod: null
   })
-  const [searchEngineList, setSearchEngineList] = useState(["Google", "Bing", "Yahoo"])
 
-  const getSettingData = async () => {
-    const browserSettingsData = await BrowserMessageManager.request("getBrowerSettings")
-    setBrowserSettings(browserSettingsData)
+  const [settingSelectList, setSettingSelectList] = useState<IGeneralSettingList>({
+    searchEngine: [],
+    theme: [],
+    retentionPeriod: []
+  })
+  
+  const getGeneralSettings = async () => {
+    const res = await PostMessages.getGeneralSettings()
+    if(res === "error") {
+
+    } else {
+      setBrowserSettings(res)
+    }
   }
 
-  const getSearchEngine = async () => {
-    const browserSearchEngineList = await BrowserMessageManager.request("getSearchEngineList")
-    setSearchEngineList(browserSearchEngineList)
+  const getGeneralSettingList = async () => {
+    const res = await PostMessages.getGeneralSettingList()
+    if(res === "error") {
+
+    } else {
+      setSettingSelectList(res)
+    }
   }
 
   useEffect(() => {
-    getSettingData()
-    getSearchEngine()
+    getGeneralSettings()
+    getGeneralSettingList()
   }, [])
 
   const handleChangeSelected = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target
     if(name === "searchEngine") {
-      const cacheBeforeSearchEngine = browserSettings.searchEngine
+      const cacheBeforeSearchEngine = { ...browserSettings.searchEngine }
       setBrowserSettings({
         ...browserSettings,
-        searchEngine: value
+        searchEngine: {
+          id: value,
+          name: settingSelectList.searchEngine.find(d => d.id === value).name
+        }
       })
-      const res = await BrowserMessageManager.request("setSearchEngine", value)
-      if(res != "success") {
+      const res = await PostMessages.setSearchEngine(value)
+      if(res === "error") {
         setBrowserSettings({
           ...browserSettings,
           searchEngine: cacheBeforeSearchEngine
@@ -46,13 +61,16 @@ export default () => {
     }
 
     if(name === "theme") {
-      const cacheBeforeTheme = browserSettings.theme
+      const cacheBeforeTheme = { ...browserSettings.theme }
       setBrowserSettings({
         ...browserSettings,
-        theme: value
+        theme: {
+          id: value,
+          name: settingSelectList.theme.find(d => d.id === value).name
+        }
       })
-      const res = await BrowserMessageManager.request("setBrowserTheme", value)
-      if(res != "success") {
+      const res = await PostMessages.setBrowserTheme(value)
+      if(res === "error") {
         setBrowserSettings({
           ...browserSettings,
           theme: cacheBeforeTheme
@@ -61,13 +79,16 @@ export default () => {
     }
 
     if(name === "period") {
-      const cacheBeforePeriod = browserSettings.retentionPeriod
+      const cacheBeforePeriod = { ...browserSettings.retentionPeriod }
       setBrowserSettings({
         ...browserSettings,
-        retentionPeriod: value
+        retentionPeriod: {
+          id: value,
+          name: settingSelectList.retentionPeriod.find(d => d.id === value).name
+        }
       })
-      const res = await BrowserMessageManager.request("setRetentionPeriod", value)
-      if(res != "success") {
+      const res = await PostMessages.setRetentionPeriod(value)
+      if(res === "error") {
         setBrowserSettings({
           ...browserSettings,
           retentionPeriod: cacheBeforePeriod
@@ -83,10 +104,10 @@ export default () => {
         <p className="title">Search engine</p>
         <div className="data">
           <$selectbox>
-            <select name="searchEngine" onChange={handleChangeSelected} value={browserSettings.searchEngine}>
-              { searchEngineList.map((name) => {
+            <select name="searchEngine" onChange={handleChangeSelected} value={browserSettings.searchEngine?.id}>
+              { settingSelectList.searchEngine.map(({ id, name }) => {
                 return (
-                  <option key={name} value={name}>{ name }</option>
+                  <option key={id} value={id}>{ name }</option>
                 )
               })}
             </select>
@@ -98,10 +119,10 @@ export default () => {
         <p className="title">Theme</p>
         <div className="data">
           <$selectbox>
-            <select name="theme" onChange={handleChangeSelected} value={browserSettings.theme}>
-              { themeList.map((name) => {
+            <select name="theme" onChange={handleChangeSelected} value={browserSettings.theme?.id}>
+              { settingSelectList.theme.map(({ id, name }) => {
                 return (
-                  <option key={name} value={name}>{ name }</option>
+                  <option key={id} value={id}>{ name }</option>
                 )
               })}
             </select>
@@ -113,10 +134,12 @@ export default () => {
         <p className="title">Data retention period</p>
         <div className="data">
           <$selectbox>
-          <select name="period" onChange={handleChangeSelected} value={browserSettings.retentionPeriod}>
-              <option value={"1 Week"}>1 Week</option>
-              <option value={"1 Month"}>1 Month</option>
-              <option value={"Indefinite"}>Indefinite</option>
+          <select name="period" onChange={handleChangeSelected} value={browserSettings.retentionPeriod?.id}>
+            { settingSelectList.retentionPeriod.map(({ id, name }) => {
+                return (
+                  <option key={id} value={id}>{ name }</option>
+                )
+              })}
             </select>
             <ArrowDown />
           </$selectbox>
