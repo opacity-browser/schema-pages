@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar'
 import General from '../components/General'
 import SearchHistory from '../components/SearchHistory'
 import VisitHistory from '../components/VisitHistory'
+import Permission from '../components/Permission'
 
 const menuList = [{
   name: "General",
@@ -14,6 +15,9 @@ const menuList = [{
 }, {
   name: "Visit History",
   link: "#visit-history"
+}, {
+  name: "Permission",
+  link: "#permission"
 }]
 
 export default () => {
@@ -32,6 +36,9 @@ export default () => {
         )}
         {pageName == "#visit-history" && (
           <VisitHistory />
+        )}
+        {pageName == "#permission" && (
+          <Permission />
         )}
       </$content>
     </$area>

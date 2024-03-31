@@ -1,12 +1,45 @@
 import PostMessageManager from '../../../managers/PostMessageManager'
 import { IGeneralSettingList, IGeneralSettings } from '../interfaces/general'
 import { ISearchHistoriesDTO, IVisitHistoriesDTO } from '../interfaces/histories'
+import { INotificationPermission } from '../interfaces/permissions'
 
 class PostMessages {
   postMessage: PostMessageManager
 
   constructor() {
     this.postMessage = new PostMessageManager()
+  }
+
+  async updateNotificationPermissions(permissionId: string, isDenied: boolean) {
+    if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
+      return await this.postMessage.request<"success" | "error">("updateNotificationPermissions", JSON.stringify({
+        id: permissionId,
+        isDenied: isDenied
+      }))
+    } else {
+      return "success"
+    }
+  }
+
+  async deleteNotificationPermissions(permissionIds: string[]) {
+    if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
+      return await this.postMessage.request<"success" | "error">("deleteNotificationPermissions", JSON.stringify(permissionIds))
+    } else {
+      return "success"
+    }
+  }
+
+  async getNotificationPermisions() {
+    if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
+      return await this.postMessage.request<INotificationPermission[] | "error">("getNotificationPermisions")
+    } else {
+      return [{
+        id: "a",
+        domain: "https://opacity.dev",
+        permission: 1,
+        isDenied: false
+      }]
+    }
   }
 
   async deleteVisitHistory(historyIds: string[]) {

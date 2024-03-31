@@ -198,7 +198,8 @@ const $deleteBtn = styled.p`
   border-radius: 6px;
   width: 80px;
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
+  text-shadow: 0 0 2px rgba(5, 115, 210, 0.5);
 `
 
 const $cancelBtn = styled.p`
@@ -210,7 +211,7 @@ const $cancelBtn = styled.p`
   border-radius: 6px;
   width: 80px;
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
 `
 
 const $checkbox = styled.div`
@@ -223,6 +224,8 @@ const $checkbox = styled.div`
   display: flex;
   items-align: center;
   justify-content: center;
+  margin-top: -1px;
+
   &.active {
     border: 1.5px rgb(70, 155, 235);
     background: rgb(70, 155, 235);
