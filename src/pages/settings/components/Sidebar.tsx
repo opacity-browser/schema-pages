@@ -73,7 +73,7 @@ const $menuArea = styled.div`
   padding: 0 30px;
   font-size: 14px;
   li {
-    line-height: 38px;
+    line-height: 36px;
     margin-bottom: 5px;
     p {
       padding: 0 15px;

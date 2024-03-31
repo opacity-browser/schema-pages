@@ -1,12 +1,36 @@
 import PostMessageManager from '../../../managers/PostMessageManager'
 import { IGeneralSettingList, IGeneralSettings } from '../interfaces/general'
-import { ISearchHistoriesDTO } from '../interfaces/searchHistories'
+import { ISearchHistoriesDTO, IVisitHistoriesDTO } from '../interfaces/histories'
 
 class PostMessages {
   postMessage: PostMessageManager
 
   constructor() {
     this.postMessage = new PostMessageManager()
+  }
+
+  async deleteVisitHistory(historyIds: string[]) {
+    if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
+      return await this.postMessage.request<"success" | "error">("deleteVisitHistory", JSON.stringify(historyIds))
+    } else {
+      return "success"
+    }
+  }
+
+  async getVisitHistoryList(yearMonth: string) {
+    if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
+      return await this.postMessage.request<IVisitHistoriesDTO | "error">("getVisitHistoryList", yearMonth)
+    } else {
+      return {
+        firstDate: "2024-03",
+        list: [{
+          id: "a",
+          title: "title",
+          url: "https://opacity.dev",
+          createDate: "2024-03-01 12:00:00"          
+        }]
+      }
+    }
   }
 
   async deleteSearchHistory(historyIds: string[]) {

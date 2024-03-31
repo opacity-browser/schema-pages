@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import PostMessages from '../adapters/PostMessages'
 import Close from '../icons/Close'
 import Check from '../icons/Check'
+import { ISearchHistory } from '../interfaces/histories'
 
 const getYearMonth = () => {
   const date = new Date()
@@ -26,7 +27,7 @@ const getDateObj = (stringDate: string) => {
 }
 
 export default () => {
-  const [firstYearMonth, setFirestYearMonth] = useState("")
+  const [firstYearMonth, setFirstYearMonth] = useState("")
   const [yearMonth, setYearMonth] = useState(getYearMonth())
   const [searchHistories, setSearchHistories] = useState([])
   const [choiceIds, setChoiceIds] = useState([])
@@ -36,7 +37,7 @@ export default () => {
     if(res === "error") {
 
     } else {
-      setFirestYearMonth(res.firstDate)
+      setFirstYearMonth(res.firstDate)
       res.list.sort((a, b) => getDateObj(b.createDate).getTime() - getDateObj(a.createDate).getTime())
       setSearchHistories([...searchHistories, {
         yearMonth: yearMonth,
@@ -62,7 +63,7 @@ export default () => {
         if(d.yearMonth != yearMonth) return d
         return {
           ...d,
-          list: d.list.filter(historyData => historyData.id !== id)
+          list: d.list.filter((historyData: ISearchHistory) => historyData.id !== id)
         }
       })
       setSearchHistories(newSearchHistories)
@@ -86,7 +87,7 @@ export default () => {
         if(d.yearMonth != yearMonth) return d
         return {
           ...d,
-          list: d.list.filter(historyData => !choiceIds.find(choiceId => choiceId === historyData.id))
+          list: d.list.filter((historyData: ISearchHistory) => !choiceIds.find(choiceId => choiceId === historyData.id))
         }
       })
       setSearchHistories(newSearchHistories)
@@ -236,7 +237,7 @@ const $checkbox = styled.div`
 const $historyBox = styled.div`
   padding: 6px 15px 6px;
   margin: 0 30px 15px;
-  font-size: 14px;
+  font-size: 13px;
   border: 1px solid rgb(228, 228, 228);
   background: rgba(150, 150, 150, 0.05);
   border-radius: 10px;
@@ -252,10 +253,12 @@ const $historyBox = styled.div`
         p {
           padding: 0 10px;
           flex-grow: 1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         span {
           padding: 0 15px;
-          width: 180px;
         }
       }
     }
