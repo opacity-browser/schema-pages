@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import PostMessages from '../adapters/PostMessages'
+import { useDialogMessagesStates } from '../hooks/DialogMessages'
 import { IGeneralSettingList, IGeneralSettings } from '../interfaces/general'
 import ArrowDown from '../icons/ArrowDown'
 
 export default () => {
+  const [mesages, setMessages] = useDialogMessagesStates()
   const [browserSettings, setBrowserSettings] = useState<IGeneralSettings>({
     searchEngine: null,
     theme: null,
     retentionPeriod: null
   })
-
   const [settingSelectList, setSettingSelectList] = useState<IGeneralSettingList>({
     searchEngine: [],
     theme: [],
@@ -20,7 +21,10 @@ export default () => {
   const getGeneralSettings = async () => {
     const res = await PostMessages.getGeneralSettings()
     if(res === "error") {
-
+      setMessages([...mesages, {
+        isActive: true,
+        message: "An error occurred"
+      }])
     } else {
       setBrowserSettings(res)
     }
@@ -29,7 +33,10 @@ export default () => {
   const getGeneralSettingList = async () => {
     const res = await PostMessages.getGeneralSettingList()
     if(res === "error") {
-
+      setMessages([...mesages, {
+        isActive: true,
+        message: "An error occurred"
+      }])
     } else {
       setSettingSelectList(res)
     }
@@ -53,6 +60,10 @@ export default () => {
       })
       const res = await PostMessages.setSearchEngine(value)
       if(res === "error") {
+        setMessages([...mesages, {
+          isActive: true,
+          message: "An error occurred"
+        }])
         setBrowserSettings({
           ...browserSettings,
           searchEngine: cacheBeforeSearchEngine
@@ -71,6 +82,10 @@ export default () => {
       })
       const res = await PostMessages.setBrowserTheme(value)
       if(res === "error") {
+        setMessages([...mesages, {
+          isActive: true,
+          message: "An error occurred"
+        }])
         setBrowserSettings({
           ...browserSettings,
           theme: cacheBeforeTheme
@@ -89,6 +104,10 @@ export default () => {
       })
       const res = await PostMessages.setRetentionPeriod(value)
       if(res === "error") {
+        setMessages([...mesages, {
+          isActive: true,
+          message: "An error occurred"
+        }])
         setBrowserSettings({
           ...browserSettings,
           retentionPeriod: cacheBeforePeriod

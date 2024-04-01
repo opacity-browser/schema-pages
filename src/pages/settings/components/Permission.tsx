@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import PostMessages from '../adapters/PostMessages'
+import { useDialogMessagesStates } from '../hooks/DialogMessages'
 import Close from '../icons/Close'
 import Check from '../icons/Check'
 import { INotificationPermission } from '../interfaces/permissions'
 
 export default () => {
-  
+  const [mesages, setMessages] = useDialogMessagesStates()
   const [choiceIds, setChoiceIds] = useState([])
   const [notificationPermissions, setNotificationPermissions] = useState<INotificationPermission[]>([])
 
   const getNotificationPermisions = async () => {
     const res = await PostMessages.getNotificationPermisions()
     if(res === "error") {
-
+      setMessages([...mesages, {
+        isActive: true,
+        message: "An error occurred"
+      }])
     } else {
       setNotificationPermissions(res)
     }
@@ -34,7 +38,10 @@ export default () => {
   const handleClickDeleteBtn = async (id: string) => {
     const res = await PostMessages.deleteNotificationPermissions([id])
     if(res === "error") {
-
+      setMessages([...mesages, {
+        isActive: true,
+        message: "An error occurred"
+      }])
     } else {
       const newNotiPerm = notificationPermissions.filter((permData: INotificationPermission) => {
         return permData.id !== id
@@ -46,7 +53,10 @@ export default () => {
   const handleClickDeleteCheck = async () => {
     const res = await PostMessages.deleteNotificationPermissions(choiceIds)
     if(res === "error") {
-      
+      setMessages([...mesages, {
+        isActive: true,
+        message: "An error occurred"
+      }])
     } else {
       const newNotiPerm = notificationPermissions.filter((permData: INotificationPermission) => {
         return !choiceIds.find(choiceId => choiceId === permData.id)

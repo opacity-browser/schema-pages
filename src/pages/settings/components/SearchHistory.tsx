@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import PostMessages from '../adapters/PostMessages'
+import { useDialogMessagesStates } from '../hooks/DialogMessages'
 import Close from '../icons/Close'
 import Check from '../icons/Check'
 import { ISearchHistory } from '../interfaces/histories'
@@ -27,6 +28,7 @@ const getDateObj = (stringDate: string) => {
 }
 
 export default () => {
+  const [mesages, setMessages] = useDialogMessagesStates()
   const [firstYearMonth, setFirstYearMonth] = useState("")
   const [yearMonth, setYearMonth] = useState(getYearMonth())
   const [searchHistories, setSearchHistories] = useState([])
@@ -35,7 +37,10 @@ export default () => {
   const getSearchHistories = async () => {
     const res = await PostMessages.getSearchHistoryList(yearMonth)
     if(res === "error") {
-
+      setMessages([...mesages, {
+        isActive: true,
+        message: "An error occurred"
+      }])
     } else {
       setFirstYearMonth(res.firstDate)
       res.list.sort((a, b) => getDateObj(b.createDate).getTime() - getDateObj(a.createDate).getTime())
@@ -57,7 +62,10 @@ export default () => {
   const handleClickDeleteBtn = async (yearMonth: string, id: string) => {
     const res = await PostMessages.deleteSearchHistory([id])
     if(res === "error") {
-
+      setMessages([...mesages, {
+        isActive: true,
+        message: "An error occurred"
+      }])
     } else {
       const newSearchHistories = searchHistories.map(d => {
         if(d.yearMonth != yearMonth) return d
@@ -81,7 +89,10 @@ export default () => {
   const handleClickDeleteCheck = async () => {
     const res = await PostMessages.deleteSearchHistory(choiceIds)
     if(res === "error") {
-      
+      setMessages([...mesages, {
+        isActive: true,
+        message: "An error occurred"
+      }])
     } else {
       const newSearchHistories = searchHistories.map(d => {
         if(d.yearMonth != yearMonth) return d
@@ -135,7 +146,7 @@ export default () => {
         )
       })}
       {(firstYearMonth !== "" && firstYearMonth !== yearMonth) && (
-        <$moreBtn onClick={handleClickMoreBtn}>More history</$moreBtn>
+        <$moreBtn onClick={handleClickMoreBtn}>View More</$moreBtn>
       )}
       {choiceIds.length > 0 && (
         <$optionBar>
@@ -238,7 +249,7 @@ const $checkbox = styled.div`
 `
 
 const $historyBox = styled.div`
-  padding: 6px 15px 6px;
+  padding: 7px 15px 6px;
   margin: 0 30px 15px;
   font-size: 13px;
   border: 1px solid rgb(228, 228, 228);
@@ -277,12 +288,12 @@ const $empty = styled.div`
 const $moreBtn = styled.p`
   display: inline-block;
   margin: 0 30px 15px;
-  padding: 7px 20px;
+  padding: 6px 16px;
   cursor: pointer;
   background: rgb(70, 155, 235);
   color: #fff;
-  font-size: 14px;
-  border-radius: 6px;
+  font-size: 13px;
+  border-radius: 4px;
 `
 
 const $closeBtnBox = styled.div`
