@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import PostMessages from '../adapters/PostMessages'
-import { useDialogMessagesStates } from '../hooks/DialogMessages'
+import { useGetPageStrings } from '../hooks/usePageStrings'
+import { useDialogMessagesStates } from '../hooks/useDialogMessages'
 import Close from '../icons/Close'
 import Check from '../icons/Check'
 import { IVisitHistory } from '../interfaces/histories'
@@ -28,6 +29,7 @@ const getDateObj = (stringDate: string) => {
 }
 
 export default () => {
+  const pageStrings = useGetPageStrings()
   const [mesages, setMessages] = useDialogMessagesStates()
   const [firstYearMonth, setFirstYearMonth] = useState("")
   const [yearMonth, setYearMonth] = useState(getYearMonth())
@@ -39,7 +41,7 @@ export default () => {
     if(res === "error") {
       setMessages([...mesages, {
         isActive: true,
-        message: "An error occurred"
+        message: pageStrings["An error occurred"]
       }])
     } else {
       setFirstYearMonth(res.firstDate)
@@ -64,7 +66,7 @@ export default () => {
     if(res === "error") {
       setMessages([...mesages, {
         isActive: true,
-        message: "An error occurred"
+        message: pageStrings["An error occurred"]
       }])
     } else {
       const newVisitHistories = visitHistories.map(d => {
@@ -91,7 +93,7 @@ export default () => {
     if(res === "error") {
       setMessages([...mesages, {
         isActive: true,
-        message: "An error occurred"
+        message: pageStrings["An error occurred"]
       }])
     } else {
       const newVisitHistories = visitHistories.map(d => {
@@ -106,9 +108,14 @@ export default () => {
     }
   }
 
+  const choiceHTMLText = () => {
+    const string = pageStrings["$n were selected."]
+    return string.replace("$n", `<span>${choiceIds.length}</span>`)
+  }
+
   return (
     <$area>
-      <h2>Visit History</h2>
+      <h2>{ pageStrings["Visit History"] }</h2>
       {visitHistories.map(({ yearMonth, list }) => {
         return (
           <>
@@ -138,7 +145,7 @@ export default () => {
                 </ul>
               ) : (
                 <$empty>
-                  <p>There is no visit history.</p>
+                  <p>{ pageStrings["There is no visit history."] }</p>
                 </$empty>
               )}
             </$historyBox>
@@ -146,13 +153,15 @@ export default () => {
         )
       })}
       {(firstYearMonth !== "" && firstYearMonth !== yearMonth) && (
-        <$moreBtn onClick={handleClickMoreBtn}>View More</$moreBtn>
+        <$moreBtn onClick={handleClickMoreBtn}>{ pageStrings["View More"] }</$moreBtn>
       )}
       {choiceIds.length > 0 && (
         <$optionBar>
-          <p className="message"><span>{choiceIds.length}</span> were selected.</p>
-          <$deleteBtn onClick={handleClickDeleteCheck}>Delete</$deleteBtn>
-          <$cancelBtn onClick={() => setChoiceIds([])}>Cancel</$cancelBtn>
+          <p className="message" dangerouslySetInnerHTML={{
+            __html: choiceHTMLText()
+          }} />
+          <$deleteBtn onClick={handleClickDeleteCheck}>{ pageStrings["Delete"] }</$deleteBtn>
+          <$cancelBtn onClick={() => setChoiceIds([])}>{ pageStrings["Cancel"] }</$cancelBtn>
         </$optionBar>
       )}
     </$area>

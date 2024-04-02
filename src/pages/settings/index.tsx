@@ -7,12 +7,9 @@ import Layout from './layouts/Layout'
 const container = document.getElementById('wrap')
 const root = ReactDOM.createRoot(container as HTMLElement)
 
-const App = () => {
-  
-  useLayoutEffect(() => {
-    (window as any).opacityResponse = {}
-  }, [])
+;(window as any).opacityResponse = {}
 
+const App = () => {  
   return (
     <>
       <GlobalStyles />

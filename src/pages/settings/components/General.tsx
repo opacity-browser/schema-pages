@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import PostMessages from '../adapters/PostMessages'
-import { useDialogMessagesStates } from '../hooks/DialogMessages'
+import { useGetPageStrings } from '../hooks/usePageStrings'
+import { useDialogMessagesStates } from '../hooks/useDialogMessages'
 import { IGeneralSettingList, IGeneralSettings } from '../interfaces/general'
 import ArrowDown from '../icons/ArrowDown'
 
 export default () => {
+  const pageStrings = useGetPageStrings()
   const [mesages, setMessages] = useDialogMessagesStates()
   const [browserSettings, setBrowserSettings] = useState<IGeneralSettings>({
     searchEngine: null,
-    theme: null,
+    screenMode: null,
     retentionPeriod: null
   })
   const [settingSelectList, setSettingSelectList] = useState<IGeneralSettingList>({
     searchEngine: [],
-    theme: [],
+    screenMode: [],
     retentionPeriod: []
   })
   
@@ -23,7 +25,7 @@ export default () => {
     if(res === "error") {
       setMessages([...mesages, {
         isActive: true,
-        message: "An error occurred"
+        message: pageStrings["An error occurred"]
       }])
     } else {
       setBrowserSettings(res)
@@ -35,7 +37,7 @@ export default () => {
     if(res === "error") {
       setMessages([...mesages, {
         isActive: true,
-        message: "An error occurred"
+        message: pageStrings["An error occurred"]
       }])
     } else {
       setSettingSelectList(res)
@@ -62,7 +64,7 @@ export default () => {
       if(res === "error") {
         setMessages([...mesages, {
           isActive: true,
-          message: "An error occurred"
+          message: pageStrings["An error occurred"]
         }])
         setBrowserSettings({
           ...browserSettings,
@@ -71,24 +73,24 @@ export default () => {
       }
     }
 
-    if(name === "theme") {
-      const cacheBeforeTheme = { ...browserSettings.theme }
+    if(name === "screenMode") {
+      const cacheBeforeScreenMode = { ...browserSettings.screenMode }
       setBrowserSettings({
         ...browserSettings,
-        theme: {
+        screenMode: {
           id: value,
-          name: settingSelectList.theme.find(d => d.id === value).name
+          name: settingSelectList.screenMode.find(d => d.id === value).name
         }
       })
-      const res = await PostMessages.setBrowserTheme(value)
+      const res = await PostMessages.setScreenMode(value)
       if(res === "error") {
         setMessages([...mesages, {
           isActive: true,
-          message: "An error occurred"
+          message: pageStrings["An error occurred"]
         }])
         setBrowserSettings({
           ...browserSettings,
-          theme: cacheBeforeTheme
+          screenMode: cacheBeforeScreenMode
         })
       }
     }
@@ -106,7 +108,7 @@ export default () => {
       if(res === "error") {
         setMessages([...mesages, {
           isActive: true,
-          message: "An error occurred"
+          message: pageStrings["An error occurred"]
         }])
         setBrowserSettings({
           ...browserSettings,
@@ -118,9 +120,9 @@ export default () => {
 
   return (
     <$area>
-      <h2>General</h2>
+      <h2>{ pageStrings["General"] }</h2>
       <$optionBox>
-        <p className="title">Search engine</p>
+        <p className="title">{ pageStrings["Search Engine"] }</p>
         <div className="data">
           <$selectbox>
             <select name="searchEngine" onChange={handleChangeSelected} value={browserSettings.searchEngine?.id}>
@@ -135,11 +137,11 @@ export default () => {
         </div>
       </$optionBox>
       <$optionBox>
-        <p className="title">Theme</p>
+        <p className="title">{ pageStrings["Screen Mode"] }</p>
         <div className="data">
           <$selectbox>
-            <select name="theme" onChange={handleChangeSelected} value={browserSettings.theme?.id}>
-              { settingSelectList.theme.map(({ id, name }) => {
+            <select name="screenMode" onChange={handleChangeSelected} value={browserSettings.screenMode?.id}>
+              { settingSelectList.screenMode.map(({ id, name }) => {
                 return (
                   <option key={id} value={id}>{ name }</option>
                 )
@@ -150,7 +152,7 @@ export default () => {
         </div>
       </$optionBox>
       <$optionBox>
-        <p className="title">Data retention period</p>
+        <p className="title">{ pageStrings["History Data Retention Period"] }</p>
         <div className="data">
           <$selectbox>
           <select name="period" onChange={handleChangeSelected} value={browserSettings.retentionPeriod?.id}>

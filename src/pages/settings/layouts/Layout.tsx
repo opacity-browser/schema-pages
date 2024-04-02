@@ -1,28 +1,31 @@
+import { useEffect, useLayoutEffect, useState } from 'react'
 import styled from '@emotion/styled'
-import { useEffect, useState } from 'react'
+import PostMessages from '../adapters/PostMessages'
+import { usePageStringsStates } from '../hooks/usePageStrings'
+import { useDialogMessagesStates } from '../hooks/useDialogMessages'
 import Sidebar from '../components/Sidebar'
 import General from '../components/General'
 import SearchHistory from '../components/SearchHistory'
 import VisitHistory from '../components/VisitHistory'
 import Permission from '../components/Permission'
-import { useDialogMessagesStates } from '../hooks/DialogMessages'
 import ErrorMessageDialog from '../components/DialogMessage'
 
-const menuList = [{
-  name: "General",
-  link: "#general"
-}, {
-  name: "Search History",
-  link: "#search-history"
-}, {
-  name: "Visit History",
-  link: "#visit-history"
-}, {
-  name: "Permission",
-  link: "#permission"
-}]
-
 export default () => {
+  const [pageStrings, setPageStrings] = usePageStringsStates()
+
+  const menuList = [{
+    name: pageStrings["General"] ?? "General",
+    link: "#general"
+  }, {
+    name: pageStrings["Search History"] ?? "Search History",
+    link: "#search-history"
+  }, {
+    name: pageStrings["Visit History"] ?? "Visit History",
+    link: "#visit-history"
+  }, {
+    name: pageStrings["Permission"] ?? "Permission",
+    link: "#permission"
+  }]
   const [pageName, setPageName] = useState<string>(location.hash || menuList[0].link)
   const [messages, setMessages] = useDialogMessagesStates()
 
@@ -31,6 +34,17 @@ export default () => {
       setMessages([])
     }
   }, [messages])
+
+  const getSettingsPageStrings = async () => {
+    const res = await PostMessages.getSettingsPageStrings()
+    if(res !== "error") {
+      setPageStrings(res)
+    }
+  }
+
+  useLayoutEffect(() => {
+    getSettingsPageStrings()
+  }, [])
 
   return (
     <$area>

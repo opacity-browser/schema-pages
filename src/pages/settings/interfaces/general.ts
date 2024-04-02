@@ -5,12 +5,12 @@ export interface IGeneralSettingItem {
 
 export interface IGeneralSettings {
   searchEngine: IGeneralSettingItem | null
-  theme: IGeneralSettingItem | null
+  screenMode: IGeneralSettingItem | null
   retentionPeriod: IGeneralSettingItem | null
 }
 
 export interface IGeneralSettingList {
   searchEngine: IGeneralSettingItem[]
-  theme: IGeneralSettingItem[]
+  screenMode: IGeneralSettingItem[]
   retentionPeriod: IGeneralSettingItem[]
 }

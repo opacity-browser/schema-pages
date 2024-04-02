@@ -1,12 +1,13 @@
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
+import { useGetPageStrings } from '../hooks/usePageStrings'
 import { Logo } from '../../../components/Logo'
 
 export default ({ pageName, setPageName, menuList }) => {
-
+  const pageStrings = useGetPageStrings()
   const handleClickMenu = (link: string) => {
     setPageName(link)
-    location.hash = link
+    ;(window as any).location.hash = link
   }
 
   return (
@@ -15,7 +16,7 @@ export default ({ pageName, setPageName, menuList }) => {
         <div>
           <Logo />
         </div>
-        <h1>Settings</h1>
+        <h1>{ pageStrings["Settings"] ?? "Settings" }</h1>
       </$logoArea>
       <$menuArea>
         <ul>

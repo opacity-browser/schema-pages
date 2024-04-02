@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import styled from '@emotion/styled'
-import { useSetDialogMessages } from '../hooks/DialogMessages'
+import { useSetDialogMessages } from '../hooks/useDialogMessages'
 
 export default ({ isActive, message, index }) => {
   const setMessages = useSetDialogMessages()

@@ -1,6 +1,7 @@
 import PostMessageManager from '../../../managers/PostMessageManager'
 import { IGeneralSettingList, IGeneralSettings } from '../interfaces/general'
 import { ISearchHistoriesDTO, IVisitHistoriesDTO } from '../interfaces/histories'
+import { IStringData } from '../interfaces/localizable'
 import { INotificationPermission } from '../interfaces/permissions'
 
 class PostMessages {
@@ -8,6 +9,14 @@ class PostMessages {
 
   constructor() {
     this.postMessage = new PostMessageManager()
+  }
+
+  async getSettingsPageStrings() {
+    if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
+      return await this.postMessage.request<IStringData | "error">("getPageStrings", "settings")
+    } else {
+      return "error"
+    }
   }
 
   async updateNotificationPermissions(permissionId: string, isDenied: boolean) {
@@ -97,9 +106,9 @@ class PostMessages {
     }
   }
 
-  async setBrowserTheme(themeId: string) {
+  async setScreenMode(screenModeId: string) {
     if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
-      return await this.postMessage.request<"success" | "error">("setBrowserTheme", themeId)
+      return await this.postMessage.request<"success" | "error">("setScreenMode", screenModeId)
     } else {
       return "success"
     }
@@ -122,7 +131,7 @@ class PostMessages {
           id: "Google",
           name: "Google"
         },
-        theme: {
+        screenMode: {
           id: "System",
           name: "System"
         },
@@ -152,7 +161,7 @@ class PostMessages {
           id: 'DuckDuckGo',
           name: 'DuckDuckGo' 
         }],
-        theme: [{ 
+        screenMode: [{ 
           id: 'System',
           name: 'System' 
         }, { 

@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import PostMessages from '../adapters/PostMessages'
-import { useDialogMessagesStates } from '../hooks/DialogMessages'
+import { useGetPageStrings } from '../hooks/usePageStrings'
+import { useDialogMessagesStates } from '../hooks/useDialogMessages'
 import Close from '../icons/Close'
 import Check from '../icons/Check'
 import { INotificationPermission } from '../interfaces/permissions'
 
 export default () => {
+  const pageStrings = useGetPageStrings()
   const [mesages, setMessages] = useDialogMessagesStates()
   const [choiceIds, setChoiceIds] = useState([])
   const [notificationPermissions, setNotificationPermissions] = useState<INotificationPermission[]>([])
@@ -16,7 +18,7 @@ export default () => {
     if(res === "error") {
       setMessages([...mesages, {
         isActive: true,
-        message: "An error occurred"
+        message: pageStrings["An error occurred"]
       }])
     } else {
       setNotificationPermissions(res)
@@ -40,7 +42,7 @@ export default () => {
     if(res === "error") {
       setMessages([...mesages, {
         isActive: true,
-        message: "An error occurred"
+        message: pageStrings["An error occurred"]
       }])
     } else {
       const newNotiPerm = notificationPermissions.filter((permData: INotificationPermission) => {
@@ -55,7 +57,7 @@ export default () => {
     if(res === "error") {
       setMessages([...mesages, {
         isActive: true,
-        message: "An error occurred"
+        message: pageStrings["An error occurred"]
       }])
     } else {
       const newNotiPerm = notificationPermissions.filter((permData: INotificationPermission) => {
@@ -65,11 +67,16 @@ export default () => {
       setChoiceIds([])
     }
   }
+
+  const choiceHTMLText = () => {
+    const string = pageStrings["$n were selected."]
+    return string.replace("$n", `<span>${choiceIds.length}</span>`)
+  }
   
   return (
     <$area>
-      <h2>Permission</h2>
-      <p className='title'>Notification</p>
+      <h2>{ pageStrings["Permission"] }</h2>
+      <p className='title'>{ pageStrings["Notification"] }</p>
       <$permissionBox>
         {notificationPermissions.length > 0 ? (
           <ul>
@@ -84,7 +91,7 @@ export default () => {
                       <Check />
                     </$checkbox>
                     <span className={isDenied ? "denied" : "allowed"}>
-                      {isDenied ? "denied" : "allowed"}
+                      {isDenied ? pageStrings["denied"] : pageStrings["allowed"]}
                     </span>
                     <p>{domain}</p>
                     <$closeBtnBox onClick={() => handleClickDeleteBtn(id)}>
@@ -97,15 +104,17 @@ export default () => {
           </ul>
         ) : (
           <$empty>
-            <p>There are no domains with notification permissions set.</p>
+            <p>{ pageStrings["There are no domains with notification permissions set."] }</p>
           </$empty>
         )}
       </$permissionBox>
       {choiceIds.length > 0 && (
         <$optionBar>
-          <p className="message"><span>{choiceIds.length}</span> were selected.</p>
-          <$deleteBtn onClick={handleClickDeleteCheck}>Delete</$deleteBtn>
-          <$cancelBtn onClick={() => setChoiceIds([])}>Cancel</$cancelBtn>
+          <p className="message" dangerouslySetInnerHTML={{
+            __html: choiceHTMLText()
+          }} />
+          <$deleteBtn onClick={handleClickDeleteCheck}>{ pageStrings["Delete"] }</$deleteBtn>
+          <$cancelBtn onClick={() => setChoiceIds([])}>{ pageStrings["Cancel"] }</$cancelBtn>
         </$optionBar>
       )}
     </$area>
