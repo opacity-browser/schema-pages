@@ -3,7 +3,8 @@ const path = require('path')
 
 module.exports = {
   entry: {
-    'new-tab': './src/pages/new-tab/index.tsx'
+    'new-tab': './src/pages/new-tab/index.tsx',
+    'settings': './src/pages/settings/index.tsx'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -46,6 +47,11 @@ module.exports = {
       filename: 'unknown/index.html',
       template: './src/pages/unknown/index.html',
       chunks: ['unknown'] 
+    }),
+    new HtmlWebpackPlugin({ 
+      filename: 'settings/index.html',
+      template: './src/pages/settings/index.html',
+      chunks: ['settings'] 
     })
   ],
 }
