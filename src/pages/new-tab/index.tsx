@@ -6,6 +6,8 @@ import Content from './components/Content'
 const container = document.getElementById('wrap')
 const root = ReactDOM.createRoot(container as HTMLElement)
 
+;(window as any).opacityResponse = {}
+
 const App = () => {
   return (
     <>

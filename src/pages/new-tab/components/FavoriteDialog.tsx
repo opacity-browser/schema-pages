@@ -53,7 +53,7 @@ export default ({ handleClickDialogCancel, handleClickDialogAdd }) => {
         <div className='input-area'>
           <div>
             <p>{ pageStrings["Title"] }</p>
-            <input type="text" name="title" onChange={handleChangeInput} value={title} />
+            <input type="text" name="title" onChange={handleChangeInput} value={title} autoFocus={true} />
           </div>
           <div>
             <p>{ pageStrings["Address"] }</p>
@@ -101,7 +101,7 @@ const $contentBox = styled.div`
   border-radius: 12px;
   box-shadow: 2px 2px 30px rgba(0,0,0,0.2);
   margin-top: -150px;
-  padding: 20px 20px 18px;
+  padding: 20px 25px 18px;
   transition: opacity 0.2s, transform 0.3s;
   opacity: 0;
   transform: translateY(-20px);
@@ -114,17 +114,17 @@ const $contentBox = styled.div`
 
   & > p {
     margin: 0;
-    font-size: 14px;
-    margin-bottom: 15px;
+    font-size: 15px;
+    margin-bottom: 10px;
     font-weight: bold;
   }
 
   .btn-area {
     text-align: right;
-    margin-top: 5px;
+    // margin-top: 5px;
     p {
       display: inline-block;
-      padding: 6px 18px;
+      padding: 5px 18px;
       font-size: 13px;
       border: 1px solid #ddd;
       background: #f5f5f5;

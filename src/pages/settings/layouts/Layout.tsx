@@ -8,7 +8,7 @@ import General from '../components/General'
 import SearchHistory from '../components/SearchHistory'
 import VisitHistory from '../components/VisitHistory'
 import Permission from '../components/Permission'
-import ErrorMessageDialog from '../components/DialogMessage'
+import DialogMessage from '../components/DialogMessage'
 
 export default () => {
   const [pageStrings, setPageStrings] = usePageStringsStates()
@@ -66,7 +66,7 @@ export default () => {
       {messages.length > 0 && (
         <$dialogArea>
           {messages.map(({isActive, message}, i) => (
-            <ErrorMessageDialog key={i} isActive={isActive} message={message} index={i} />
+            <DialogMessage key={i} isActive={isActive} message={message} index={i} />
           ))}
         </$dialogArea>
       )}

@@ -66,7 +66,8 @@ export default () => {
     setDialogIsShow(false)
   }
 
-  const handleClickFavoriteDelete = async (id: string) => {
+  const handleClickFavoriteDelete = async (e: React.MouseEvent<HTMLDivElement>, id: string) => {
+    e.stopPropagation()
     const res = await PostMessages.deleteFavorite(id)
     if(res === "error") {
       setMessages([...mesages, {
@@ -105,7 +106,7 @@ export default () => {
                     <p>{d.title}</p>
                     <div 
                       className="delete"
-                      onClick={() => handleClickFavoriteDelete(d.id)}
+                      onClick={(e) => handleClickFavoriteDelete(e, d.id)}
                     >
                       <Close />
                     </div>
@@ -222,7 +223,7 @@ const $bookmarkBox = styled.div`
   & > .icon {
     width: 32px;
     height: 32px;
-    line-height: 32px;
+    line-height: 34px;
     text-align: center;
     background: rgba(0, 0, 0, 0.8);
     color: #fff;
@@ -247,6 +248,10 @@ const $bookmarkBox = styled.div`
   & > p {
     margin: 0;
     font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 10px;
   }
 
   &.add-btn {

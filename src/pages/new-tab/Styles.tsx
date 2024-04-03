@@ -11,6 +11,7 @@ const Styles = () => {
       html, body, #wrap {
         height: 100%;
         margin: 0;
+        font-family: 'Apple SD Gothic Neo', sans-serif;
       }
     `} />
   )

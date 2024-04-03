@@ -6,6 +6,7 @@ import Shortcut from './Shortcut'
 import { useDialogMessagesStates } from '../hooks/useDialogMessages'
 import { useSetPageStrings } from '../hooks/usePageStrings'
 import PostMessages from '../adapters/PostMessages'
+import DialogMessage from './DialogMessage'
 
 
 export default () => {
@@ -40,6 +41,13 @@ export default () => {
       <$logo>
         <Logo />
       </$logo>
+      {messages.length > 0 && (
+        <$dialogArea>
+          {messages.map(({isActive, message}, i) => (
+            <DialogMessage key={i} isActive={isActive} message={message} index={i} />
+          ))}
+        </$dialogArea>
+      )}
     </$area>
   )
 }
@@ -74,4 +82,10 @@ const $box = styled.div`
   width: 460px;
   // padding-top: 80px;
   margin-top: -60px;
+`
+
+const $dialogArea = styled.div`
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
 `
