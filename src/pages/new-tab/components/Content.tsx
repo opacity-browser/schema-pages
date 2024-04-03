@@ -1,10 +1,33 @@
+import { useEffect, useLayoutEffect } from 'react'
 import styled from '@emotion/styled'
 import { Clock } from '../items/Clock'
 import { Logo } from '../items/Logo'
 import Shortcut from './Shortcut'
+import { useDialogMessagesStates } from '../hooks/useDialogMessages'
+import { useSetPageStrings } from '../hooks/usePageStrings'
+import PostMessages from '../adapters/PostMessages'
+
 
 export default () => {
+  const setPageStrings = useSetPageStrings()
+  const [messages, setMessages] = useDialogMessagesStates()
+  
+  useEffect(() => {
+    if(messages.length > 0 && !messages.find(em => em.isActive)) {
+      setMessages([])
+    }
+  }, [messages])
 
+  const getSettingsPageStrings = async () => {
+    const res = await PostMessages.getNewTabPageStrings()
+    if(res !== "error") {
+      setPageStrings(res)
+    }
+  }
+
+  useLayoutEffect(() => {
+    getSettingsPageStrings()
+  }, [])
 
   return (
     <$area>

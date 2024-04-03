@@ -91,7 +91,7 @@ export default () => {
   return (
     <$area>
       <section>
-        <h2>Favorite</h2>
+        <h2>{ pageStrings["Favorite"] }</h2>
         <$bookmarkArea>
           {favoriteList.map((d, i) => {
             return (
@@ -127,7 +127,7 @@ export default () => {
         </$bookmarkArea>
       </section>
       <section>
-        <h2>Frequent</h2>
+        <h2>{ pageStrings["Frequent"] }</h2>
         <$bookmarkArea>
           {frequentList.map((d, i) => {
             return (

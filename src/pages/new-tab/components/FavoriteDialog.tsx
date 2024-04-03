@@ -49,20 +49,20 @@ export default ({ handleClickDialogCancel, handleClickDialogAdd }) => {
         onClick={handleClickClosed}
       />
       <$contentBox className={isShow ? 'show' : ''}>
-        <p>Add Favorite</p>
+        <p>{ pageStrings["Add Favorite"] }</p>
         <div className='input-area'>
           <div>
-            <p>Title</p>
+            <p>{ pageStrings["Title"] }</p>
             <input type="text" name="title" onChange={handleChangeInput} value={title} />
           </div>
           <div>
-            <p>Address</p>
+            <p>{ pageStrings["Address"] }</p>
             <input type="text" name="address" onChange={handleChangeInput} value={address} />
           </div>
         </div>
         <div className="btn-area">
-          <p className="add" onClick={handleClickAdded}>Add</p>
-          <p onClick={handleClickClosed}>Cancel</p>
+          <p className="add" onClick={handleClickAdded}>{ pageStrings["Add"] }</p>
+          <p onClick={handleClickClosed}>{ pageStrings["Cancel"] }</p>
         </div>
       </$contentBox>
     </$dialog>

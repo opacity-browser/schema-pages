@@ -6,6 +6,11 @@ const pageStrings = atom<IStringData>({
   default: {
     "Favorite": "Favorite",
     "Frequent": "Frequent",
+    "Add Favorite": "Add Favorite",
+    "Title": "Title",
+    "Address": "Address",
+    "Add": "Add",
+    "Cancel": "Cancel",
     "An error occurred": "An error occurred",
     "Please enter title or address": "Please enter title or address"
   }
