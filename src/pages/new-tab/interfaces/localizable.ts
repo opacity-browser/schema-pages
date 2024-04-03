@@ -1,3 +1,6 @@
 export interface IStringData {
-  "Bookmarks": string
+  "Favorite": string
+  "Frequent": string
+  "An error occurred": string
+  "Please enter title or address": string
 }

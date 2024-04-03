@@ -4,7 +4,10 @@ import { IStringData } from '../interfaces/localizable'
 const pageStrings = atom<IStringData>({
   key: 'pageStrings',
   default: {
-    "Bookmarks": "Bookmarks",
+    "Favorite": "Favorite",
+    "Frequent": "Frequent",
+    "An error occurred": "An error occurred",
+    "Please enter title or address": "Please enter title or address"
   }
 });
 

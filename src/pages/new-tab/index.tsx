@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom/client'
+import { RecoilRoot } from 'recoil'
 import Styles from './Styles'
 import Content from './components/Content'
 
@@ -9,7 +10,9 @@ const App = () => {
   return (
     <>
       <Styles />
-      <Content />
+      <RecoilRoot>
+        <Content />
+      </RecoilRoot>
     </>
   )
 }

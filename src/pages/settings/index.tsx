@@ -1,4 +1,3 @@
-import { useLayoutEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RecoilRoot } from 'recoil'
 import GlobalStyles from './styles/GlobalStyles'

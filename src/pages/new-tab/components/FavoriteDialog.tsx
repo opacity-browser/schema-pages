@@ -1,7 +1,12 @@
 import { Fragment, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
+import { useGetPageStrings } from '../hooks/usePageStrings'
+import { useDialogMessagesStates } from '../hooks/useDialogMessages'
 
 export default ({ handleClickDialogCancel, handleClickDialogAdd }) => {
+  const pageStrings = useGetPageStrings()
+  const [mesages, setMessages] = useDialogMessagesStates()
+
   const [isShow, setIsShow] = useState(false)
   const [title, setTItle] = useState("")
   const [address, setAddress] = useState("")
@@ -24,9 +29,16 @@ export default ({ handleClickDialogCancel, handleClickDialogAdd }) => {
   }
 
   const handleClickAdded = () => {
+    if(title === "" || address === "") {
+      setMessages([...mesages, {
+        isActive: true,
+        message: pageStrings["Please enter title or address"]
+      }])
+      return
+    }
     setIsShow(false)
     setTimeout(() => {
-      handleClickDialogAdd()
+      handleClickDialogAdd(title, address)
     }, 300)
   }
 
