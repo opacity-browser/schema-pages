@@ -41,30 +41,11 @@ export const Clock = () => {
   return (
     <$clockArea>
       <h2>
-        <div css={css`
-          display: inline-block;
-          margin-right: 10px;
-        `}>
-          <p css={css`
-            font-size: 20px;
-            margin: 8px 0 0 0;
-          `}>
-            <span css={css`
-              display: inline-block;
-              margin-right: 4px;
-              letter-spacing: -0.3px;
-            `}>
-              {month}.
-            </span>{date}
-          </p>
-          <p css={css`
-            font-size: 42px;
-            margin-right: 20px;
-            opacity: 0.5;
-            margin: 0;
-            line-height: 50px;
-            letter-spacing: -0.3px;
-          `}>{ampm}</p>
+        <div>
+          <$date>
+          <span>{month}.</span>{date}
+          </$date>
+          <$ampm>{ampm}</$ampm>
         </div>
         {time}
       </h2>
@@ -75,7 +56,6 @@ export const Clock = () => {
 const $clockArea = styled.div`
   font-family: Futura;
   text-align: center;
-  opacity: 0.8;
   margin-left: -4px;
 
   h2 {
@@ -85,5 +65,28 @@ const $clockArea = styled.div`
     justify-content: center;
     align-items: center;
     font-weight: bold;
+    & > div {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+`
+
+const $ampm = styled.p`
+  font-size: 42px;
+  margin-right: 20px;
+  opacity: 0.5;
+  margin: 0;
+  line-height: 50px;
+  letter-spacing: -0.3px;
+`
+
+const $date = styled.p`
+  font-size: 20px;
+  margin: 8px 0 0 0;
+  span {
+    display: inline-block;
+    margin-right: 4px;
+    letter-spacing: -0.3px;
   }
 `

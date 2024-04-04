@@ -112,6 +112,11 @@ const $contentBox = styled.div`
     transform: translateY(0);
   }
 
+  @media (prefers-color-scheme: dark) {
+    background: rgb(35, 35, 35);
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.6);
+  }
+
   & > p {
     margin: 0;
     font-size: 15px;
@@ -132,11 +137,14 @@ const $contentBox = styled.div`
       margin: 10px 0 0 10px;
       cursor: pointer;
       &.add {
-        // background: rgb(70, 155, 235);
-        // border-color: rgb(50 138 222);
-        background: #000;
-        border-color: #000;
+        background: rgb(20, 20, 20);
+        border-color: rgb(20, 20, 20);
         color: #fff;
+      }
+      @media (prefers-color-scheme: dark) {
+        color: #000;
+        background: rgb(220, 220, 220);
+        border-color: rgb(50, 50, 50);
       }
       transition: opacity 0.3s;
       &:hover {
@@ -163,6 +171,12 @@ const $contentBox = styled.div`
         border-radius: 4px;
         line-height: 26px;
         padding: 0 10px;
+
+        @media (prefers-color-scheme: dark) {
+          background: rgb(30, 30, 30);
+          border-color: rgb(20, 20, 20);
+          color: #fff;
+        }
       }
     }
   }

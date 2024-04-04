@@ -93,12 +93,12 @@ export default () => {
     <$area>
       <section>
         <h2>{ pageStrings["Favorite"] }</h2>
-        <$bookmarkArea>
+        <$shortcutArea>
           {favoriteList.map((d, i) => {
             return (
               <Fragment key={i}>
                 {d ? (
-                  <$bookmarkBox
+                  <$shortcutBox
                     className="active"
                     onClick={() => handleClickGoPage(d.address)}
                   >
@@ -110,9 +110,9 @@ export default () => {
                     >
                       <Close />
                     </div>
-                  </$bookmarkBox>
+                  </$shortcutBox>
                 ) : (
-                  <$bookmarkBox 
+                  <$shortcutBox 
                     className={favoriteSize === i ? 'add-btn' : ''}
                     onClick={() => {
                       if(favoriteSize === i) {
@@ -120,34 +120,34 @@ export default () => {
                       }
                     }}
                   >
-                  </$bookmarkBox>
+                  </$shortcutBox>
                 )}
               </Fragment>
             )
           })}
-        </$bookmarkArea>
+        </$shortcutArea>
       </section>
       <section>
         <h2>{ pageStrings["Frequent"] }</h2>
-        <$bookmarkArea>
+        <$shortcutArea>
           {frequentList.map((d, i) => {
             return (
               <Fragment key={i}>
                 {d ? (
-                <$bookmarkBox 
+                <$shortcutBox 
                   className="active"
                   onClick={() => handleClickGoPage(d.address)}
                 >
                   <div className={`icon icon-${i}`}>{d.title.substring(0, 1)}</div>
                   <p>{d.title}</p>
-                </$bookmarkBox>
+                </$shortcutBox>
                 ) : (
-                  <$bookmarkBox />
+                  <$shortcutBox />
                 )}
               </Fragment>
             )
           })}
-        </$bookmarkArea>
+        </$shortcutArea>
       </section>
       {isDialogShow && (
         <FavoriteDialog 
@@ -168,25 +168,32 @@ const $area = styled.div`
       margin-bottom: 7px;
       color: #666;
       margin-left: 1px;
+      @media (prefers-color-scheme: dark) {
+        color: #b5b5b5;
+      }
     }
     margin-bottom: 30px;
   }
 `
 
-const $bookmarkArea = styled.div`
+const $shortcutArea = styled.div`
   display: grid;
   width: 460px;
   grid-template-columns: repeat(5, 1fr);
   column-gap: 15px;
 `
 
-const $bookmarkBox = styled.div`
+const $shortcutBox = styled.div`
   position: relative;
   width: 80px;
   height: 80px;
   border: 1.5px dashed #ddd;
   border-radius: 10px;
   text-align: center;
+
+  @media (prefers-color-scheme: dark) {
+    border-color: rgba(80, 80, 80);
+  }
 
   &.active {
     border: 0;
@@ -196,6 +203,13 @@ const $bookmarkBox = styled.div`
     &:hover {
       background: #eaeaea;
     }
+
+    @media (prefers-color-scheme: dark) {
+      background: rgb(40, 40, 40);
+      &:hover {
+        background: rgb(60, 60, 60);
+      }
+    }
   }
 
   & > .delete {
@@ -204,8 +218,8 @@ const $bookmarkBox = styled.div`
     right: -7px;
     padding: 2px;
     line-height: 0;
-    background: #fff;
-    border: 1px solid #ddd;
+    background: transparent;
+    border: 1px solid #bbb;
     border-radius: 50%;
     cursor: pointer;
     opacity: 0;
@@ -213,6 +227,9 @@ const $bookmarkBox = styled.div`
     svg {
       width: 14px;
       height: auto;
+    }
+    @media (prefers-color-scheme: dark) {
+      border-color: rgba(150, 150, 150);
     }
   }
 
@@ -243,6 +260,23 @@ const $bookmarkBox = styled.div`
     &.icon-4 {
       background: rgba(0, 0, 0, 0.2);
     }
+
+    @media (prefers-color-scheme: dark) {
+      color: #000;
+      background: rgba(255, 255, 255, 1);
+      &.icon-1 {
+        background: rgba(255, 255, 255, 0.85);
+      }
+      &.icon-2 {
+        background: rgba(255, 255, 255, 0.6);
+      }
+      &.icon-3 {
+        background: rgba(255, 255, 255, 0.45);
+      }
+      &.icon-4 {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
   }
 
   & > p {
@@ -255,13 +289,22 @@ const $bookmarkBox = styled.div`
   }
 
   &.add-btn {
-    border: 1.5px solid #eaeaea;
+    border: 1.5px solid #f9f9f9;
     background: #f9f9f9;
     position: relative;
-    transition: background 0.3s;
+    transition: all 0.3s;
     cursor: pointer;
     &:hover {
+      border-color: #eaeaea; 
       background: #eaeaea;
+    }
+    @media (prefers-color-scheme: dark) {
+      background: rgba(45, 45, 45);
+      border-color: rgba(45, 45, 45);
+      &:hover {
+        background: rgba(60, 60, 60);
+        border-color: rgba(60, 60, 60);
+      }
     }
     &::before {
       content: "";
@@ -273,6 +316,9 @@ const $bookmarkBox = styled.div`
       left: 50%;
       margin-top: -1px;
       margin-left: -8px;
+      @media (prefers-color-scheme: dark) {
+        background: #fff;
+      }
     }
     &::after {
       content: "";
@@ -284,6 +330,9 @@ const $bookmarkBox = styled.div`
       left: 50%;
       margin-top: -8px;
       margin-left: -1px;
+      @media (prefers-color-scheme: dark) {
+        background: #fff;
+      }
     }
   }
 `

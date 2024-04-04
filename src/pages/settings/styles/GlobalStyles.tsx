@@ -36,10 +36,6 @@ export default () => {
           list-style: none;        
         }
       }
-
-      // .active-menu {
-      //   color: rgb(70, 155, 235);
-      // }
     `} />
   )
 }

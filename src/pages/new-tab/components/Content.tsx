@@ -67,6 +67,12 @@ const $logo = styled.div`
   img {
     filter: invert(100%);
   }
+
+  @media (prefers-color-scheme: dark) {
+    img {
+      filter: none;
+    }
+  }
 `
 
 const $content = styled.div`
@@ -80,7 +86,6 @@ const $content = styled.div`
 
 const $box = styled.div`
   width: 460px;
-  // padding-top: 80px;
   margin-top: -60px;
 `
 
