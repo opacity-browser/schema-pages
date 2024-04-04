@@ -13,7 +13,7 @@ export default () => {
         padding: 0;
         height: 100%;
         color: #666;
-        font-family: sans-serif;
+        font-family: 'Apple SD Gothic Neo', sans-serif;
       }
 
       #wrap {
@@ -36,10 +36,6 @@ export default () => {
           list-style: none;        
         }
       }
-
-      // .active-menu {
-      //   color: rgb(70, 155, 235);
-      // }
     `} />
   )
 }

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 import { useGetPageStrings } from '../hooks/usePageStrings'
-import { Logo } from '../../../components/Logo'
+import { Logo } from '../../new-tab/items/Logo'
 
 export default ({ pageName, setPageName, menuList }) => {
   const pageStrings = useGetPageStrings()

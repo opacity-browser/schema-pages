@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import PostMessages from '../adapters/PostMessages'
 import { useGetPageStrings } from '../hooks/usePageStrings'
 import { useDialogMessagesStates } from '../hooks/useDialogMessages'
-import Close from '../icons/Close'
+import Close from '../../../icons/Close'
 import Check from '../icons/Check'
 import { IVisitHistory } from '../interfaces/histories'
 

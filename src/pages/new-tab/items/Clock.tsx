@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 
 const tickData = () => {
   const now = new Date()
@@ -21,13 +22,6 @@ export const Clock = () => {
   const [month, setMonth] = useState(monthString)
   const [date, setDate] = useState(dateString)
 
-  useEffect(() => {
-    const timerID = setInterval(() => tick(), 300)
-    return () => {
-      clearInterval(timerID)
-    }
-  }, [])
-
   const tick = () => {
     const { ampmString, hoursString, minutesString, monthString, dateString } = tickData()
     const formattedTime = `${hoursString}:${minutesString}`
@@ -37,46 +31,62 @@ export const Clock = () => {
     setDate(dateString)
   }
 
+  useEffect(() => {
+    const timerID = setInterval(() => tick(), 500)
+    return () => {
+      clearInterval(timerID)
+    }
+  }, [])
+
   return (
-    <div css={css`
-      font-family: Futura;
-      color: #fff;
-      text-align: center;
-      margin-top: 40px;
-    `}>
-      <h2 css={css`
-        margin: 0;
-        font-size: 120px;
-        text-shadow: 2px 2px 30px rgba(0, 0, 0, 0.8);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-      `}>
-        <div css={css`
-          display: inline-block;
-          margin-right: 20px;
-        `}>
-          <p css={css`
-            font-size: 24px;
-            margin: 15px 0 0 0;
-          `}>
-            <span css={css`
-              display: inline-block;
-              margin-right: 4px;
-            `}>
-              {month}.
-            </span>{date}
-          </p>
-          <p css={css`
-            font-size: 48px;
-            margin-right: 20px;
-            opacity: 0.6;
-            margin: 0;
-          `}>{ampm}</p>
+    <$clockArea>
+      <h2>
+        <div>
+          <$date>
+          <span>{month}.</span>{date}
+          </$date>
+          <$ampm>{ampm}</$ampm>
         </div>
         {time}
       </h2>
-    </div>
+    </$clockArea>
   )
 }
+
+const $clockArea = styled.div`
+  font-family: Futura;
+  text-align: center;
+  margin-left: -4px;
+
+  h2 {
+    margin: 0;
+    font-size: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    & > div {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+`
+
+const $ampm = styled.p`
+  font-size: 42px;
+  margin-right: 20px;
+  opacity: 0.5;
+  margin: 0;
+  line-height: 50px;
+  letter-spacing: -0.3px;
+`
+
+const $date = styled.p`
+  font-size: 20px;
+  margin: 8px 0 0 0;
+  span {
+    display: inline-block;
+    margin-right: 4px;
+    letter-spacing: -0.3px;
+  }
+`
