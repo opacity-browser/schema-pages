@@ -244,8 +244,10 @@ const $permissionBox = styled.div`
   ul {
     li {
       line-height: 30px;
-      div {
-        display: flex;
+      & > div {
+        display: grid;
+        grid-template-columns: 18px 80px 1fr 24px;
+        gap: 10px;
         align-items: center;
         p {
           flex-grow: 1;
@@ -255,9 +257,7 @@ const $permissionBox = styled.div`
         }
         span {
           display: inline-block;
-          width: 80px;
-          min-width: 80px;
-          padding-left: 15px;
+          text-align: center;
           color: rgb(74, 148, 64);
           &.denied {
             color: rgb(218, 106, 106);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import PostMessages from '../adapters/PostMessages'
 import { useGetPageStrings } from '../hooks/usePageStrings'
@@ -116,9 +116,9 @@ export default () => {
   return (
     <$area>
       <h2>{ pageStrings["Search History"] }</h2>
-      {searchHistories.map(({ yearMonth, list }) => {
+      {searchHistories.map(({ yearMonth, list }, i) => {
         return (
-          <>
+          <Fragment key={i}>
             <p className='title'>{yearMonth}</p>
             <$historyBox key={yearMonth}>
               {list.length > 0 ? (
@@ -149,7 +149,7 @@ export default () => {
                 </$empty>
               )}
             </$historyBox>
-          </>
+          </Fragment>
         )
       })}
       {(firstYearMonth !== "" && firstYearMonth !== yearMonth) && (
@@ -254,7 +254,7 @@ const $checkbox = styled.div`
   background: #fff;
   transition: all 0.3s;
   display: flex;
-  items-align: center;
+  align-items: center;
   justify-content: center;
   margin-top: -1px;
 
@@ -274,7 +274,7 @@ const $checkbox = styled.div`
 `
 
 const $historyBox = styled.div`
-  padding: 7px 15px 6px;
+  padding: 7px 10px 6px 15px;
   margin: 0 30px 15px;
   font-size: 13px;
   border: 1px solid rgb(228, 228, 228);
@@ -292,18 +292,18 @@ const $historyBox = styled.div`
   ul {
     li {
       line-height: 30px;
-      div {
-        display: flex;
+      & > div {
+        display: grid;
+        grid-template-columns: 18px 140px 1fr 24px;
+        gap: 10px;
         align-items: center;
         p {
-          padding: 0 10px;
-          flex-grow: 1;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
         span {
-          padding: 0 15px;
+          text-align: center;
         }
       }
     }
@@ -339,7 +339,7 @@ const $closeBtnBox = styled.div`
   transition: background 0.3s;
   cursor: pointer;
   display: flex;
-  items-align: center;
+  align-items: center;
   justify-content: center;
   &:hover {
     background: rgba(100, 100, 100, 0.1);

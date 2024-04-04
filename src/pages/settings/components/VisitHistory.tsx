@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import PostMessages from '../adapters/PostMessages'
 import { useGetPageStrings } from '../hooks/usePageStrings'
@@ -116,9 +116,9 @@ export default () => {
   return (
     <$area>
       <h2>{ pageStrings["Visit History"] }</h2>
-      {visitHistories.map(({ yearMonth, list }) => {
+      {visitHistories.map(({ yearMonth, list }, i) => {
         return (
-          <>
+          <Fragment key={i}>
             <p className='title'>{yearMonth}</p>
             <$historyBox key={yearMonth}>
               {list.length > 0 ? (
@@ -134,7 +134,7 @@ export default () => {
                             <Check />
                           </$checkbox>
                           <span>{createDate}</span>
-                          <p>{title}<span>{url}</span></p>
+                          <p><span>{title}</span>{url}</p>
                           <$closeBtnBox onClick={() => handleClickDeleteBtn(yearMonth, id)}>
                             <Close />
                           </$closeBtnBox>
@@ -149,7 +149,7 @@ export default () => {
                 </$empty>
               )}
             </$historyBox>
-          </>
+          </Fragment>
         )
       })}
       {(firstYearMonth !== "" && firstYearMonth !== yearMonth) && (
@@ -275,7 +275,7 @@ const $checkbox = styled.div`
 `
 
 const $historyBox = styled.div`
-  padding: 7px 15px 6px;
+  padding: 7px 10px 6px 15px;
   margin: 0 30px 15px;
   font-size: 13px;
   border: 1px solid rgb(228, 228, 228);
@@ -293,22 +293,27 @@ const $historyBox = styled.div`
   ul {
     li {
       line-height: 30px;
-      div {
-        display: flex;
+      & > div {
         align-items: center;
+        display: grid;
+        grid-template-columns: 18px 140px 1fr 24px;
+        gap: 10px;
         & > p {
-          padding: 0 10px;
-          flex-grow: 1;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
           span {
+            float: left;
             display: inline-block;
-            padding-left: 15px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-right: 15px;
+            max-width: 200px;
           }
         }
         & > span {
-          padding: 0 15px;
+          text-align: center;
         }
       }
     }
