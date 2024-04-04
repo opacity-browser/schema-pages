@@ -175,6 +175,9 @@ const $area = styled.div`
     font-size: 18px;
     color: #222;
     line-height: 35px;
+    @media (prefers-color-scheme: dark) {
+      color: #fff;
+    }
   }
 
   .title {
@@ -197,6 +200,12 @@ const $optionBar = styled.div`
   line-height: 24px;
   padding: 0 30px;
   font-size: 15px;
+
+  @media (prefers-color-scheme: dark) {
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.4);
+    background: rgb(30, 30, 30);
+    color: #fff;
+  }
 
   .message {
     font-size: 16px;
@@ -233,6 +242,9 @@ const $cancelBtn = styled.p`
   width: 80px;
   text-align: center;
   font-size: 13px;
+  @media (prefers-color-scheme: dark) {
+    background: rgba(180, 180, 180, 0.1);
+  }
 `
 
 const $checkbox = styled.div`
@@ -247,8 +259,12 @@ const $checkbox = styled.div`
   justify-content: center;
   margin-top: -1px;
 
+  @media (prefers-color-scheme: dark) {
+    border-color: #fff;
+  }
+
   &.active {
-    border: 1.5px rgb(70, 155, 235);
+    border-color: rgb(70, 155, 235);
     background: rgb(70, 155, 235);
   }
 
@@ -267,6 +283,12 @@ const $historyBox = styled.div`
   border-radius: 10px;
   font-weight: 400;
   color: #444;
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba(100, 100, 100, 0.1);
+    border-color: rgb(22, 22, 22);
+    color: #fff;
+  }
 
   ul {
     li {
@@ -295,8 +317,11 @@ const $historyBox = styled.div`
 
 const $empty = styled.div`
   font-size: 14px;
-  padding: 12px 0;
+  padding: 10px 5px;
   color: #444;
+  @media (prefers-color-scheme: dark) {
+    color: rgb(180, 180, 180);
+  }
 `
 
 const $moreBtn = styled.p`
@@ -323,6 +348,9 @@ const $closeBtnBox = styled.div`
   justify-content: center;
   &:hover {
     background: rgba(100, 100, 100, 0.1);
+    @media (prefers-color-scheme: dark) {
+      background: rgba(200, 200, 200, 0.1);
+    }
   }
   svg {
     width: 18px;

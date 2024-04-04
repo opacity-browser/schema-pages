@@ -46,6 +46,9 @@ const $sidebar = styled.div`
   width: 280px;
   flex-shrink: 0;
   border-right: 1px solid rgb(228, 228, 228);
+  @media (prefers-color-scheme: dark) {
+    border-color: rgb(22, 22, 22);
+  }
 `
 
 const $logoArea = styled.div`
@@ -53,20 +56,29 @@ const $logoArea = styled.div`
   display: flex;
   & > div {
     display: inline-block;
-    background: #000;
     line-height: 0;
     padding: 5px;
-    border-radius: 10px;
+    img {
+      filter: invert(100%);
+    }
+    @media (prefers-color-scheme: dark) {
+      img {
+        filter: none;
+      }
+    }
   }
 
   & > h1 {
-    margin-left: 10px;
+    margin-left: 5px;
     font-size: 20px;
     vertical-align: middle;
     line-height: 33px;
     color: #222;
     font-weight: 500;
     padding-top: 2px;
+    @media (prefers-color-scheme: dark) {
+      color: #fff;
+    }
   }
 `
 
@@ -74,7 +86,7 @@ const $menuArea = styled.div`
   padding: 0 30px;
   font-size: 14px;
   li {
-    line-height: 36px;
+    line-height: 38px;
     margin-bottom: 5px;
     p {
       padding: 0 15px;
@@ -83,6 +95,9 @@ const $menuArea = styled.div`
     }
     p.active-menu {
       background: rgba(100, 100, 100, 0.1);
+      @media (prefers-color-scheme: dark) {
+        background: rgba(150, 150, 150, 0.1);
+      }
     }
   }
 `

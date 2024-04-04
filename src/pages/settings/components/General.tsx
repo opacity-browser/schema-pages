@@ -176,6 +176,10 @@ const $area = styled.div`
     font-size: 18px;
     color: #222;
     line-height: 35px;
+
+    @media (prefers-color-scheme: dark) {
+      color: #fff;
+    }
   }
 `
 
@@ -186,6 +190,9 @@ const $optionBox = styled.div`
     margin-bottom: 8px;
     font-size: 15px;
     font-weight: 600;
+    @media (prefers-color-scheme: dark) {
+      color: #fff;
+    }
   }
   .data {
 
@@ -194,14 +201,20 @@ const $optionBox = styled.div`
 
 const $selectbox = styled.div`
   position: relative;
-  width: 200px;
+  width: 220px;
   select {
     border: 1px solid rgb(228, 228, 228);
-    line-height: 34px;
-    height: 34px;
-    padding: 0 10px;
+    line-height: 36px;
+    height: 36px;
+    padding: 0 13px;
     border-radius: 6px;
     width: 100%;
+    font-size: 14px;
+    @media (prefers-color-scheme: dark) {
+      background: rgb(30, 30, 30);
+      border-color: rgb(120, 120, 120);
+      color: #fff;
+    }
     -webkit-appearance: none;
   }
   svg {
