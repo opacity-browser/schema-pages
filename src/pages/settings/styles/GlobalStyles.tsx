@@ -14,7 +14,7 @@ export default () => {
         height: 100%;
         color: #666;
         font-family: 'Apple SD Gothic Neo', sans-serif;
-        background: rgb(255, 255, 255);
+        background: rgb(250, 250, 250);
         @media (prefers-color-scheme: dark) {
           background: rgb(52, 52, 52);
           color: #fff;

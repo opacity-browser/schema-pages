@@ -113,7 +113,7 @@ const $contentBox = styled.div`
   }
 
   @media (prefers-color-scheme: dark) {
-    background: rgb(35, 35, 35);
+    background: rgb(60, 60, 60);
     box-shadow: 2px 2px 30px rgba(0,0,0,0.6);
   }
 
@@ -137,8 +137,8 @@ const $contentBox = styled.div`
       margin: 10px 0 0 10px;
       cursor: pointer;
       &.add {
-        background: rgb(20, 20, 20);
-        border-color: rgb(20, 20, 20);
+        background: rgb(40, 40, 40);
+        border-color: rgb(40, 40, 40);
         color: #fff;
       }
       @media (prefers-color-scheme: dark) {
@@ -173,8 +173,8 @@ const $contentBox = styled.div`
         padding: 0 10px;
 
         @media (prefers-color-scheme: dark) {
-          background: rgb(30, 30, 30);
-          border-color: rgb(20, 20, 20);
+          background: rgb(60, 60, 60);
+          border-color: rgb(90, 90, 90);
           color: #fff;
         }
       }

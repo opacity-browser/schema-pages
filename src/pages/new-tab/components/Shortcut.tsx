@@ -197,17 +197,17 @@ const $shortcutBox = styled.div`
 
   &.active {
     border: 0;
-    background: #f7f7f7;
+    background: rgb(240, 240, 240);
     transition: background 0.3s;
     cursor: pointer;
     &:hover {
-      background: #eaeaea;
+      background: rgb(230, 230, 230);
     }
 
     @media (prefers-color-scheme: dark) {
-      background: rgb(40, 40, 40);
+      background: rgb(45, 45, 45);
       &:hover {
-        background: rgb(60, 60, 60);
+        background: rgb(30, 30, 30);
       }
     }
   }
@@ -289,21 +289,21 @@ const $shortcutBox = styled.div`
   }
 
   &.add-btn {
-    border: 1.5px solid #f9f9f9;
-    background: #f9f9f9;
+    border: 1.5px solid rgb(245, 245, 245);
+    background: rgb(245, 245, 245);
     position: relative;
     transition: all 0.3s;
     cursor: pointer;
     &:hover {
-      border-color: #eaeaea; 
-      background: #eaeaea;
+      border-color: rgb(230, 230, 230);
+      background: rgb(230, 230, 230);
     }
     @media (prefers-color-scheme: dark) {
-      background: rgba(45, 45, 45);
-      border-color: rgba(45, 45, 45);
+      background: rgba(47, 47, 47);
+      border-color: rgba(47, 47, 47);
       &:hover {
-        background: rgba(60, 60, 60);
-        border-color: rgba(60, 60, 60);
+        background: rgba(30, 30, 30);
+        border-color: rgba(30, 30, 30);
       }
     }
     &::before {
