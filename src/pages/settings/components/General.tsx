@@ -211,8 +211,8 @@ const $selectbox = styled.div`
     width: 100%;
     font-size: 14px;
     @media (prefers-color-scheme: dark) {
-      background: rgb(30, 30, 30);
-      border-color: rgb(120, 120, 120);
+      background: rgb(52, 52, 52);
+      border-color: rgb(90, 90, 90);
       color: #fff;
     }
     -webkit-appearance: none;

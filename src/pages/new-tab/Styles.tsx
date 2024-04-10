@@ -15,8 +15,10 @@ const Styles = () => {
 
       body {
         font-family: 'Apple SD Gothic Neo', sans-serif;
+        // background: transparent;
+        background: rgb(255, 255, 255);
         @media (prefers-color-scheme: dark) {
-          background: rgb(30, 30, 30);
+          background: rgb(52, 52, 52);
           color: #fff;
         }
       }

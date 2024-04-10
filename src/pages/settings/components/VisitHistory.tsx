@@ -285,8 +285,8 @@ const $historyBox = styled.div`
   color: #444;
 
   @media (prefers-color-scheme: dark) {
-    background: rgba(100, 100, 100, 0.1);
-    border-color: rgb(22, 22, 22);
+    background: rgb(70, 70, 70);
+    border-color: rgb(90, 90, 90);
     color: #fff;
   }
 

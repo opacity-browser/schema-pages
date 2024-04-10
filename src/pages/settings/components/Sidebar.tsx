@@ -45,9 +45,10 @@ const $sidebar = styled.div`
   position: relative;
   width: 280px;
   flex-shrink: 0;
-  border-right: 1px solid rgb(228, 228, 228);
+  border-right: 0.5px solid rgb(228, 228, 228);
   @media (prefers-color-scheme: dark) {
     border-color: rgb(22, 22, 22);
+    border-color: rgb(90, 90, 90);
   }
 `
 
