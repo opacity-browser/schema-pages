@@ -247,8 +247,8 @@ const $cancelBtn = styled.p`
 `
 
 const $checkbox = styled.div`
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border: 1px solid #bbb;
   border-radius: 4px;
   background: #fff;

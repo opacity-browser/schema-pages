@@ -248,14 +248,14 @@ const $cancelBtn = styled.p`
 `
 
 const $checkbox = styled.div`
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border: 1px solid #bbb;
   border-radius: 4px;
   background: #fff;
   transition: all 0.3s;
   display: flex;
-  items-align: center;
+  align-items: center;
   justify-content: center;
   margin-top: -1px;
 
