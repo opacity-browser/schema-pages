@@ -57,13 +57,12 @@ const $area = styled.div`
 `
 
 const $logo = styled.div`
-  padding: 15px;
+  padding: 18px;
   position: fixed;
   bottom: 0;
   left: 0;
   color: #bbb;
-  font-size: 12px;
-  line-height: 16px;
+  line-height: 0;
   img {
     filter: invert(100%);
   }
