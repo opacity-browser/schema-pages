@@ -122,6 +122,14 @@ class PostMessages {
     }
   }
 
+  async setBlockingTracker(blcokingLevelId: string) {
+    if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
+      return await this.postMessage.request<"success" | "error">("setBlockingTracker", blcokingLevelId)
+    } else {
+      return "success"
+    }
+  }
+
   async getGeneralSettings() {
     if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
       return await this.postMessage.request<IGeneralSettings | "error">("getGeneralSettings")
@@ -138,6 +146,10 @@ class PostMessages {
         retentionPeriod: {
           id: "1 Week",
           name: "1 Week"
+        },
+        blockingLevel: {
+          id: "blocking-moderate",
+          name: "blocking-moderate"
         }
       }
     }
@@ -180,6 +192,19 @@ class PostMessages {
         }, { 
           id: 'Indefinite',
           name: 'Indefinite' 
+        }],
+        blockingLevel: [{
+          id: "blocking-strong",
+          name: "blocking-strong"
+        }, {
+          id: "blocking-moderate",
+          name: "blocking-moderate"
+        }, {
+          id: "blocking-light",
+          name: "blocking-light"
+        }, {
+          id: "blocking-none",
+          name: "blocking-none"
         }]
       }
     }

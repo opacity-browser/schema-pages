@@ -12,12 +12,14 @@ export default () => {
   const [browserSettings, setBrowserSettings] = useState<IGeneralSettings>({
     searchEngine: null,
     screenMode: null,
-    retentionPeriod: null
+    retentionPeriod: null,
+    blockingLevel: null
   })
   const [settingSelectList, setSettingSelectList] = useState<IGeneralSettingList>({
     searchEngine: [],
     screenMode: [],
-    retentionPeriod: []
+    retentionPeriod: [],
+    blockingLevel: []
   })
   
   const getGeneralSettings = async () => {
@@ -95,6 +97,28 @@ export default () => {
       }
     }
 
+    if(name === "blockingTracker") {
+      const cacheBeforeBlockingLevel = { ...browserSettings.blockingLevel }
+      setBrowserSettings({
+        ...browserSettings,
+        blockingLevel: {
+          id: value,
+          name: settingSelectList.blockingLevel.find(d => d.id === value).name
+        }
+      })
+      const res = await PostMessages.setBlockingTracker(value)
+      if(res === "error") {
+        setMessages([...mesages, {
+          isActive: true,
+          message: pageStrings["An error occurred"]
+        }])
+        setBrowserSettings({
+          ...browserSettings,
+          blockingLevel: cacheBeforeBlockingLevel
+        })
+      }
+    }
+
     if(name === "period") {
       const cacheBeforePeriod = { ...browserSettings.retentionPeriod }
       setBrowserSettings({
@@ -152,6 +176,22 @@ export default () => {
         </div>
       </$optionBox>
       <$optionBox>
+        <p className="title">{ pageStrings["Tracker Blocking"] } <a href="https://github.com/opacity-browser/tracker-blocking" target="_blank">{ pageStrings["Learn More"] }</a></p>
+        <div className="data">
+          <$selectbox>
+          <select name="blockingTracker" onChange={handleChangeSelected} value={browserSettings.blockingLevel?.id}>
+            { settingSelectList.blockingLevel.map(({ id, name }) => {
+                return (
+                  <option key={id} value={id}>{ name }</option>
+                )
+              })}
+            </select>
+            <ArrowDown />
+          </$selectbox>
+        </div>
+        <$psText>{ pageStrings["blocking-change-text"] }</$psText>
+      </$optionBox>
+      <$optionBox>
         <p className="title">{ pageStrings["History Data Retention Period"] }</p>
         <div className="data">
           <$selectbox>
@@ -183,6 +223,13 @@ const $area = styled.div`
   }
 `
 
+const $psText = styled.p`
+  margin-top: 7px;
+  margin-left: 2px;
+  font-size: 12px;
+  opacity: 0.6;
+`
+
 const $optionBox = styled.div`
   margin: 0 30px 30px;
   .title {
@@ -192,6 +239,12 @@ const $optionBox = styled.div`
     font-weight: 600;
     @media (prefers-color-scheme: dark) {
       color: #fff;
+    }
+    a {
+      display: inline-block;
+      margin-left: 5px;
+      color: rgb(70, 155, 235);
+      font-size: 12px;
     }
   }
   .data {

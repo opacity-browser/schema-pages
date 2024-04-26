@@ -22,7 +22,10 @@ const pageStrings = atom<IStringData>({
     "denied": "denied",
     "There are no domains with notification permissions set.": "There are no domains with notification permissions set.",
     "There is no search history.": "There is no search history.",
-    "There is no visit history.": "There is no visit history."
+    "There is no visit history.": "There is no visit history.",
+    "Tracker Blocking": "Tracker Blocking",
+    "blocking-change-text": "Changes take effect starting from newly created tabs.",
+    "Learn More": "Learn More"
   }
 });
 
