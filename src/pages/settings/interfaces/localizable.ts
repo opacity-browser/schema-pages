@@ -18,4 +18,7 @@ export interface IStringData {
   "There are no domains with notification permissions set.": string
   "There is no search history.": string
   "There is no visit history.": string
+  "Tracker Blocking": string
+  "blocking-change-text": string
+  "Learn More": string
 }
