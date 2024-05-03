@@ -49,6 +49,11 @@ module.exports = {
       chunks: ['occurred-ssl-error'] 
     }),
     new HtmlWebpackPlugin({ 
+      filename: 'blocked-content/index.html',
+      template: './src/pages/blocked-content/index.html',
+      chunks: ['blocked-content'] 
+    }),
+    new HtmlWebpackPlugin({ 
       filename: 'unknown/index.html',
       template: './src/pages/unknown/index.html',
       chunks: ['unknown'] 
