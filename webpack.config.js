@@ -44,6 +44,11 @@ module.exports = {
       chunks: ['not-find-host'] 
     }),
     new HtmlWebpackPlugin({ 
+      filename: 'occurred-ssl-error/index.html',
+      template: './src/pages/occurred-ssl-error/index.html',
+      chunks: ['occurred-ssl-error'] 
+    }),
+    new HtmlWebpackPlugin({ 
       filename: 'unknown/index.html',
       template: './src/pages/unknown/index.html',
       chunks: ['unknown'] 

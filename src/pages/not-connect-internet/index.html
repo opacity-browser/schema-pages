@@ -115,7 +115,10 @@
         button.innerText = pageData.refreshBtn
         
         button.addEventListener('click', () => {
-          window.location.replace(pageData.href)
+          window.webkit.messageHandlers.opacityBrowser.postMessage({
+            name: "replacePage",
+            value: pageData.href
+          })
         })
         document.body.style.display = 'flex'
       }
