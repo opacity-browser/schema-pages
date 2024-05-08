@@ -6,27 +6,7 @@ import { useDialogMessagesStates } from '../hooks/useDialogMessages'
 import Close from '../../../icons/Close'
 import Check from '../icons/Check'
 import { ISearchHistory } from '../interfaces/histories'
-
-const getYearMonth = () => {
-  const date = new Date()
-  return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0")
-}
-
-const getPrevYearMonth = (yearMonth: string) => {
-  const year = Number(yearMonth.split("-")[0])
-  const month = Number(yearMonth.split("-")[1])
-  if(month > 1) {
-    return year + "-" + String(month - 1).padStart(2, "0")
-  } else {
-    return (year - 1) + "-12"
-  }
-}
-
-const getDateObj = (stringDate: string) => {
-  const yyyymmdd = stringDate.split(" ")[0].split("-")
-  const hhmmss = stringDate.split(" ")[1].split(":")
-  return new Date(Number(yyyymmdd[0]), Number(yyyymmdd[1]) - 1, Number(yyyymmdd[2]), Number(hhmmss[0]), Number(hhmmss[1]), Number(hhmmss[2]))
-}
+import { getDateObj, getPrevYearMonth, getYearMonth, groupByDate } from '../helpers/dateParser'
 
 export default () => {
   const pageStrings = useGetPageStrings()
@@ -48,7 +28,7 @@ export default () => {
       res.list.sort((a, b) => getDateObj(b.createDate).getTime() - getDateObj(a.createDate).getTime())
       setSearchHistories([...searchHistories, {
         yearMonth: yearMonth,
-        list: res.list
+        list: groupByDate(res.list)
       }])
     }
   }
@@ -59,6 +39,18 @@ export default () => {
 
   const handleClickMoreBtn = () => {
     setYearMonth(getPrevYearMonth(yearMonth))
+  }
+
+  const handleClickDeleteAllBtn = async () => {
+    const res = await PostMessages.deleteAllSearchHistory()
+    if(res === "error") {
+      setMessages([...mesages, {
+        isActive: true,
+        message: pageStrings["An error occurred"]
+      }])
+    } else {
+      setSearchHistories([])
+    }
   }
 
   const handleClickDeleteBtn = async (yearMonth: string, id: string) => {
@@ -73,7 +65,13 @@ export default () => {
         if(d.yearMonth != yearMonth) return d
         return {
           ...d,
-          list: d.list.filter((historyData: ISearchHistory) => historyData.id !== id)
+          list: d.list.map((childList: { day: string, list: ISearchHistory[] }) => {
+            const list = childList.list.filter((historyData: ISearchHistory) => historyData.id !== id)
+            return list.length == 0 ? false : {
+              day: childList.day,
+              list: list
+            }
+          }).filter(Boolean)
         }
       })
       setSearchHistories(newSearchHistories)
@@ -100,7 +98,13 @@ export default () => {
         if(d.yearMonth != yearMonth) return d
         return {
           ...d,
-          list: d.list.filter((historyData: ISearchHistory) => !choiceIds.find(choiceId => choiceId === historyData.id))
+          list: d.list.map((childList: { day: string, list: ISearchHistory[] }) => {
+            const list = childList.list.filter((historyData: ISearchHistory) => !choiceIds.find(choiceId => choiceId === historyData.id))
+            return list.length == 0 ? false : {
+              day: childList.day,
+              list: list
+            }
+          }).filter(Boolean)
         }
       })
       setSearchHistories(newSearchHistories)
@@ -115,7 +119,10 @@ export default () => {
   
   return (
     <$area>
-      <h2>{ pageStrings["Search History"] }</h2>
+      <h2>
+        { pageStrings["Search History"] } 
+        <span onClick={handleClickDeleteAllBtn}>{ pageStrings["Clear All"] }</span>
+      </h2>
       {searchHistories.map(({ yearMonth, list }, i) => {
         return (
           <Fragment key={i}>
@@ -123,22 +130,33 @@ export default () => {
             <$historyBox key={yearMonth}>
               {list.length > 0 ? (
                 <ul>
-                  {list.map(({ id, searchText, createDate }) => {
+                  {list.map(({ day, list: childList }, j) => {
                     return (
-                      <li key={id}>
-                        <div>
-                          <$checkbox 
-                            className={choiceIds.find((choiceId) => choiceId == id) ? "active" : ""}
-                            onClick={() => handleClickCheckbox(id)}
-                          >
-                            <Check />
-                          </$checkbox>
-                          <span>{createDate}</span>
-                          <p>{searchText}</p>
-                          <$closeBtnBox onClick={() => handleClickDeleteBtn(yearMonth, id)}>
-                            <Close />
-                          </$closeBtnBox>
-                        </div>
+                      <li key={j}>
+                        <$hisotryChildBox>
+                          <p className='sub-title'>{day}</p>
+                          <ul>
+                            {childList.map(({ id, createDate, searchText }, k) => {
+                              return (
+                                <li key={k}>
+                                  <div>
+                                    <$checkbox 
+                                      className={choiceIds.find((choiceId) => choiceId == id) ? "active" : ""}
+                                      onClick={() => handleClickCheckbox(id)}
+                                    >
+                                      <Check />
+                                    </$checkbox>
+                                    <span>{createDate}</span>
+                                    <p>{searchText}</p>
+                                    <$closeBtnBox onClick={() => handleClickDeleteBtn(yearMonth, id)}>
+                                      <Close />
+                                    </$closeBtnBox>
+                                  </div>
+                                </li>
+                              )
+                            })}
+                          </ul>
+                        </$hisotryChildBox>
                       </li>
                     )
                   })}
@@ -176,6 +194,14 @@ const $area = styled.div`
     line-height: 35px;
     @media (prefers-color-scheme: dark) {
       color: #fff;
+    }
+
+    span {
+      display: inline-block;
+      margin-left: 5px;
+      color: rgb(70, 155, 235);
+      font-size: 12px;
+      cursor: pointer;
     }
   }
 
@@ -289,6 +315,20 @@ const $historyBox = styled.div`
     color: #fff;
   }
 
+  & > ul {
+    & > li {
+      &:not(:first-of-type) {
+        margin-top: 10px;
+      }
+    }
+  }
+`
+
+const $hisotryChildBox = styled.div`
+  .sub-title {
+    font-size: 14px;
+    padding: 5px 0;
+  }
   ul {
     li {
       line-height: 30px;
@@ -348,7 +388,7 @@ const $closeBtnBox = styled.div`
     }
   }
   svg {
-    width: 18px;
+    width: 15px;
     height: auto;
   }
 `

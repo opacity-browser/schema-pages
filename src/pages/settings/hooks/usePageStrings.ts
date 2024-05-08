@@ -25,7 +25,8 @@ const pageStrings = atom<IStringData>({
     "There is no visit history.": "There is no visit history.",
     "Tracker Blocking": "Tracker Blocking",
     "blocking-change-text": "Changes take effect starting from newly created tabs.",
-    "Learn More": "Learn More"
+    "Learn More": "Learn More",
+    "Clear All": "Clear All"
   }
 });
 
