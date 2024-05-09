@@ -83,18 +83,7 @@ const $area = styled.div`
 
 const $content = styled.div`
   flex-grow: 1;
-  position: relative;
-  &::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    width: 0.5px;
-    height: 100%;
-    background: rgb(228, 228, 228);
-    @media (prefers-color-scheme: dark) {
-      background: rgb(90, 90, 90);
-    }
-  }
+  margin-left: 280px;
 `
 
 const $dialogArea = styled.div`

@@ -42,9 +42,15 @@ export default ({ pageName, setPageName, menuList }) => {
 }
 
 const $sidebar = styled.div`
-  position: relative;
+  position: fixed;
   width: 280px;
+  height: 100%;
   flex-shrink: 0;
+  border-right: 0.5px solid rgb(228, 228, 228);
+  @media (prefers-color-scheme: dark) {
+    border-color: rgb(22, 22, 22);
+    border-color: rgb(90, 90, 90);
+  }
 `
 
 const $logoArea = styled.div`
