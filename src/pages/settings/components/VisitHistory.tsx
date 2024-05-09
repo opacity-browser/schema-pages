@@ -16,7 +16,7 @@ export default () => {
   const [visitHistories, setVisitHistories] = useState([])
   const [choiceIds, setChoiceIds] = useState([])
 
-  const getSearchHistories = async () => {
+  const getVisitHistories = async (isReset: boolean = false) => {
     const res = await PostMessages.getVisitHistoryList(yearMonth)
     if(res === "error") {
       setMessages([...mesages, {
@@ -26,15 +26,21 @@ export default () => {
     } else {
       setFirstYearMonth(res.firstDate)
       res.list.sort((a, b) => getDateObj(b.createDate).getTime() - getDateObj(a.createDate).getTime())
-      setVisitHistories([...visitHistories, {
+
+      const newVisitHistories = isReset ? [{
         yearMonth: yearMonth,
         list: groupByDate(res.list)
-      }])
+      }] : [...visitHistories, {
+        yearMonth: yearMonth,
+        list: groupByDate(res.list)
+      }]
+
+      setVisitHistories(newVisitHistories)
     }
   }
 
   useEffect(() => {
-    getSearchHistories()
+    getVisitHistories()
   }, [yearMonth])
 
   const handleClickMoreBtn = () => {
@@ -49,7 +55,7 @@ export default () => {
         message: pageStrings["An error occurred"]
       }])
     } else {
-      setVisitHistories([])
+      getVisitHistories(true)
     }
   }
 
@@ -204,6 +210,7 @@ const $area = styled.div`
       color: rgb(70, 155, 235);
       font-size: 12px;
       cursor: pointer;
+      line-height: 0;
     }
   }
 

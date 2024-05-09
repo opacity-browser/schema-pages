@@ -16,7 +16,7 @@ export default () => {
   const [searchHistories, setSearchHistories] = useState([])
   const [choiceIds, setChoiceIds] = useState([])
 
-  const getSearchHistories = async () => {
+  const getSearchHistories = async (isReset: boolean = false) => {
     const res = await PostMessages.getSearchHistoryList(yearMonth)
     if(res === "error") {
       setMessages([...mesages, {
@@ -26,10 +26,15 @@ export default () => {
     } else {
       setFirstYearMonth(res.firstDate)
       res.list.sort((a, b) => getDateObj(b.createDate).getTime() - getDateObj(a.createDate).getTime())
-      setSearchHistories([...searchHistories, {
+      const newSearchHistories = isReset ? [{
         yearMonth: yearMonth,
         list: groupByDate(res.list)
-      }])
+      }] : [...searchHistories, {
+        yearMonth: yearMonth,
+        list: groupByDate(res.list)
+      }]
+
+      setSearchHistories(newSearchHistories)
     }
   }
 
@@ -49,7 +54,7 @@ export default () => {
         message: pageStrings["An error occurred"]
       }])
     } else {
-      setSearchHistories([])
+      getSearchHistories(true)
     }
   }
 
@@ -203,6 +208,7 @@ const $area = styled.div`
       color: rgb(70, 155, 235);
       font-size: 12px;
       cursor: pointer;
+      line-height: 0;
     }
   }
 
