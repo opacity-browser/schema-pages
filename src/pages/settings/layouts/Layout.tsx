@@ -82,7 +82,8 @@ const $area = styled.div`
 `
 
 const $content = styled.div`
-  flex-grow: 1
+  flex-grow: 1;
+  margin-left: 280px;
 `
 
 const $dialogArea = styled.div`

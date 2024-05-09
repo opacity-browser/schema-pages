@@ -59,6 +59,14 @@ class PostMessages {
     }
   }
 
+  async deleteAllVisitHistory() {
+    if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
+      return await this.postMessage.request<"success" | "error">("deleteAllVisitHistory")
+    } else {
+      return "success"
+    }
+  }
+
   async getVisitHistoryList(yearMonth: string) {
     if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
       return await this.postMessage.request<IVisitHistoriesDTO | "error">("getVisitHistoryList", yearMonth)
@@ -67,9 +75,24 @@ class PostMessages {
         firstDate: "2024-03",
         list: [{
           id: "a",
-          title: "Opacity Opacity Opacity Opacity Opacity Opacity Opacity Opacity Opacity ",
+          title: "Opacity Opacity Opacity Opacity Opacity Opacity Opacity Opacity Opacity",
           url: "https://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.dev",
           createDate: "2024-03-01 12:00:00"          
+        }, {
+          id: "b",
+          title: "Opacity",
+          url: "https://opacity.dev",
+          createDate: "2024-03-01 12:00:00"          
+        }, {
+          id: "c",
+          title: "Opacity2",
+          url: "https://opacity.dev",
+          createDate: "2024-03-02 12:00:00"          
+        }, {
+          id: "d",
+          title: "Opacity3",
+          url: "https://opacity.dev",
+          createDate: "2024-03-02 12:00:00"          
         }]
       }
     }
@@ -78,6 +101,14 @@ class PostMessages {
   async deleteSearchHistory(historyIds: string[]) {
     if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
       return await this.postMessage.request<"success" | "error">("deleteSearchHistory", JSON.stringify(historyIds))
+    } else {
+      return "success"
+    }
+  }
+
+  async deleteAllSearchHistory() {
+    if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
+      return await this.postMessage.request<"success" | "error">("deleteAllSearchHistory")
     } else {
       return "success"
     }
@@ -93,6 +124,14 @@ class PostMessages {
           id: "a",
           searchText: "keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword",
           createDate: "2024-03-01 12:00:00"          
+        }, {
+          id: "b",
+          searchText: "keyword",
+          createDate: "2024-03-01 12:00:00"          
+        }, {
+          id: "c",
+          searchText: "keyword keyword ",
+          createDate: "2024-03-03 12:00:00"          
         }]
       }
     }

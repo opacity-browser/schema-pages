@@ -21,4 +21,5 @@ export interface IStringData {
   "Tracker Blocking": string
   "blocking-change-text": string
   "Learn More": string
+  "Clear All": string
 }

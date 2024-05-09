@@ -122,6 +122,7 @@ export default () => {
 }
 
 const $area = styled.div`
+  padding-bottom: 20px;
   h2 {
     padding: 41px 30px 29px;
     font-size: 18px;
