@@ -54,13 +54,14 @@ export const Clock = () => {
 }
 
 const $clockArea = styled.div`
-  font-family: Futura;
+  // font-family: Quicksand;
+  font-family: "Quicksand", sans-serif;
   text-align: center;
   margin-left: -4px;
 
   h2 {
     margin: 0;
-    font-size: 90px;
+    font-size: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,16 +74,16 @@ const $clockArea = styled.div`
 `
 
 const $ampm = styled.p`
-  font-size: 42px;
+  font-size: 32px;
   margin-right: 20px;
   opacity: 0.5;
   margin: 0;
-  line-height: 50px;
+  line-height: 32px;
   letter-spacing: -0.3px;
 `
 
 const $date = styled.p`
-  font-size: 20px;
+  font-size: 18px;
   margin: 8px 0 0 0;
   span {
     display: inline-block;

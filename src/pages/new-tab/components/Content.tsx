@@ -1,12 +1,11 @@
 import { useEffect, useLayoutEffect } from 'react'
 import styled from '@emotion/styled'
-import { Clock } from '../items/Clock'
-import { Logo } from '../items/Logo'
 import Shortcut from './Shortcut'
 import { useDialogMessagesStates } from '../hooks/useDialogMessages'
 import { useSetPageStrings } from '../hooks/usePageStrings'
 import PostMessages from '../adapters/PostMessages'
 import DialogMessage from './DialogMessage'
+import { Logo } from '../items/Logo'
 
 
 export default () => {
@@ -34,13 +33,12 @@ export default () => {
     <$area>
       <$content>
         <$box>
-          <Clock />
+          <$logo>
+            <Logo />
+          </$logo>
           <Shortcut />
         </$box>
       </$content>
-      <$logo>
-        <Logo />
-      </$logo>
       {messages.length > 0 && (
         <$dialogArea>
           {messages.map(({isActive, message}, i) => (
@@ -57,18 +55,15 @@ const $area = styled.div`
 `
 
 const $logo = styled.div`
-  padding: 18px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  color: #bbb;
-  line-height: 0;
-  img {
+  text-align: center;
+  svg {
+    width: 80px;
+    height: auto;
     filter: invert(100%);
   }
 
   @media (prefers-color-scheme: dark) {
-    img {
+    svg {
       filter: none;
     }
   }
