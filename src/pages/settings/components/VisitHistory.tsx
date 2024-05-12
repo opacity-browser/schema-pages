@@ -153,7 +153,7 @@ export default () => {
                                       <Check />
                                     </$checkbox>
                                     <span>{createDate}</span>
-                                    <p><span>{title}</span>{url}</p>
+                                    <p><a href={url} target='_blank'><span>{title}</span>{url}</a></p>
                                     <$closeBtnBox onClick={() => handleClickDeleteBtn(yearMonth, id)}>
                                       <Close />
                                     </$closeBtnBox>
@@ -349,6 +349,10 @@ const $hisotryChildBox = styled.div`
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          color: rgba(120, 120, 120);
+          @media (prefers-color-scheme: dark) {
+            color: rgb(180, 180, 180);
+          }
           span {
             float: left;
             display: inline-block;
@@ -357,6 +361,10 @@ const $hisotryChildBox = styled.div`
             text-overflow: ellipsis;
             padding-right: 15px;
             max-width: 200px;
+            color: rgba(0, 0, 0);
+            @media (prefers-color-scheme: dark) {
+              color: #fff;
+            }
           }
         }
         & > span {

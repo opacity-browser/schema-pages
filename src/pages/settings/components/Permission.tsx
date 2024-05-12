@@ -93,7 +93,7 @@ export default () => {
                     <span className={isDenied ? "denied" : "allowed"}>
                       {isDenied ? pageStrings["denied"] : pageStrings["allowed"]}
                     </span>
-                    <p>{domain}</p>
+                    <p><a href={domain} target='_blank'>{domain}</a></p>
                     <$closeBtnBox onClick={() => handleClickDeleteBtn(id)}>
                       <Close />
                     </$closeBtnBox>

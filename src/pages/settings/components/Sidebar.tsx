@@ -60,11 +60,13 @@ const $logoArea = styled.div`
     display: inline-block;
     line-height: 0;
     padding: 5px;
-    img {
+    svg {
+      width: 30px;
+      height: auto;
       filter: invert(100%);
     }
     @media (prefers-color-scheme: dark) {
-      img {
+      svg {
         filter: none;
       }
     }
@@ -72,9 +74,9 @@ const $logoArea = styled.div`
 
   & > h1 {
     margin-left: 5px;
-    font-size: 20px;
+    font-size: 22px;
     vertical-align: middle;
-    line-height: 33px;
+    line-height: 40px;
     color: #222;
     font-weight: 500;
     padding-top: 2px;
