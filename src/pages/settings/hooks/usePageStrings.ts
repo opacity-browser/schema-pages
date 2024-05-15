@@ -26,7 +26,8 @@ const pageStrings = atom<IStringData>({
     "Tracker Blocking": "Tracker Blocking",
     "blocking-change-text": "Changes take effect starting from newly created tabs.",
     "Learn More": "Learn More",
-    "Clear All": "Clear All"
+    "Clear All": "Clear All",
+    "Library": "Library"
   }
 });
 

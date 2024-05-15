@@ -9,6 +9,7 @@ import SearchHistory from '../components/SearchHistory'
 import VisitHistory from '../components/VisitHistory'
 import Permission from '../components/Permission'
 import DialogMessage from '../components/DialogMessage'
+import Library from '../components/Library'
 
 export default () => {
   const [pageStrings, setPageStrings] = usePageStringsStates()
@@ -25,6 +26,9 @@ export default () => {
   }, {
     name: pageStrings["Permission"] ?? "Permission",
     link: "#permission"
+  }, {
+    name: pageStrings["Library"] ?? "Library",
+    link: "#library"
   }]
   const [pageName, setPageName] = useState<string>(location.hash || menuList[0].link)
   const [messages, setMessages] = useDialogMessagesStates()
@@ -61,6 +65,9 @@ export default () => {
         )}
         {pageName == "#permission" && (
           <Permission />
+        )}
+        {pageName == "#library" && (
+          <Library />
         )}
       </$content>
       {messages.length > 0 && (

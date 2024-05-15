@@ -37,9 +37,26 @@ export default ({ pageName, setPageName, menuList }) => {
           })}
         </ul>
       </$menuArea>
+      <$version>
+        <span>v</span>{ pageStrings["version"] }
+      </$version>
     </$sidebar>
   )
 }
+
+const $version = styled.div`
+  position: sticky;
+  top: 100%;
+  margin-left: 30px;
+  font-size: 12px;
+  letter-spacing: -0.3px;
+  height: 35px;
+  color: #888;
+  span {
+    display: inline-block;
+    margin-right: 1px;
+  }
+`
 
 const $sidebar = styled.div`
   position: fixed;
