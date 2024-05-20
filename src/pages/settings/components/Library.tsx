@@ -23,6 +23,13 @@ export default () => {
               <a href="https://github.com/duckduckgo/tracker-radar" target="_blank">https://github.com/duckduckgo/tracker-radar</a>
             </$libraryBox>
           </li>
+          <li>
+            <$libraryBox>
+              <p className="title">RemoveAdblockThing</p>
+              <p></p>
+              <a href="https://github.com/TheRealJoelmatic/RemoveAdblockThing" target="_blank">https://github.com/TheRealJoelmatic/RemoveAdblockThing</a>
+            </$libraryBox>
+          </li>
         </ul>
       </$libraryListBox>
     </$area>
