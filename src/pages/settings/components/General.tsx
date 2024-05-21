@@ -13,7 +13,8 @@ export default () => {
     searchEngine: null,
     screenMode: null,
     retentionPeriod: null,
-    blockingLevel: null
+    blockingLevel: null,
+    adBlocking: null
   })
   const [settingSelectList, setSettingSelectList] = useState<IGeneralSettingList>({
     searchEngine: [],
@@ -142,6 +143,27 @@ export default () => {
     }
   }
 
+  const handleChangeCheckbox = async (target: string) => {
+    if(target === "adblocking") {
+      const cacheIsAdBlocking = browserSettings.adBlocking
+      setBrowserSettings({
+        ...browserSettings,
+        adBlocking: !browserSettings.adBlocking
+      })
+      const res = await PostMessages.setAdBlocking(!browserSettings.adBlocking)
+      if(res === "error") {
+        setMessages([...mesages, {
+          isActive: true,
+          message: pageStrings["An error occurred"]
+        }])
+        setBrowserSettings({
+          ...browserSettings,
+          adBlocking: cacheIsAdBlocking
+        })
+      }
+    }
+  }
+
   return (
     <$area>
       <h2>{ pageStrings["General"] }</h2>
@@ -204,6 +226,15 @@ export default () => {
             </select>
             <ArrowDown />
           </$selectbox>
+        </div>
+      </$optionBox>
+      <$optionBox>
+        <p className="title">{ pageStrings["Ad Blocking"] }</p>
+        <div className="data">
+        <$toggleBtn 
+          className={browserSettings.adBlocking ? "active" : ""}
+          onClick={() => handleChangeCheckbox("adblocking")}
+        />
         </div>
       </$optionBox>
     </$area>
@@ -276,5 +307,42 @@ const $selectbox = styled.div`
     right: 10px;
     top: 50%;
     margin-top: -8px;
+  }
+`
+
+const $toggleBtn = styled.div`
+  width: 38px;
+  height: 24px;
+  border-radius: 15px;
+  background: #fff;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  background: rgb(210, 210, 210);
+
+  @media (prefers-color-scheme: dark) {
+    background: rgb(180, 180, 180);
+  }
+
+  &::after {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 10px;
+    content: "";
+    background: #fff;
+    left: 3px;
+    transition: all 0.3s;
+  }
+
+
+  &.active {
+    background: rgb(70, 155, 235);
+    &::after {
+      left: 17px;
+    }
   }
 `

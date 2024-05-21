@@ -27,7 +27,9 @@ const pageStrings = atom<IStringData>({
     "blocking-change-text": "Changes take effect starting from newly created tabs.",
     "Learn More": "Learn More",
     "Clear All": "Clear All",
-    "Library": "Library"
+    "Library": "Library",
+    "Ad Blocking": "Ad Blocking",
+    "version": ""
   }
 });
 

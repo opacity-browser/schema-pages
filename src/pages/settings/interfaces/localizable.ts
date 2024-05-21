@@ -22,5 +22,7 @@ export interface IStringData {
   "blocking-change-text": string
   "Learn More": string
   "Clear All": string
-  "Library": string
+  "Library": string,
+  "Ad Blocking": string,
+  "version": string
 }

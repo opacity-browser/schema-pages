@@ -8,6 +8,7 @@ export interface IGeneralSettings {
   screenMode: IGeneralSettingItem | null
   retentionPeriod: IGeneralSettingItem | null
   blockingLevel: IGeneralSettingItem | null
+  adBlocking: boolean | null
 }
 
 export interface IGeneralSettingList {

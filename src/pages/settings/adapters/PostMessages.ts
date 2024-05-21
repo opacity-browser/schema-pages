@@ -169,6 +169,14 @@ class PostMessages {
     }
   }
 
+  async setAdBlocking(isBlocking: boolean) {
+    if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
+      return await this.postMessage.request<"success" | "error">("setAdBlocking", isBlocking.toString())
+    } else {
+      return "success"
+    }
+  }
+
   async getGeneralSettings() {
     if((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
       return await this.postMessage.request<IGeneralSettings | "error">("getGeneralSettings")
@@ -189,7 +197,8 @@ class PostMessages {
         blockingLevel: {
           id: "blocking-moderate",
           name: "blocking-moderate"
-        }
+        },
+        adBlocking: true
       }
     }
   }
