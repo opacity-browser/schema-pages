@@ -1,33 +1,59 @@
-import styled from '@emotion/styled'
-import { useGetPageStrings } from '../hooks/usePageStrings'
+import styled from "@emotion/styled"
+import { useGetPageStrings } from "../hooks/usePageStrings"
 
 export default () => {
   const pageStrings = useGetPageStrings()
   return (
     <$area>
-      <h2>{ pageStrings["Library"] }</h2>
-      <p className="subtitle">{ pageStrings["This is a library used in service development."] }</p>
+      <h2>{pageStrings["Library"]}</h2>
+      <p className="subtitle">
+        {pageStrings["This is a library used in service development."]}
+      </p>
       <$libraryListBox>
         <ul>
           <li>
             <$libraryBox>
               <p className="title">ASN1Decoder</p>
               <p></p>
-              <a href="https://github.com/filom/ASN1Decoder" target="_blank">https://github.com/filom/ASN1Decoder</a>
+              <a href="https://github.com/filom/ASN1Decoder" target="_blank">
+                https://github.com/filom/ASN1Decoder
+              </a>
             </$libraryBox>
           </li>
           <li>
             <$libraryBox>
-              <p className="title">tracker-radar</p>
+              <p className="title">TrackerRadarKit</p>
               <p></p>
-              <a href="https://github.com/duckduckgo/tracker-radar" target="_blank">https://github.com/duckduckgo/tracker-radar</a>
+              <a
+                href="https://github.com/duckduckgo/tracker-radar"
+                target="_blank"
+              >
+                https://github.com/duckduckgo/TrackerRadarKit
+              </a>
+            </$libraryBox>
+          </li>
+          <li>
+            <$libraryBox>
+              <p className="title">tracker-blocklists</p>
+              <p></p>
+              <a
+                href="https://github.com/duckduckgo/tracker-radar"
+                target="_blank"
+              >
+                https://github.com/duckduckgo/tracker-blocklists
+              </a>
             </$libraryBox>
           </li>
           <li>
             <$libraryBox>
               <p className="title">RemoveAdblockThing</p>
               <p></p>
-              <a href="https://github.com/TheRealJoelmatic/RemoveAdblockThing" target="_blank">https://github.com/TheRealJoelmatic/RemoveAdblockThing</a>
+              <a
+                href="https://github.com/TheRealJoelmatic/RemoveAdblockThing"
+                target="_blank"
+              >
+                https://github.com/TheRealJoelmatic/RemoveAdblockThing
+              </a>
             </$libraryBox>
           </li>
         </ul>

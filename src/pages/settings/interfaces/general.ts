@@ -7,13 +7,11 @@ export interface IGeneralSettings {
   searchEngine: IGeneralSettingItem | null
   screenMode: IGeneralSettingItem | null
   retentionPeriod: IGeneralSettingItem | null
-  blockingLevel: IGeneralSettingItem | null
-  adBlocking: boolean | null
+  isTrackerBlocking: boolean | null
 }
 
 export interface IGeneralSettingList {
   searchEngine: IGeneralSettingItem[]
   screenMode: IGeneralSettingItem[]
   retentionPeriod: IGeneralSettingItem[]
-  blockingLevel: IGeneralSettingItem[]
 }

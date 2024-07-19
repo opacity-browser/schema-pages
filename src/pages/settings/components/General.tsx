@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
-import styled from '@emotion/styled'
-import PostMessages from '../adapters/PostMessages'
-import { useGetPageStrings } from '../hooks/usePageStrings'
-import { useDialogMessagesStates } from '../hooks/useDialogMessages'
-import { IGeneralSettingList, IGeneralSettings } from '../interfaces/general'
-import ArrowDown from '../icons/ArrowDown'
+import { useEffect, useState } from "react"
+import styled from "@emotion/styled"
+import PostMessages from "../adapters/PostMessages"
+import { useGetPageStrings } from "../hooks/usePageStrings"
+import { useDialogMessagesStates } from "../hooks/useDialogMessages"
+import { IGeneralSettingList, IGeneralSettings } from "../interfaces/general"
+import ArrowDown from "../icons/ArrowDown"
 
 export default () => {
   const pageStrings = useGetPageStrings()
@@ -13,23 +13,25 @@ export default () => {
     searchEngine: null,
     screenMode: null,
     retentionPeriod: null,
-    blockingLevel: null,
-    adBlocking: null
+    isTrackerBlocking: null
   })
-  const [settingSelectList, setSettingSelectList] = useState<IGeneralSettingList>({
-    searchEngine: [],
-    screenMode: [],
-    retentionPeriod: [],
-    blockingLevel: []
-  })
-  
+  const [settingSelectList, setSettingSelectList] =
+    useState<IGeneralSettingList>({
+      searchEngine: [],
+      screenMode: [],
+      retentionPeriod: []
+    })
+
   const getGeneralSettings = async () => {
     const res = await PostMessages.getGeneralSettings()
-    if(res === "error") {
-      setMessages([...mesages, {
-        isActive: true,
-        message: pageStrings["An error occurred"]
-      }])
+    if (res === "error") {
+      setMessages([
+        ...mesages,
+        {
+          isActive: true,
+          message: pageStrings["An error occurred"]
+        }
+      ])
     } else {
       setBrowserSettings(res)
     }
@@ -37,11 +39,14 @@ export default () => {
 
   const getGeneralSettingList = async () => {
     const res = await PostMessages.getGeneralSettingList()
-    if(res === "error") {
-      setMessages([...mesages, {
-        isActive: true,
-        message: pageStrings["An error occurred"]
-      }])
+    if (res === "error") {
+      setMessages([
+        ...mesages,
+        {
+          isActive: true,
+          message: pageStrings["An error occurred"]
+        }
+      ])
     } else {
       setSettingSelectList(res)
     }
@@ -52,23 +57,28 @@ export default () => {
     getGeneralSettingList()
   }, [])
 
-  const handleChangeSelected = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChangeSelected = async (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const { name, value } = e.target
-    if(name === "searchEngine") {
+    if (name === "searchEngine") {
       const cacheBeforeSearchEngine = { ...browserSettings.searchEngine }
       setBrowserSettings({
         ...browserSettings,
         searchEngine: {
           id: value,
-          name: settingSelectList.searchEngine.find(d => d.id === value).name
+          name: settingSelectList.searchEngine.find((d) => d.id === value).name
         }
       })
       const res = await PostMessages.setSearchEngine(value)
-      if(res === "error") {
-        setMessages([...mesages, {
-          isActive: true,
-          message: pageStrings["An error occurred"]
-        }])
+      if (res === "error") {
+        setMessages([
+          ...mesages,
+          {
+            isActive: true,
+            message: pageStrings["An error occurred"]
+          }
+        ])
         setBrowserSettings({
           ...browserSettings,
           searchEngine: cacheBeforeSearchEngine
@@ -76,21 +86,24 @@ export default () => {
       }
     }
 
-    if(name === "screenMode") {
+    if (name === "screenMode") {
       const cacheBeforeScreenMode = { ...browserSettings.screenMode }
       setBrowserSettings({
         ...browserSettings,
         screenMode: {
           id: value,
-          name: settingSelectList.screenMode.find(d => d.id === value).name
+          name: settingSelectList.screenMode.find((d) => d.id === value).name
         }
       })
       const res = await PostMessages.setScreenMode(value)
-      if(res === "error") {
-        setMessages([...mesages, {
-          isActive: true,
-          message: pageStrings["An error occurred"]
-        }])
+      if (res === "error") {
+        setMessages([
+          ...mesages,
+          {
+            isActive: true,
+            message: pageStrings["An error occurred"]
+          }
+        ])
         setBrowserSettings({
           ...browserSettings,
           screenMode: cacheBeforeScreenMode
@@ -98,43 +111,25 @@ export default () => {
       }
     }
 
-    if(name === "blockingTracker") {
-      const cacheBeforeBlockingLevel = { ...browserSettings.blockingLevel }
-      setBrowserSettings({
-        ...browserSettings,
-        blockingLevel: {
-          id: value,
-          name: settingSelectList.blockingLevel.find(d => d.id === value).name
-        }
-      })
-      const res = await PostMessages.setBlockingTracker(value)
-      if(res === "error") {
-        setMessages([...mesages, {
-          isActive: true,
-          message: pageStrings["An error occurred"]
-        }])
-        setBrowserSettings({
-          ...browserSettings,
-          blockingLevel: cacheBeforeBlockingLevel
-        })
-      }
-    }
-
-    if(name === "period") {
+    if (name === "period") {
       const cacheBeforePeriod = { ...browserSettings.retentionPeriod }
       setBrowserSettings({
         ...browserSettings,
         retentionPeriod: {
           id: value,
-          name: settingSelectList.retentionPeriod.find(d => d.id === value).name
+          name: settingSelectList.retentionPeriod.find((d) => d.id === value)
+            .name
         }
       })
       const res = await PostMessages.setRetentionPeriod(value)
-      if(res === "error") {
-        setMessages([...mesages, {
-          isActive: true,
-          message: pageStrings["An error occurred"]
-        }])
+      if (res === "error") {
+        setMessages([
+          ...mesages,
+          {
+            isActive: true,
+            message: pageStrings["An error occurred"]
+          }
+        ])
         setBrowserSettings({
           ...browserSettings,
           retentionPeriod: cacheBeforePeriod
@@ -144,21 +139,26 @@ export default () => {
   }
 
   const handleChangeCheckbox = async (target: string) => {
-    if(target === "adblocking") {
-      const cacheIsAdBlocking = browserSettings.adBlocking
+    if (target === "isTrackerBlocking") {
+      const cacheIsTrackerBlocking = browserSettings.isTrackerBlocking
       setBrowserSettings({
         ...browserSettings,
-        adBlocking: !browserSettings.adBlocking
+        isTrackerBlocking: !browserSettings.isTrackerBlocking
       })
-      const res = await PostMessages.setAdBlocking(!browserSettings.adBlocking)
-      if(res === "error") {
-        setMessages([...mesages, {
-          isActive: true,
-          message: pageStrings["An error occurred"]
-        }])
+      const res = await PostMessages.setIsTrackerBlocking(
+        !browserSettings.isTrackerBlocking
+      )
+      if (res === "error") {
+        setMessages([
+          ...mesages,
+          {
+            isActive: true,
+            message: pageStrings["An error occurred"]
+          }
+        ])
         setBrowserSettings({
           ...browserSettings,
-          adBlocking: cacheIsAdBlocking
+          isTrackerBlocking: cacheIsTrackerBlocking
         })
       }
     }
@@ -166,15 +166,21 @@ export default () => {
 
   return (
     <$area>
-      <h2>{ pageStrings["General"] }</h2>
+      <h2>{pageStrings["General"]}</h2>
       <$optionBox>
-        <p className="title">{ pageStrings["Search Engine"] }</p>
+        <p className="title">{pageStrings["Search Engine"]}</p>
         <div className="data">
           <$selectbox>
-            <select name="searchEngine" onChange={handleChangeSelected} value={browserSettings.searchEngine?.id}>
-              { settingSelectList.searchEngine.map(({ id, name }) => {
+            <select
+              name="searchEngine"
+              onChange={handleChangeSelected}
+              value={browserSettings.searchEngine?.id}
+            >
+              {settingSelectList.searchEngine.map(({ id, name }) => {
                 return (
-                  <option key={id} value={id}>{ name }</option>
+                  <option key={id} value={id}>
+                    {name}
+                  </option>
                 )
               })}
             </select>
@@ -183,13 +189,19 @@ export default () => {
         </div>
       </$optionBox>
       <$optionBox>
-        <p className="title">{ pageStrings["Screen Mode"] }</p>
+        <p className="title">{pageStrings["Screen Mode"]}</p>
         <div className="data">
           <$selectbox>
-            <select name="screenMode" onChange={handleChangeSelected} value={browserSettings.screenMode?.id}>
-              { settingSelectList.screenMode.map(({ id, name }) => {
+            <select
+              name="screenMode"
+              onChange={handleChangeSelected}
+              value={browserSettings.screenMode?.id}
+            >
+              {settingSelectList.screenMode.map(({ id, name }) => {
                 return (
-                  <option key={id} value={id}>{ name }</option>
+                  <option key={id} value={id}>
+                    {name}
+                  </option>
                 )
               })}
             </select>
@@ -198,29 +210,19 @@ export default () => {
         </div>
       </$optionBox>
       <$optionBox>
-        <p className="title">{ pageStrings["Tracker Blocking"] } <a href="https://github.com/opacity-browser/tracker-blocking" target="_blank">{ pageStrings["Learn More"] }</a></p>
+        <p className="title">{pageStrings["History Data Retention Period"]}</p>
         <div className="data">
           <$selectbox>
-          <select name="blockingTracker" onChange={handleChangeSelected} value={browserSettings.blockingLevel?.id}>
-            { settingSelectList.blockingLevel.map(({ id, name }) => {
+            <select
+              name="period"
+              onChange={handleChangeSelected}
+              value={browserSettings.retentionPeriod?.id}
+            >
+              {settingSelectList.retentionPeriod.map(({ id, name }) => {
                 return (
-                  <option key={id} value={id}>{ name }</option>
-                )
-              })}
-            </select>
-            <ArrowDown />
-          </$selectbox>
-        </div>
-        <$psText>{ pageStrings["blocking-change-text"] }</$psText>
-      </$optionBox>
-      <$optionBox>
-        <p className="title">{ pageStrings["History Data Retention Period"] }</p>
-        <div className="data">
-          <$selectbox>
-          <select name="period" onChange={handleChangeSelected} value={browserSettings.retentionPeriod?.id}>
-            { settingSelectList.retentionPeriod.map(({ id, name }) => {
-                return (
-                  <option key={id} value={id}>{ name }</option>
+                  <option key={id} value={id}>
+                    {name}
+                  </option>
                 )
               })}
             </select>
@@ -229,12 +231,20 @@ export default () => {
         </div>
       </$optionBox>
       <$optionBox>
-        <p className="title">{ pageStrings["Ad Blocking"] }</p>
+        <p className="title">
+          {pageStrings["Tracker Blocking"]}{" "}
+          <a
+            href="https://github.com/opacity-browser/tracker-blocking"
+            target="_blank"
+          >
+            {pageStrings["Learn More"]}
+          </a>
+        </p>
         <div className="data">
-        <$toggleBtn 
-          className={browserSettings.adBlocking ? "active" : ""}
-          onClick={() => handleChangeCheckbox("adblocking")}
-        />
+          <$toggleBtn
+            className={browserSettings.isTrackerBlocking ? "active" : ""}
+            onClick={() => handleChangeCheckbox("isTrackerBlocking")}
+          />
         </div>
       </$optionBox>
     </$area>
@@ -244,7 +254,7 @@ export default () => {
 const $area = styled.div`
   padding-bottom: 20px;
   h2 {
-    padding: 41px 30px 29px;
+    padding: 41px 30px 34px;
     font-size: 18px;
     color: #222;
     line-height: 35px;
@@ -280,7 +290,6 @@ const $optionBox = styled.div`
     }
   }
   .data {
-
   }
 `
 
@@ -337,7 +346,6 @@ const $toggleBtn = styled.div`
     left: 3px;
     transition: all 0.3s;
   }
-
 
   &.active {
     background: rgb(70, 155, 235);
