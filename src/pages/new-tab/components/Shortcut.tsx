@@ -1,27 +1,43 @@
-import { Fragment, useEffect, useState } from 'react'
-import styled from '@emotion/styled'
-import FavoriteDialog from './FavoriteDialog'
-import Close from '../../../icons/Close'
-import PostMessages from '../adapters/PostMessages'
-import { useDialogMessagesStates } from '../hooks/useDialogMessages'
-import { useGetPageStrings } from '../hooks/usePageStrings'
+import { Fragment, useEffect, useState } from "react"
+import styled from "@emotion/styled"
+import FavoriteDialog from "./FavoriteDialog"
+// import Close from "../../../icons/Close"
+import PostMessages from "../adapters/PostMessages"
+import { useDialogMessagesStates } from "../hooks/useDialogMessages"
+import { useGetPageStrings } from "../hooks/usePageStrings"
+import CloseImg from "../../../icons/CloseImg"
 
 export default () => {
   const pageStrings = useGetPageStrings()
   const [mesages, setMessages] = useDialogMessagesStates()
-  
-  const [favoriteList, setFavoriteList] = useState([null, null, null, null, null])
+
+  const [favoriteList, setFavoriteList] = useState([
+    null,
+    null,
+    null,
+    null,
+    null
+  ])
   const [favoriteSize, setFavoriteSize] = useState(0)
   const [isDialogShow, setDialogIsShow] = useState(false)
-  const [frequentList, setFrequentList] = useState([null, null, null, null, null])
+  const [frequentList, setFrequentList] = useState([
+    null,
+    null,
+    null,
+    null,
+    null
+  ])
 
   const getFavoriteList = async () => {
     const res = await PostMessages.getFavoriteList()
-    if(res === "error") {
-      setMessages([...mesages, {
-        isActive: true,
-        message: pageStrings["An error occurred"]
-      }])
+    if (res === "error") {
+      setMessages([
+        ...mesages,
+        {
+          isActive: true,
+          message: pageStrings["An error occurred"]
+        }
+      ])
     } else {
       const resLen = res.length
       const fill = res.slice(0, resLen).concat(new Array(5 - resLen).fill(null))
@@ -32,11 +48,14 @@ export default () => {
 
   const getFrequentList = async () => {
     const res = await PostMessages.getFrequentList()
-    if(res === "error") {
-      setMessages([...mesages, {
-        isActive: true,
-        message: pageStrings["An error occurred"]
-      }])
+    if (res === "error") {
+      setMessages([
+        ...mesages,
+        {
+          isActive: true,
+          message: pageStrings["An error occurred"]
+        }
+      ])
     } else {
       const resLen = res.length
       const fill = res.slice(0, resLen).concat(new Array(5 - resLen).fill(null))
@@ -49,13 +68,16 @@ export default () => {
     getFrequentList()
   }, [])
 
-  const handleClickDialogAdd = async(title: string, address: string) => {
+  const handleClickDialogAdd = async (title: string, address: string) => {
     const res = await PostMessages.addFavorite(title, address)
-    if(res === "error") {
-      setMessages([...mesages, {
-        isActive: true,
-        message: pageStrings["An error occurred"]
-      }])
+    if (res === "error") {
+      setMessages([
+        ...mesages,
+        {
+          isActive: true,
+          message: pageStrings["An error occurred"]
+        }
+      ])
     } else {
       getFavoriteList()
       setDialogIsShow(false)
@@ -66,14 +88,20 @@ export default () => {
     setDialogIsShow(false)
   }
 
-  const handleClickFavoriteDelete = async (e: React.MouseEvent<HTMLDivElement>, id: string) => {
+  const handleClickFavoriteDelete = async (
+    e: React.MouseEvent<HTMLDivElement>,
+    id: string
+  ) => {
     e.stopPropagation()
     const res = await PostMessages.deleteFavorite(id)
-    if(res === "error") {
-      setMessages([...mesages, {
-        isActive: true,
-        message: pageStrings["An error occurred"]
-      }])
+    if (res === "error") {
+      setMessages([
+        ...mesages,
+        {
+          isActive: true,
+          message: pageStrings["An error occurred"]
+        }
+      ])
     } else {
       getFavoriteList()
     }
@@ -81,18 +109,21 @@ export default () => {
 
   const handleClickGoPage = async (address: string) => {
     const res = await PostMessages.goPage(address)
-    if(res === "error") {
-      setMessages([...mesages, {
-        isActive: true,
-        message: pageStrings["An error occurred"]
-      }])
+    if (res === "error") {
+      setMessages([
+        ...mesages,
+        {
+          isActive: true,
+          message: pageStrings["An error occurred"]
+        }
+      ])
     }
   }
 
   return (
     <$area>
       <section>
-        <h2>{ pageStrings["Favorite"] }</h2>
+        <h2>{pageStrings["Favorite"]}</h2>
         <$shortcutArea>
           {favoriteList.map((d, i) => {
             return (
@@ -102,25 +133,26 @@ export default () => {
                     className="active"
                     onClick={() => handleClickGoPage(d.address)}
                   >
-                    <div className={`icon icon-${i}`}>{d.title.substring(0, 1)}</div>
+                    <div className={`icon icon-${i}`}>
+                      {d.title.substring(0, 1)}
+                    </div>
                     <p>{d.title}</p>
-                    <div 
+                    <div
                       className="delete"
                       onClick={(e) => handleClickFavoriteDelete(e, d.id)}
                     >
-                      <Close />
+                      <CloseImg />
                     </div>
                   </$shortcutBox>
                 ) : (
-                  <$shortcutBox 
-                    className={favoriteSize === i ? 'add-btn' : ''}
+                  <$shortcutBox
+                    className={favoriteSize === i ? "add-btn" : ""}
                     onClick={() => {
-                      if(favoriteSize === i) {
+                      if (favoriteSize === i) {
                         setDialogIsShow(true)
                       }
                     }}
-                  >
-                  </$shortcutBox>
+                  ></$shortcutBox>
                 )}
               </Fragment>
             )
@@ -128,19 +160,21 @@ export default () => {
         </$shortcutArea>
       </section>
       <section>
-        <h2>{ pageStrings["Frequent"] }</h2>
+        <h2>{pageStrings["Frequent"]}</h2>
         <$shortcutArea>
           {frequentList.map((d, i) => {
             return (
               <Fragment key={i}>
                 {d ? (
-                <$shortcutBox 
-                  className="active"
-                  onClick={() => handleClickGoPage(d.address)}
-                >
-                  <div className={`icon icon-${i}`}>{d.title.substring(0, 1)}</div>
-                  <p>{d.title}</p>
-                </$shortcutBox>
+                  <$shortcutBox
+                    className="active"
+                    onClick={() => handleClickGoPage(d.address)}
+                  >
+                    <div className={`icon icon-${i}`}>
+                      {d.title.substring(0, 1)}
+                    </div>
+                    <p>{d.title}</p>
+                  </$shortcutBox>
                 ) : (
                   <$shortcutBox />
                 )}
@@ -150,15 +184,14 @@ export default () => {
         </$shortcutArea>
       </section>
       {isDialogShow && (
-        <FavoriteDialog 
-          handleClickDialogAdd={handleClickDialogAdd} 
-          handleClickDialogCancel={handleClickDialogCancel} 
+        <FavoriteDialog
+          handleClickDialogAdd={handleClickDialogAdd}
+          handleClickDialogCancel={handleClickDialogCancel}
         />
       )}
     </$area>
   )
 }
-
 
 const $area = styled.div`
   margin-top: 60px;
@@ -218,18 +251,22 @@ const $shortcutBox = styled.div`
     right: -7px;
     padding: 2px;
     line-height: 0;
-    background: transparent;
+    background: #fff;
     border: 1px solid #bbb;
     border-radius: 50%;
     cursor: pointer;
     opacity: 0;
     transition: opacity 0.3s;
-    svg {
-      width: 14px;
-      height: auto;
-    }
+    // img {
+    //   width: 16px;
+    //   height: auto;
+    // }
     @media (prefers-color-scheme: dark) {
-      border-color: rgba(150, 150, 150);
+      background: rgb(50, 50, 50);
+      border-color: rgb(150, 150, 150);
+      img {
+        filter: invert(100%);
+      }
     }
   }
 

@@ -1,0 +1,9 @@
+export default () => {
+  return (
+    <img
+      width="16"
+      height="16"
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgB7ZbRDYAgDEQvTsAIHaH7L+UI6gcmhiiRo9AY+5J+Xu8SoBQIgqBOOkrA06WXo9Zcinb0ok8gSFm8ESG00ApIlAjBaMwampu3NB5m/sZguHnNaJr5U4ip5nchuswXfBDXI3C9hK7P0HUQuY5i189IOhqVIRIIzn3AYiERkAjI9Eb6IPgBOzluZyOY8CkTAAAAAElFTkSuQmCC"
+    />
+  )
+}
