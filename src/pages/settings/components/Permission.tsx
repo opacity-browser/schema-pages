@@ -1,69 +1,115 @@
-import { useEffect, useState } from 'react'
-import styled from '@emotion/styled'
-import PostMessages from '../adapters/PostMessages'
-import { useGetPageStrings } from '../hooks/usePageStrings'
-import { useDialogMessagesStates } from '../hooks/useDialogMessages'
-import Close from '../../../icons/Close'
-import Check from '../icons/Check'
-import { INotificationPermission } from '../interfaces/permissions'
+import { useEffect, useState } from "react"
+import styled from "@emotion/styled"
+import PostMessages from "../adapters/PostMessages"
+import { useGetPageStrings } from "../hooks/usePageStrings"
+import { useDialogMessagesStates } from "../hooks/useDialogMessages"
+import Close from "../../../icons/Close"
+import Check from "../icons/Check"
+import { ISettingPermission } from "../interfaces/permissions"
 
 export default () => {
   const pageStrings = useGetPageStrings()
   const [mesages, setMessages] = useDialogMessagesStates()
   const [choiceIds, setChoiceIds] = useState([])
-  const [notificationPermissions, setNotificationPermissions] = useState<INotificationPermission[]>([])
+  const [notificationPermissions, setNotificationPermissions] = useState<
+    ISettingPermission[]
+  >([])
+  const [locationPermissions, setLocaitonPermissions] = useState<
+    ISettingPermission[]
+  >([])
 
   const getNotificationPermisions = async () => {
     const res = await PostMessages.getNotificationPermisions()
-    if(res === "error") {
-      setMessages([...mesages, {
-        isActive: true,
-        message: pageStrings["An error occurred"]
-      }])
+    if (res === "error") {
+      setMessages([
+        ...mesages,
+        {
+          isActive: true,
+          message: pageStrings["An error occurred"]
+        }
+      ])
     } else {
       setNotificationPermissions(res)
     }
   }
 
+  const getLocationPermisions = async () => {
+    const res = await PostMessages.getLocationPermisions()
+    if (res === "error") {
+      setMessages([
+        ...mesages,
+        {
+          isActive: true,
+          message: pageStrings["An error occurred"]
+        }
+      ])
+    } else {
+      setLocaitonPermissions(res)
+    }
+  }
+
   useEffect(() => {
     getNotificationPermisions()
+    getLocationPermisions()
   }, [])
 
   const handleClickCheckbox = (id: string) => {
-    if(choiceIds.find(choiceId => choiceId === id)) {
-      setChoiceIds(choiceIds.filter(choiceId => choiceId != id))
+    if (choiceIds.find((choiceId) => choiceId === id)) {
+      setChoiceIds(choiceIds.filter((choiceId) => choiceId != id))
     } else {
       setChoiceIds([...choiceIds, id])
     }
   }
 
   const handleClickDeleteBtn = async (id: string) => {
-    const res = await PostMessages.deleteNotificationPermissions([id])
-    if(res === "error") {
-      setMessages([...mesages, {
-        isActive: true,
-        message: pageStrings["An error occurred"]
-      }])
+    const res = await PostMessages.deletePermissions([id])
+    if (res === "error") {
+      setMessages([
+        ...mesages,
+        {
+          isActive: true,
+          message: pageStrings["An error occurred"]
+        }
+      ])
     } else {
-      const newNotiPerm = notificationPermissions.filter((permData: INotificationPermission) => {
-        return permData.id !== id
-      })
+      const newNotiPerm = notificationPermissions.filter(
+        (permData: ISettingPermission) => {
+          return permData.id !== id
+        }
+      )
+      const newLocPerm = locationPermissions.filter(
+        (permData: ISettingPermission) => {
+          return permData.id !== id
+        }
+      )
       setNotificationPermissions(newNotiPerm)
+      setLocaitonPermissions(newLocPerm)
     }
   }
 
   const handleClickDeleteCheck = async () => {
-    const res = await PostMessages.deleteNotificationPermissions(choiceIds)
-    if(res === "error") {
-      setMessages([...mesages, {
-        isActive: true,
-        message: pageStrings["An error occurred"]
-      }])
+    const res = await PostMessages.deletePermissions(choiceIds)
+    if (res === "error") {
+      setMessages([
+        ...mesages,
+        {
+          isActive: true,
+          message: pageStrings["An error occurred"]
+        }
+      ])
     } else {
-      const newNotiPerm = notificationPermissions.filter((permData: INotificationPermission) => {
-        return !choiceIds.find(choiceId => choiceId === permData.id)
-      })
+      const newNotiPerm = notificationPermissions.filter(
+        (permData: ISettingPermission) => {
+          return !choiceIds.find((choiceId) => choiceId === permData.id)
+        }
+      )
+      const newLocPerm = locationPermissions.filter(
+        (permData: ISettingPermission) => {
+          return !choiceIds.find((choiceId) => choiceId === permData.id)
+        }
+      )
       setNotificationPermissions(newNotiPerm)
+      setLocaitonPermissions(newLocPerm)
       setChoiceIds([])
     }
   }
@@ -72,49 +118,112 @@ export default () => {
     const string = pageStrings["$n were selected."]
     return string.replace("$n", `<span>${choiceIds.length}</span>`)
   }
-  
+
   return (
     <$area>
-      <h2>{ pageStrings["Permission"] }</h2>
-      <p className='title'>{ pageStrings["Notification"] }</p>
-      <$permissionBox>
-        {notificationPermissions.length > 0 ? (
-          <ul>
-            {notificationPermissions.map(({ id, domain, isDenied }) => {
-              return (
-                <li key={id}>
-                  <div>
-                    <$checkbox 
-                      className={choiceIds.find((choiceId) => choiceId == id) ? "active" : ""}
-                      onClick={() => handleClickCheckbox(id)}
-                    >
-                      <Check />
-                    </$checkbox>
-                    <span className={isDenied ? "denied" : "allowed"}>
-                      {isDenied ? pageStrings["denied"] : pageStrings["allowed"]}
-                    </span>
-                    <p><a href={domain} target='_blank'>{domain}</a></p>
-                    <$closeBtnBox onClick={() => handleClickDeleteBtn(id)}>
-                      <Close />
-                    </$closeBtnBox>
-                  </div>
-                </li>
-              )
-            })}
-          </ul>
-        ) : (
-          <$empty>
-            <p>{ pageStrings["There are no domains with notification permissions set."] }</p>
-          </$empty>
-        )}
-      </$permissionBox>
+      <h2>{pageStrings["Permission"]}</h2>
+      <section>
+        <p className="title">{pageStrings["Notification"]}</p>
+        <$permissionBox>
+          {notificationPermissions.length > 0 ? (
+            <ul>
+              {notificationPermissions.map(({ id, domain, isDenied }) => {
+                return (
+                  <li key={id}>
+                    <div>
+                      <$checkbox
+                        className={
+                          choiceIds.find((choiceId) => choiceId == id)
+                            ? "active"
+                            : ""
+                        }
+                        onClick={() => handleClickCheckbox(id)}
+                      >
+                        <Check />
+                      </$checkbox>
+                      <span className={isDenied ? "denied" : "allowed"}>
+                        {isDenied
+                          ? pageStrings["denied"]
+                          : pageStrings["allowed"]}
+                      </span>
+                      <p>
+                        <a href={domain} target="_blank">
+                          {domain}
+                        </a>
+                      </p>
+                      <$closeBtnBox onClick={() => handleClickDeleteBtn(id)}>
+                        <Close />
+                      </$closeBtnBox>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          ) : (
+            <$empty>
+              <p>{pageStrings["There is no domain with permissions set."]}</p>
+            </$empty>
+          )}
+        </$permissionBox>
+      </section>
+      <section>
+        <p className="title">{pageStrings["Location"]}</p>
+        <$permissionBox>
+          {locationPermissions.length > 0 ? (
+            <ul>
+              {locationPermissions.map(({ id, domain, isDenied }) => {
+                return (
+                  <li key={id}>
+                    <div>
+                      <$checkbox
+                        className={
+                          choiceIds.find((choiceId) => choiceId == id)
+                            ? "active"
+                            : ""
+                        }
+                        onClick={() => handleClickCheckbox(id)}
+                      >
+                        <Check />
+                      </$checkbox>
+                      <span className={isDenied ? "denied" : "allowed"}>
+                        {isDenied
+                          ? pageStrings["denied"]
+                          : pageStrings["allowed"]}
+                      </span>
+                      <p>
+                        <a href={domain} target="_blank">
+                          {domain}
+                        </a>
+                      </p>
+                      <$closeBtnBox onClick={() => handleClickDeleteBtn(id)}>
+                        <Close />
+                      </$closeBtnBox>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          ) : (
+            <$empty>
+              <p>{pageStrings["There is no domain with permissions set."]}</p>
+            </$empty>
+          )}
+        </$permissionBox>
+      </section>
       {choiceIds.length > 0 && (
         <$optionBar>
-          <p className="message" dangerouslySetInnerHTML={{
-            __html: choiceHTMLText()
-          }} />
-          <$deleteBtn onClick={handleClickDeleteCheck}>{ pageStrings["Delete"] }</$deleteBtn>
-          <$cancelBtn onClick={() => setChoiceIds([])}>{ pageStrings["Cancel"] }</$cancelBtn>
+          <p
+            className="message"
+            dangerouslySetInnerHTML={{
+              __html: choiceHTMLText()
+            }}
+          />
+          <$deleteBtn onClick={handleClickDeleteCheck}>
+            {pageStrings["Delete"]}
+          </$deleteBtn>
+          <$cancelBtn onClick={() => setChoiceIds([])}>
+            {pageStrings["Cancel"]}
+          </$cancelBtn>
         </$optionBar>
       )}
     </$area>
@@ -137,6 +246,10 @@ const $area = styled.div`
     font-size: 12px;
     margin: 5px 32px;
     color: #888;
+  }
+
+  section {
+    margin-bottom: 30px;
   }
 `
 
@@ -165,8 +278,8 @@ const $optionBar = styled.div`
     flex-grow: 1;
     text-align: center;
     span {
-     color: rgb(70, 155, 235);
-     font-weight: bold; 
+      color: rgb(70, 155, 235);
+      font-weight: bold;
     }
   }
 `
@@ -270,7 +383,7 @@ const $permissionBox = styled.div`
 `
 
 const $empty = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   padding: 10px 5px;
   color: #444;
   @media (prefers-color-scheme: dark) {

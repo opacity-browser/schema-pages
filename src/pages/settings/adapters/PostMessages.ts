@@ -5,7 +5,7 @@ import {
   IVisitHistoriesDTO
 } from "../interfaces/histories"
 import { IStringData } from "../interfaces/localizable"
-import { INotificationPermission } from "../interfaces/permissions"
+import { ISettingPermission } from "../interfaces/permissions"
 
 class PostMessages {
   postMessage: PostMessageManager
@@ -39,10 +39,10 @@ class PostMessages {
     }
   }
 
-  async deleteNotificationPermissions(permissionIds: string[]) {
+  async deletePermissions(permissionIds: string[]) {
     if ((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
       return await this.postMessage.request<"success" | "error">(
-        "deleteNotificationPermissions",
+        "deletePermissions",
         JSON.stringify(permissionIds)
       )
     } else {
@@ -50,11 +50,29 @@ class PostMessages {
     }
   }
 
+  async getLocationPermisions() {
+    if ((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
+      return await this.postMessage.request<ISettingPermission[] | "error">(
+        "getLocationPermisions"
+      )
+    } else {
+      return [
+        {
+          id: "b",
+          domain:
+            "https://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.dev",
+          permission: 2,
+          isDenied: true
+        }
+      ]
+    }
+  }
+
   async getNotificationPermisions() {
     if ((window as any)?.webkit?.messageHandlers?.opacityBrowser) {
-      return await this.postMessage.request<
-        INotificationPermission[] | "error"
-      >("getNotificationPermisions")
+      return await this.postMessage.request<ISettingPermission[] | "error">(
+        "getNotificationPermisions"
+      )
     } else {
       return [
         {

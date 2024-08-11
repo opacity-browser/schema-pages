@@ -1,4 +1,4 @@
-export interface INotificationPermission {
+export interface ISettingPermission {
   id: string
   domain: string
   permission: number
