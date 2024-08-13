@@ -12,7 +12,7 @@
     "url": "git+https://github.com/opacity-browser/schema-page.git"
   },
   "author": "false",
-  "license": "ISC",
+  "license": "Apache License 2.0",
   "bugs": {
     "url": "https://github.com/opacity-browser/schema-page/issues"
   },
