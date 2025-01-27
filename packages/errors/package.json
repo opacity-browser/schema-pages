@@ -1,0 +1,9 @@
+{
+  "name": "errors",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "vite"
+  },
+  "packageManager": "yarn@4.2.2"
+}

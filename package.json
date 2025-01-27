@@ -1,12 +1,7 @@
 {
   "name": "schema-page",
   "version": "1.0.0",
-  "description": "",
   "private": true,
-  "scripts": {
-    "build": "webpack --mode production",
-    "start": "webpack serve --open --mode development"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/opacity-browser/schema-page.git"
@@ -16,20 +11,39 @@
   "bugs": {
     "url": "https://github.com/opacity-browser/schema-page/issues"
   },
-  "homepage": "https://github.com/opacity-browser/schema-page#readme",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "storybook": "yarn workspace design-system run storybook",
+    "start:error": "yarn workspace errors run start"
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.1.3"
+  },
   "devDependencies": {
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
-    "@types/react": "^18.2.56",
-    "@types/react-dom": "^18.2.19",
-    "html-webpack-plugin": "^5.6.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "recoil": "^0.7.7",
-    "ts-loader": "^9.5.1",
-    "typescript": "^5.3.3",
-    "webpack": "^5.90.2",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.2"
-  }
+    "@chromatic-com/storybook": "^3.2.4",
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
+    "@storybook/addon-essentials": "^8.5.0",
+    "@storybook/addon-interactions": "^8.5.0",
+    "@storybook/blocks": "^8.5.0",
+    "@storybook/react": "^8.5.0",
+    "@storybook/react-vite": "^8.5.0",
+    "@storybook/test": "^8.5.0",
+    "@types/node": "^22.10.7",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.1",
+    "prettier": "^3.4.2",
+    "storybook": "^8.5.0",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7"
+  },
+  "homepage": "https://github.com/opacity-browser/schema-page#readme",
+  "packageManager": "yarn@4.2.2"
 }
