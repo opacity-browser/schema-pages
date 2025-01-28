@@ -17,6 +17,7 @@
   "scripts": {
     "storybook": "yarn workspace design-system run storybook",
     "start:error": "yarn workspace errors run start"
+  },
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
