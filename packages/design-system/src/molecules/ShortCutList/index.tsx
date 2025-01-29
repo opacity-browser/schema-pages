@@ -55,7 +55,7 @@ export default function ShortCutList({
 
   return (
     <div>
-      <ul className="grid grid-cols-6 gap-4">
+      <ul className="grid md:grid-cols-6 grid-cols-3 gap-4">
         {loopList.map((_, i) => {
           if (i === listLen)
             return (

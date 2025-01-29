@@ -2,8 +2,9 @@ import { ChangeEvent, useState } from "react"
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react"
 import Button from "../../atoms/Button"
 import CancelButton from "../../atoms/CancelButton"
-import InputTextField from "../../atoms/InputTextField"
 import { I18n } from "./interface"
+import InputField from "../../atoms/InputField"
+import Input from "../../atoms/Input"
 
 export default function ShortCutDialog({
   dialogTitle,
@@ -68,19 +69,20 @@ export default function ShortCutDialog({
             </DialogTitle>
 
             <div className="mb-5 space-y-3">
-              <InputTextField
-                title={i18n["Title"]}
-                name="title"
-                value={shortCutTitle}
-                onChange={handleChangeInput}
-                autoFocus={true}
-              />
-              <InputTextField
-                title={i18n["Address"]}
-                name="address"
-                value={shortCutAddress}
-                onChange={handleChangeInput}
-              />
+              <InputField label={i18n["Title"]}>
+                <Input
+                  name="title"
+                  value={shortCutTitle}
+                  onChange={handleChangeInput}
+                />
+              </InputField>
+              <InputField label={i18n["Address"]}>
+                <Input
+                  name="address"
+                  value={shortCutAddress}
+                  onChange={handleChangeInput}
+                />
+              </InputField>
             </div>
 
             <div className="text-right space-x-2">
