@@ -1,5 +1,6 @@
 import { IHistoryItem } from "./interface"
 import HistoryItem from "./HistoryItem"
+import BoxTitle from "../../atoms/BoxTitle"
 
 export default function HistoryList({
   title,
@@ -12,8 +13,8 @@ export default function HistoryList({
 }) {
   return (
     <div>
-      <h2 className="font-semibold mb-2">{title}</h2>
-      <div className="border-t border-gray-200">
+      <BoxTitle>{title}</BoxTitle>
+      <div className="border-t border-primary-200 dark:border-primary-400">
         <ul>
           {list.map((item) => (
             <li key={item.id}>

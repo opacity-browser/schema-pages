@@ -1,3 +1,4 @@
+import BoxTitle from "../../atoms/BoxTitle"
 import { ILibraryItem } from "./interface"
 import LibraryItem from "./LibraryItem"
 
@@ -5,13 +6,13 @@ export default function LibraryList({
   title,
   list
 }: {
-  title: string
+  title?: string
   list: Array<ILibraryItem>
 }) {
   return (
     <div>
-      <h2 className="font-semibold mb-2">{title}</h2>
-      <div className="border-t border-gray-200">
+      {title && <BoxTitle>{title}</BoxTitle>}
+      <div className="border-t border-primary-200 dark:border-primary-300">
         <ul>
           {list.map((item) => (
             <li key={item.title}>

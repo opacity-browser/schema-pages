@@ -33,7 +33,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    title: "2025-03",
     list: [
       {
         title: "ASN1Decoder",

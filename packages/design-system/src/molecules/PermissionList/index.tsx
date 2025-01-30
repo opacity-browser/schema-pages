@@ -1,3 +1,4 @@
+import BoxTitle from "../../atoms/BoxTitle"
 import { IPermissionItem } from "./interface"
 import PermissionItem from "./PermissionItem"
 
@@ -12,8 +13,8 @@ export default function PermissionList({
 }) {
   return (
     <div>
-      <h2 className="font-semibold mb-2">{title}</h2>
-      <div className="border-t border-gray-200">
+      <BoxTitle>{title}</BoxTitle>
+      <div className="border-t border-primary-200 dark:border-primary-300">
         <ul>
           {list.map((item) => (
             <li key={item.id}>
