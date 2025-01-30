@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react"
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react"
 import Button from "../../atoms/Button"
 import CancelButton from "../../atoms/CancelButton"
-import { I18n } from "./interface"
+import { Ii18n } from "./interface"
 import InputField from "../../atoms/InputField"
 import Input from "../../atoms/Input"
 
@@ -25,7 +25,7 @@ export default function ShortCutDialog({
   onClose: () => void
   onUpdate?: (id: string, name: string, address: string) => void
   onCreate?: (name: string, address: string) => void
-  i18n: I18n
+  i18n: Ii18n
 }) {
   const [shortCutTitle, setShortCutTitle] = useState(title)
   const [shortCutAddress, setShortCutAddress] = useState(address)

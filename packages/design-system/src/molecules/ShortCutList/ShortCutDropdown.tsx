@@ -1,13 +1,13 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react"
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline"
-import { I18n } from "./interface"
+import { Ii18n } from "./interface"
 
 export default function ShortCutDropdown({
   onClick,
   i18n
 }: {
   onClick: (type: string) => void
-  i18n: I18n
+  i18n: Ii18n
 }) {
   return (
     <>

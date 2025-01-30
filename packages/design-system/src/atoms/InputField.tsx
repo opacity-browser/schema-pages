@@ -13,7 +13,7 @@ export default function InputField({
   return (
     <div className="w-full">
       <Field>
-        <div className="mb-1">
+        <div className="mb-2">
           <Label className="text-sm/6 font-medium text-primary dark:text-primary-50">
             {label}
           </Label>

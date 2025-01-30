@@ -1,4 +1,4 @@
-export interface I18n {
+export interface Ii18n {
   Favorite: string
   "Add Favorite": string
   "Edit Favorite": string

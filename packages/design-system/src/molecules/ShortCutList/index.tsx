@@ -2,7 +2,7 @@ import { useState } from "react"
 import { PlusIcon } from "@heroicons/react/24/outline"
 import ShortCutDialog from "./ShortCutDialog"
 import ShortCutItem from "./ShortCutItem"
-import { I18n } from "./interface"
+import { Ii18n } from "./interface"
 
 export default function ShortCutList({
   length = 6,
@@ -31,7 +31,7 @@ export default function ShortCutList({
   onUpdate?: (id: string, name: string, address: string) => void
   onCreate?: (name: string, address: string) => void
   onDelete?: (id: string) => void
-  i18n?: I18n
+  i18n?: Ii18n
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const [openDialogId, setDialogOpenId] = useState("")

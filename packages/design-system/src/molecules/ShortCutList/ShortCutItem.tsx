@@ -1,4 +1,4 @@
-import { I18n } from "./interface"
+import { Ii18n } from "./interface"
 import ShortCutDropdown from "./ShortCutDropdown"
 
 export default function ShortCutItem({
@@ -14,7 +14,7 @@ export default function ShortCutItem({
   address: string
   i: number
   handleClickDropdown: (id: string, type: string) => void
-  i18n: I18n
+  i18n: Ii18n
 }) {
   return (
     <div className="relative size-28 bg-gray-100 hover:bg-gray-200 transition-colors rounded-lg cursor-pointer flex items-center justify-center group dark:bg-primary-800 dark:hover:bg-primary-900">

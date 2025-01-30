@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { Checkbox as HUICheckbox } from "@headlessui/react"
 import { CheckIcon } from "@heroicons/react/24/outline"
 
@@ -12,9 +13,20 @@ export default function Checkbox({
     <HUICheckbox
       checked={checked}
       onChange={onChange}
-      className="group block size-6 p-0.5 rounded border bg-white data-[checked]:bg-primary-700 dark:bg-primary-800 dark:border-primary-600 dark:data-[checked]:bg-white data-[checked]:border-primary-900"
+      className={clsx(
+        "group block size-6 p-0.5 rounded border",
+        "border-primary-200 dark:border-primary-500",
+        "bg-white dark:bg-primary-800 data-[checked]:bg-primary-700 dark:data-[checked]:bg-white",
+        "data-[checked]:border-primary-900 dark:border-primary-600",
+        "cursor-pointer"
+      )}
     >
-      <CheckIcon className="stroke-white dark:stroke-primary-900 opacity-0 group-data-[checked]:opacity-100 stroke-2" />
+      <CheckIcon
+        className={clsx(
+          "stroke-2 opacity-0 group-data-[checked]:opacity-100",
+          "stroke-primary-50 dark:stroke-primary-900"
+        )}
+      />
     </HUICheckbox>
   )
 }

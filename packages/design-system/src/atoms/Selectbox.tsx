@@ -7,8 +7,9 @@ export default function Selectbox({ ...props }) {
     <div className="relative min-w-48">
       <Select
         className={clsx(
-          "text-primary bg-primary-50 dark:text-primary-50 dark:bg-primary-600",
-          "block w-full appearance-none rounded-lg border-none py-1.5 px-3 text-sm/6",
+          "block w-full appearance-none rounded-lg border py-1.5 px-3 text-sm/6",
+          "border-primary-200 dark:border-primary-500",
+          "text-primary dark:text-primary-50 bg-white dark:bg-primary-600",
           "*:text-black"
         )}
       >
