@@ -16,7 +16,8 @@
   ],
   "scripts": {
     "storybook": "yarn workspace design-system run storybook",
-    "start:error": "yarn workspace errors run start"
+    "start:error": "yarn workspace errors run start",
+    "start:newTab": "yarn workspace new-tab run start"
   },
   "dependencies": {
     "jotai": "^2.11.1",

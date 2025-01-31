@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router"
-import Error from "./components/pages/Error"
+import NewTab from "./components/pages/NewTab"
 
-const router = createBrowserRouter([{ path: "*", element: <Error /> }])
+const router = createBrowserRouter([{ path: "*", element: <NewTab /> }])
 
 export const Routes = () => {
   return <RouterProvider router={router} />

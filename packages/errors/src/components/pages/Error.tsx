@@ -13,18 +13,24 @@ export default function Error() {
   const decodeURL = atob(searchParams.get("url") || "")
   const messageManager = new MessageManager()
 
+  const [isInit, setIsInit] = useState(false)
   const [strings, setStrings] = useState<IStrings>({
-    lang: "",
-    headTitle: "",
-    title: "",
-    message: "",
-    buttonText: ""
+    lang: "en",
+    headTitle: "Unknown error",
+    title: "Unknown error",
+    message: "An unknown error occurred.",
+    buttonText: "Refresh"
   })
 
   const getStrings = async (errorType: string) => {
     const strings = await messageManager.getStrings(errorType)
+    if (strings === "error") {
+      setIsInit(true)
+      return
+    }
     document.documentElement.lang = strings.lang
     setStrings(strings)
+    setIsInit(true)
   }
 
   const handleClickRefresh = () => {
@@ -39,7 +45,7 @@ export default function Error() {
     <div
       className={clsx(
         "w-full h-full flex justify-start items-center flex-col",
-        strings.lang === "" ? "hidden" : ""
+        isInit ? "" : "hidden"
       )}
     >
       <div className="mt-24">

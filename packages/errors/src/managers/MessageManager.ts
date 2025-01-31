@@ -1,5 +1,6 @@
 import PostMessage from "adapters/PostMessage"
 import { IStrings } from "../interfases/IStrings"
+import { isDev } from "../constants"
 
 export default class MessageManager {
   postMessage: PostMessage
@@ -8,8 +9,8 @@ export default class MessageManager {
     this.postMessage = new PostMessage()
   }
 
-  getStrings(type: string): Promise<IStrings> {
-    if (!(window as any)?.webkit?.messageHandlers?.opacityBrowser) {
+  getStrings(type: string): Promise<IStrings | "error"> {
+    if (isDev) {
       return new Promise((resolve) =>
         resolve({
           lang: "en",
@@ -21,11 +22,11 @@ export default class MessageManager {
       )
     }
 
-    return this.postMessage.request<IStrings>("getPageStrings", type)
+    return this.postMessage.request<IStrings | "error">("getPageStrings", type)
   }
 
   replacePage(url: string): void {
-    if (!(window as any)?.webkit?.messageHandlers?.opacityBrowser) {
+    if (isDev) {
       return
     }
 

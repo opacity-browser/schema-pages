@@ -1,4 +1,6 @@
-export interface Ii18n {
+export interface IStrings {
+  lang: string
+  headTitle: string
   "Add Favorite": string
   "Edit Favorite": string
   Title: string

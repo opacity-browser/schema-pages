@@ -10,8 +10,8 @@ export default function ShortCutList({
   onUpdate,
   onCreate,
   onDelete,
+  className,
   i18n = {
-    Favorite: "Favorite",
     "Add Favorite": "Add Favorite",
     "Edit Favorite": "Edit Favorite",
     Title: "Title",
@@ -31,6 +31,7 @@ export default function ShortCutList({
   onUpdate?: (id: string, name: string, address: string) => void
   onCreate?: (name: string, address: string) => void
   onDelete?: (id: string) => void
+  className?: string
   i18n?: Ii18n
 }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -54,7 +55,7 @@ export default function ShortCutList({
   }
 
   return (
-    <div>
+    <div {...{ className }}>
       <ul className="grid md:grid-cols-6 grid-cols-3 gap-4">
         {loopList.map((_, i) => {
           if (i === listLen)
