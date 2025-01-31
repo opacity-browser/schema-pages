@@ -1,8 +1,15 @@
+const designSystemConfig = require("../design-system/tailwind.config")
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    ...(designSystemConfig.content || []),
+    "./src/**/*.{js,ts,jsx,tsx}"
+  ],
   theme: {
-    extend: {}
+    extend: {
+      ...designSystemConfig.theme.extend
+    }
   },
-  plugins: []
+  plugins: [...(designSystemConfig.plugins || [])]
 }

@@ -15,6 +15,7 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
+      "design-system/*": ["packages/design-system/src/*"],
       "adapters/*": ["packages/adapters/src/*"]
     }
   },

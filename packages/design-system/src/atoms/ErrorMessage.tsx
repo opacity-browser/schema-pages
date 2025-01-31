@@ -5,12 +5,12 @@ export default function ErrorMessage({
   title,
   message,
   btnText,
-  onRefresh
+  onClick
 }: {
   title: string
   message: React.ReactNode
-  btnText: string
-  onRefresh: () => void
+  btnText?: string
+  onClick?: () => void
 }) {
   return (
     <div className="flex flex-col items-center">
@@ -21,7 +21,7 @@ export default function ErrorMessage({
         {title}
       </h1>
       <p className="text-primary-300 dark:text-primary-100 mb-12">{message}</p>
-      <Button onClick={onRefresh}>{btnText}</Button>
+      <Button onClick={onClick}>{btnText}</Button>
     </div>
   )
 }

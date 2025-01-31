@@ -18,7 +18,7 @@ const meta = {
         type: "text"
       }
     },
-    onRefresh: {
+    onClick: {
       action: "refresh"
     }
   }
@@ -32,6 +32,6 @@ export const Default: Story = {
     title: "Unknown error",
     message: "An unknown error occurred.",
     btnText: "Refresh",
-    onRefresh: () => {}
+    onClick: () => {}
   }
 }
