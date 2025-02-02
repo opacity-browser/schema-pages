@@ -12,7 +12,7 @@ export default function CancelButton({
 }) {
   const styles = () => {
     const className =
-      "bg-transparent text-primary data-[hover]:bg-gray-100 transition-colors dark:text-primary-100 dark:data-[hover]:bg-primary-700"
+      "bg-transparent text-primary data-[hover]:bg-gray-100 transition-colors dark:text-primary-100 dark:data-[hover]:bg-primary-900/60"
 
     switch (size) {
       case "small":

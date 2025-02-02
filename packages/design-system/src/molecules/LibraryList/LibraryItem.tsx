@@ -5,7 +5,7 @@ export default function LibraryItem({ item }: { item: ILibraryItem }) {
   return (
     <div
       className={clsx(
-        "w-full text-sm/7 border-b border-primary-50/80 dark:border-primary-300 py-2",
+        "w-full text-sm/7 border-b border-primary-50/80 dark:border-primary-600/80 py-2",
         "text-primary dark:text-primary-50"
       )}
     >

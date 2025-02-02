@@ -26,7 +26,7 @@ export default function VisitHistory() {
     }>
   >([])
 
-  const getVisitHistories = async (isReset: boolean = false) => {
+  const getVisitHistories = async () => {
     const res = await messageManager.getVisitHistory(yearMonth)
     if (res === "error") return
 
@@ -35,23 +35,17 @@ export default function VisitHistory() {
       (a, b) =>
         getDateObj(b.createDate).getTime() - getDateObj(a.createDate).getTime()
     )
+
     const newVisitHistories: Array<{
       yearMonth: string
       list: IHistoryItem[]
-    }> = isReset
-      ? [
-          {
-            yearMonth: yearMonth,
-            list: res.list
-          }
-        ]
-      : [
-          ...visitHistories,
-          {
-            yearMonth: yearMonth,
-            list: res.list
-          }
-        ]
+    }> = [
+      ...visitHistories,
+      {
+        yearMonth: yearMonth,
+        list: res.list
+      }
+    ]
 
     setVisitHistories(newVisitHistories)
   }
@@ -71,7 +65,16 @@ export default function VisitHistory() {
   const handleClickClearAllBtn = async () => {
     const res = await messageManager.deleteAllVisitHistory()
     if (res === "error") return
-    getVisitHistories(true)
+
+    const nowYearMonth = getYearMonth()
+    setYearMonth(nowYearMonth)
+    setFirstYearMonth("")
+    setVisitHistories([
+      {
+        yearMonth: nowYearMonth,
+        list: []
+      }
+    ])
   }
 
   const handleClickDeleteBtn = async (id: string) => {
@@ -97,12 +100,13 @@ export default function VisitHistory() {
             {strings["Clear All"]}
           </CancelButton>
         </h2>
-        <div className="border-t border-gray-200 pt-6">
+        <div className="border-t border-gray-200 dark:border-primary-600 pt-6">
           {visitHistories.map((visitHistory) => (
             <div className="mb-6" key={visitHistory.yearMonth}>
               <HistoryList
                 title={visitHistory.yearMonth}
                 list={visitHistory.list}
+                emptyMessage={strings["There is no visit history."]}
                 onDelete={handleClickDeleteBtn}
               />
             </div>

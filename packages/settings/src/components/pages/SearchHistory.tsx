@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import clsx from "clsx"
 import HistoryList from "design-system/molecules/HistoryList"
 import { IHistoryItem } from "design-system/molecules/HistoryList/interface"
+import Button from "design-system/atoms/Button"
+import CancelButton from "design-system/atoms/CancelButton"
 import BaseLayout from "../templatets/BaseLayout"
 import useStrings from "../../hooks/useStrings"
 import MessageManager from "../../managers/MessageManager"
@@ -10,8 +12,6 @@ import {
   getPrevYearMonth,
   getYearMonth
 } from "../../helpers/dateParser"
-import Button from "design-system/atoms/Button"
-import CancelButton from "design-system/atoms/CancelButton"
 
 export default function SearchHistory() {
   const messageManager = new MessageManager()
@@ -26,7 +26,7 @@ export default function SearchHistory() {
     }>
   >([])
 
-  const getSearchHistories = async (isReset: boolean = false) => {
+  const getSearchHistories = async () => {
     const res = await messageManager.getSearchHistory(yearMonth)
     if (res === "error") return
 
@@ -35,23 +35,17 @@ export default function SearchHistory() {
       (a, b) =>
         getDateObj(b.createDate).getTime() - getDateObj(a.createDate).getTime()
     )
+
     const newSearchHistories: Array<{
       yearMonth: string
       list: IHistoryItem[]
-    }> = isReset
-      ? [
-          {
-            yearMonth: yearMonth,
-            list: res.list
-          }
-        ]
-      : [
-          ...searchHistories,
-          {
-            yearMonth: yearMonth,
-            list: res.list
-          }
-        ]
+    }> = [
+      ...searchHistories,
+      {
+        yearMonth,
+        list: res.list
+      }
+    ]
 
     setSearchHistories(newSearchHistories)
   }
@@ -71,7 +65,16 @@ export default function SearchHistory() {
   const handleClickClearAllBtn = async () => {
     const res = await messageManager.deleteAllSearchHistory()
     if (res === "error") return
-    getSearchHistories(true)
+
+    const nowYearMonth = getYearMonth()
+    setYearMonth(nowYearMonth)
+    setFirstYearMonth("")
+    setSearchHistories([
+      {
+        yearMonth: nowYearMonth,
+        list: []
+      }
+    ])
   }
 
   const handleClickDeleteBtn = async (id: string) => {
@@ -97,12 +100,13 @@ export default function SearchHistory() {
             {strings["Clear All"]}
           </CancelButton>
         </h2>
-        <div className="border-t border-gray-200 pt-6">
+        <div className="border-t border-gray-200 dark:border-primary-600 pt-6">
           {searchHistories.map((searchHistory) => (
             <div className="mb-6" key={searchHistory.yearMonth}>
               <HistoryList
                 title={searchHistory.yearMonth}
                 list={searchHistory.list}
+                emptyMessage={strings["There is no search history."]}
                 onDelete={handleClickDeleteBtn}
               />
             </div>

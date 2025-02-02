@@ -32,9 +32,7 @@ export default function ShortCutItem({
         >
           {title.substring(0, 1)}
         </div>
-        <p className="text-sm w-full px-2 truncate dark:text-onPrimary-100">
-          {title}
-        </p>
+        <p className="text-sm w-full px-2 truncate dark:text-white">{title}</p>
       </div>
       <div className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity group-hover:delay-300 z-20 rounded-full hover:bg-gray-300 dark:hover:bg-primary-700 p-1 size-7 flex items-center justify-center">
         <ShortCutDropdown

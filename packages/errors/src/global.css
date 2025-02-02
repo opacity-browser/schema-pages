@@ -7,3 +7,13 @@ body,
 #root {
   @apply h-full w-full;
 }
+
+body {
+  @apply bg-background;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-background-dark text-white;
+  }
+}

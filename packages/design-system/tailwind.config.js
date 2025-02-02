@@ -14,7 +14,8 @@ module.exports = {
           DEFAULT: "#222222"
         },
         background: {
-          DEFAULT: "#fafafa"
+          DEFAULT: "#fafafa",
+          dark: "#343434"
         },
         primary: {
           DEFAULT: "#222222",

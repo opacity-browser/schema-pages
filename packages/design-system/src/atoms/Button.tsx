@@ -14,7 +14,7 @@ export default function Button({
 }) {
   const styles = () => {
     const className =
-      "bg-primary text-onPrimary data-[hover]:bg-primary/80 transition-colors disabled:bg-gray-400 dark:bg-primary-500 dark:text-primary-100 dark:data-[hover]:bg-primary-400 dark:disabled:bg-primary-700"
+      "bg-primary text-onPrimary data-[hover]:bg-primary/80 transition-colors disabled:bg-gray-400 dark:bg-white dark:text-primary-800 dark:data-[hover]:bg-primary-100 dark:disabled:bg-primary-400 dark:disabled:text-primary-50"
 
     switch (size) {
       case "small":

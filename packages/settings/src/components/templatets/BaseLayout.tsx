@@ -14,13 +14,15 @@ export default function BaseLayout({
 }) {
   return (
     <div className={clsx("w-full h-full min-w-[768px]")}>
-      <div className="fixed w-64 h-full border-r border-gray-200 bg-background z-10 overflow-auto">
+      <div className="fixed w-64 h-full border-r border-gray-200 dark:border-primary-600 bg-background dark:bg-background-dark z-10 overflow-auto">
         <Sidebar i18n={strings} />
-        <p className="sticky top-full px-6 py-4 text-xs text-primary-500">
+        <p className="sticky top-full px-6 py-4 text-xs text-primary-500 dark:text-primary-300">
           {strings["version"] ? `v${strings["version"]}` : ""}
         </p>
       </div>
-      <main className="w-full h-full pl-64 bg-white">{children}</main>
+      <main className="w-full h-full pl-64 bg-white dark:bg-background-dark">
+        {children}
+      </main>
       <DocumentMeta title={strings.headTitle} />
     </div>
   )

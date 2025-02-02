@@ -20,7 +20,7 @@ export default function General() {
     <BaseLayout strings={strings}>
       <div className={clsx("max-w-6xl mx-auto px-8 pt-6 pb-12")}>
         <h2 className="text-xl/8 mb-6">General</h2>
-        <div className="border-t border-gray-200 pt-6">
+        <div className="border-t border-gray-200 dark:border-primary-600 pt-6">
           <div className="max-w-60  mb-6">
             <LanguageField label={strings["Language"]} />
           </div>

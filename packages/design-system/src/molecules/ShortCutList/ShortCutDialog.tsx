@@ -62,7 +62,7 @@ export default function ShortCutDialog({
         <div className="flex min-h-full items-center justify-center p-4">
           <DialogPanel
             transition
-            className="w-full max-w-md rounded-xl bg-white p-6 border border-gray/10 text-primary dark:bg-primary-800 dark:border-primary-700 dark:text-primary-100"
+            className="w-full max-w-md rounded-xl bg-white p-6 border border-gray/10 text-primary dark:bg-primary-800 dark:border-primary-700 dark:text-white"
           >
             <DialogTitle as="h2" className="text-base/7 font-medium mb-4">
               {dialogTitle}

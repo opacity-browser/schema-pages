@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "storybook": "yarn workspace design-system run storybook",
-    "start:error": "yarn workspace errors run start",
+    "start:errors": "yarn workspace errors run start",
     "start:newTab": "yarn workspace new-tab run start",
     "start:settings": "yarn workspace settings run start",
     "build:errors": "yarn workspace errors run build",

@@ -14,11 +14,11 @@ export default function InputField({
     <div className="w-full">
       <Field>
         <div className="mb-2">
-          <Label className="text-sm/6 font-medium text-primary dark:text-primary-50">
+          <Label className="text-sm/6 font-medium text-primary dark:text-primary-100">
             {label}
           </Label>
           {description && (
-            <Description className="text-sm/6 text-primary-300 dark:text-primary-100">
+            <Description className="text-sm/6 text-primary-300 dark:text-primary-200">
               {description}
             </Description>
           )}

@@ -17,7 +17,7 @@ export default function Library() {
         <h2 className="text-xl/8 mb-6 flex items-center">
           {strings["Library"]}
         </h2>
-        <div className="border-t border-gray-200 pt-6">
+        <div className="border-t border-gray-200 dark:border-primary-600 pt-6">
           <LibraryList
             title={strings["Library"]}
             list={[

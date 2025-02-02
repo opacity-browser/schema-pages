@@ -23,7 +23,7 @@ export default function CheckboxField({
           </Label>
         </div>
         {description && (
-          <Description className="text-sm/6 text-primary-300 dark:text-primary-100 mt-1">
+          <Description className="text-sm/6 text-primary-300 dark:text-primary-300 mt-1">
             {description}
           </Description>
         )}

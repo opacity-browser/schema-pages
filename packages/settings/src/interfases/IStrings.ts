@@ -24,7 +24,6 @@ export interface IStrings {
   "Learn More": string
   "Clear All": string
   Library: string
-  "Ad Blocking": string
   version: string
   Korean: string
   English: string
@@ -34,5 +33,6 @@ export interface IStrings {
   Chinese: string
   French: string
   Hindi: string
+  Norwegian: string
   "Blocks unnecessary ads and trackers using DuckDuckGo’s tracking protection list along with additional rules.": string
 }

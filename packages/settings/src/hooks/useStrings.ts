@@ -29,7 +29,6 @@ const stringsAtom = atom<IStrings>({
   "Learn More": "Learn More",
   "Clear All": "Clear All",
   Library: "Library",
-  "Ad Blocking": "Ad Blocking",
   version: "1.0.10",
   Korean: "Korean",
   English: "English",
@@ -39,6 +38,7 @@ const stringsAtom = atom<IStrings>({
   Chinese: "Chinese",
   French: "French",
   Hindi: "Hindi",
+  Norwegian: "Norwegian",
   "Blocks unnecessary ads and trackers using DuckDuckGo’s tracking protection list along with additional rules.":
     "Blocks unnecessary ads and trackers using DuckDuckGo’s tracking protection list along with additional rules."
 })

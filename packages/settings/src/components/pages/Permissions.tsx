@@ -48,11 +48,12 @@ export default function Permissions() {
         <h2 className="text-xl/8 mb-6 flex items-center">
           {strings["Permissions"]}
         </h2>
-        <div className="border-t border-gray-200 pt-6">
+        <div className="border-t border-gray-200 dark:border-primary-600 pt-6">
           <div className="mb-6">
             <PermissionList
               title={strings["Notification"]}
               list={notificationPermissions}
+              emptyMessage={strings["There is no domain with permissions set."]}
               onDelete={handleClickDeletePermissions}
             />
           </div>
@@ -60,6 +61,7 @@ export default function Permissions() {
             <PermissionList
               title={strings["Location"]}
               list={locationPermissions}
+              emptyMessage={strings["There is no domain with permissions set."]}
               onDelete={handleClickDeletePermissions}
             />
           </div>

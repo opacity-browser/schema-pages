@@ -41,7 +41,6 @@ export default class MessageManager {
           "Learn More": "Learn More",
           "Clear All": "Clear All",
           Library: "Library",
-          "Ad Blocking": "Ad Blocking",
           version: "1.0.10",
           Korean: "Korean",
           English: "English",
@@ -51,6 +50,7 @@ export default class MessageManager {
           Chinese: "Chinese",
           French: "French",
           Hindi: "Hindi",
+          Norwegian: "Norwegian",
           "Blocks unnecessary ads and trackers using DuckDuckGo’s tracking protection list along with additional rules.":
             "Blocks unnecessary ads and trackers using DuckDuckGo’s tracking protection list along with additional rules."
         })
@@ -326,22 +326,22 @@ export default class MessageManager {
         resolve({
           firstDate: "2024-03",
           list: [
-            {
-              id: "a",
-              title:
-                "keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword",
-              createDate: "2024-03-01 12:00:00"
-            },
-            {
-              id: "b",
-              title: "keyword",
-              createDate: "2024-03-01 12:00:00"
-            },
-            {
-              id: "c",
-              title: "keyword keyword ",
-              createDate: "2024-03-03 12:00:00"
-            }
+            // {
+            //   id: "a",
+            //   title:
+            //     "keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword",
+            //   createDate: "2024-03-01 12:00:00"
+            // },
+            // {
+            //   id: "b",
+            //   title: "keyword",
+            //   createDate: "2024-03-01 12:00:00"
+            // },
+            // {
+            //   id: "c",
+            //   title: "keyword keyword ",
+            //   createDate: "2024-03-03 12:00:00"
+            // }
           ]
         })
       )
@@ -452,14 +452,13 @@ export default class MessageManager {
     if (isDev) {
       return new Promise((resolve) =>
         resolve([
-          {
-            id: "b",
-            domain:
-              "https://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.dev",
-            permission: 2,
-            isDenied: true,
-            createDate: "2024-03-01 12:00:00"
-          }
+          // {
+          //   id: "b",
+          //   domain:
+          //     "https://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.dev",
+          //   permission: 2,
+          //   isDenied: true
+          // }
         ])
       )
     }
@@ -478,8 +477,7 @@ export default class MessageManager {
             domain:
               "https://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.dev",
             permission: 1,
-            isDenied: false,
-            createDate: "2024-03-01 12:00:00"
+            isDenied: false
           }
         ])
       )

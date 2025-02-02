@@ -13,13 +13,13 @@ export default function ShortCutDropdown({
     <>
       <Menu>
         <MenuButton className="">
-          <EllipsisVerticalIcon className="size-5 text-primary-600 dark:text-primary-400" />
+          <EllipsisVerticalIcon className="size-5 text-primary-600 dark:text-primary-200" />
         </MenuButton>
 
         <MenuItems
           transition
           anchor="bottom end"
-          className="w-24 origin-top-right rounded-xl border border-gray/5 bg-white p-1 text-sm/6 text-primary transition duration-200 ease-out focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0 [--anchor-gap:-20px] z-50 dark:bg-primary-800 dark:border-primary-700 dark:text-primary-100"
+          className="w-24 origin-top-right rounded-xl border border-gray/5 bg-white p-1 text-sm/6 text-primary transition duration-200 ease-out focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0 [--anchor-gap:-20px] z-50 dark:bg-primary-800 dark:border-primary-700 dark:text-primary-50"
         >
           <MenuItem>
             <button

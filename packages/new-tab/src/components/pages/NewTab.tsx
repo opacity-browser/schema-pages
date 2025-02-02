@@ -11,16 +11,16 @@ export default function NewTab() {
 
   const [isInit, setIsInit] = useState(false)
   const [strings, setStrings] = useState<IStrings>({
-    lang: "",
-    headTitle: "",
-    "Add Favorite": "",
-    "Edit Favorite": "",
-    Title: "",
-    Address: "",
-    Edit: "",
-    Delete: "",
-    Save: "",
-    Cancel: ""
+    lang: "en",
+    headTitle: "New Tab",
+    "Add Favorite": "Add Favorite",
+    "Edit Favorite": "Edit Favorite",
+    Title: "Title",
+    Address: "Address",
+    Edit: "Edit",
+    Delete: "Delete",
+    Save: "Save",
+    Cancel: "Cancel"
   })
 
   const getStrings = async () => {
@@ -48,7 +48,7 @@ export default function NewTab() {
     >
       <div className="flex flex-col">
         <figure className="m-auto mt-6 mb-20">
-          <Logo className="invert size-20" />
+          <Logo className="invert dark:invert-0 size-20" />
         </figure>
         <Shortcut className="mb-14" i18n={strings} />
       </div>

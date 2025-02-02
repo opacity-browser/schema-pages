@@ -15,9 +15,9 @@ export default function Checkbox({
       onChange={onChange}
       className={clsx(
         "group block size-6 p-0.5 rounded border",
-        "border-primary-100 dark:border-primary-500",
+        "border-primary-100 dark:border-primary-600",
         "bg-white dark:bg-primary-800 data-[checked]:bg-primary-700 dark:data-[checked]:bg-white",
-        "data-[checked]:border-primary-900 dark:border-primary-600",
+        "data-[checked]:border-primary-900",
         "cursor-pointer"
       )}
     >

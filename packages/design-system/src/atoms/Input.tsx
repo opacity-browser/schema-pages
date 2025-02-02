@@ -16,7 +16,7 @@ export default function Input({
 }) {
   return (
     <HUIInput
-      className="block w-full rounded-lg border-none bg-gray-100 py-1.5 px-3 text-sm/6 text-primary font-medium dark:bg-primary-700 dark:text-primary-100"
+      className="block w-full rounded-lg border-none bg-gray-100 py-1.5 px-3 text-sm/6 text-primary font-medium dark:bg-primary-700 dark:text-white"
       name={name}
       value={value}
       onChange={onChange}
