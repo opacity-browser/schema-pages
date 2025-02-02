@@ -24,14 +24,14 @@ export default function NewTab() {
   })
 
   const getStrings = async () => {
-    const strings = await messageManager.getStrings()
-    if (strings === "error") {
+    const res = await messageManager.getStrings()
+    if (res === "error") {
       setIsInit(true)
       return
     }
 
-    document.documentElement.lang = strings.lang
-    setStrings(strings)
+    document.documentElement.lang = res.lang
+    setStrings(res)
     setIsInit(true)
   }
 

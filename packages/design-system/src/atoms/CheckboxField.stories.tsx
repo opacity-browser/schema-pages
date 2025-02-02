@@ -8,9 +8,12 @@ const meta = {
   component: () => {
     const [checked, setChecked] = useState(false)
     return (
-      <CheckboxField label="Label" description="Description">
-        <Checkbox checked={checked} onChange={() => setChecked(!checked)} />
-      </CheckboxField>
+      <CheckboxField
+        label="Label"
+        description="Description"
+        checked={checked}
+        onChange={() => setChecked(!checked)}
+      />
     )
   },
   parameters: {
