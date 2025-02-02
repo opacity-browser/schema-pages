@@ -1,0 +1,9 @@
+{
+  "name": "design-system",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "storybook": "storybook dev -p 6006"
+  },
+  "packageManager": "yarn@4.2.2"
+}

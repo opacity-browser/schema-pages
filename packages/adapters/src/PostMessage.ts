@@ -1,6 +1,7 @@
-class PostMessageManager {
+export default class PostMessage {
   request<T>(name: string, value: string = ""): Promise<T> {
     return new Promise((resolve) => {
+      ;(window as any).opacityResponse = (window as any).opacityResponse || {}
       ;(window as any).opacityResponse[name] = ({ data }: { data: T }) => {
         resolve(data)
       }
@@ -11,5 +12,3 @@ class PostMessageManager {
     })
   }
 }
-
-export default PostMessageManager
