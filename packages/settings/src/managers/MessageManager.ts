@@ -2,6 +2,7 @@ import PostMessage from "adapters/PostMessage"
 import { isDev } from "../constants"
 import { IStrings } from "../interfases/IStrings"
 import { IHistoryItem } from "design-system/molecules/HistoryList/interface"
+import { IPermissionItem } from "design-system/molecules/PermissionList/interface"
 
 export default class MessageManager {
   postMessage: PostMessage
@@ -433,6 +434,59 @@ export default class MessageManager {
 
     return this.postMessage.request<"success" | "error">(
       "deleteAllVisitHistory"
+    )
+  }
+
+  deletePermissions(id: string): Promise<"success" | "error"> {
+    if (isDev) {
+      return new Promise((resolve) => resolve("success"))
+    }
+
+    return this.postMessage.request<"success" | "error">(
+      "deletePermissions",
+      id
+    )
+  }
+
+  getLocationPermissions(): Promise<IPermissionItem[] | "error"> {
+    if (isDev) {
+      return new Promise((resolve) =>
+        resolve([
+          {
+            id: "b",
+            domain:
+              "https://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.dev",
+            permission: 2,
+            isDenied: true,
+            createDate: "2024-03-01 12:00:00"
+          }
+        ])
+      )
+    }
+
+    return this.postMessage.request<IPermissionItem[] | "error">(
+      "getLocationPermissions"
+    )
+  }
+
+  getNotificationPermissions(): Promise<IPermissionItem[] | "error"> {
+    if (isDev) {
+      return new Promise((resolve) =>
+        resolve([
+          {
+            id: "a",
+            domain:
+              "https://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.dev",
+            permission: 1,
+            isDenied: false,
+            createDate: "2024-03-01 12:00:00"
+          }
+        ])
+      )
+    }
+
+    return this.postMessage.request<IPermissionItem[] | "error">(
+      "getNotificationPermissions"
     )
   }
 }

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import InputField from "design-system/atoms/InputField"
 import Listbox, { IListboxItem } from "design-system/atoms/Listbox"
 import MessageManager from "../../managers/MessageManager"
-import { aw } from "react-router/dist/development/route-data-Cw8htKcF"
 
 export default function ScreenModeField({ label }: { label: string }) {
   const [screenMode, setScreenMode] = useState<IListboxItem>({

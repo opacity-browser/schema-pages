@@ -12,7 +12,7 @@ export default function LibraryList({
   return (
     <div>
       {title && <BoxTitle>{title}</BoxTitle>}
-      <div className="border-t border-primary-200 dark:border-primary-300">
+      <div className="border-t border-primary-50 dark:border-primary-300">
         <ul>
           {list.map((item) => (
             <li key={item.title}>

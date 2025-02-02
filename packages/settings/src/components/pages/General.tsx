@@ -8,8 +8,6 @@ import SearchEngineField from "../molecules/SearchEngineField"
 import RetentionPeriodField from "../molecules/RetentionPeriodField"
 import TrackerBlockingField from "../molecules/TrackerBlockingField"
 import Divide from "../atoms/Divide"
-import Button from "design-system/atoms/Button"
-import CancelButton from "design-system/atoms/CancelButton"
 
 export default function General() {
   const { strings, getStrings } = useStrings()

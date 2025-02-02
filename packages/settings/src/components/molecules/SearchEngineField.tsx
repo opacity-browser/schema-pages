@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react"
 import InputField from "design-system/atoms/InputField"
 import Listbox, { IListboxItem } from "design-system/atoms/Listbox"
-import { useEffect, useState } from "react"
 import MessageManager from "../../managers/MessageManager"
 
 export default function SearchEngineField({ label }: { label: string }) {

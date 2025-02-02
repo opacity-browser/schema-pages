@@ -12,7 +12,7 @@ export default function HistoryItem({
   return (
     <div
       className={clsx(
-        "w-full text-sm border-b border-primary-50/80 dark:border-primary-300 py-2",
+        "w-full text-sm/7 border-b border-primary-50/80 dark:border-primary-300 py-2",
         "text-primary dark:text-primary-50"
       )}
     >
@@ -37,14 +37,12 @@ export default function HistoryItem({
             <p className="min-w-0 truncate">{item.title}</p>
           )}
         </div>
-        <div>
-          <button
-            className="cursor-pointer rounded-full p-1 hover:bg-primary-50 dark:hover:bg-primary-600"
-            onClick={() => onDelete(item.id)}
-          >
-            <XMarkIcon className="size-5 text-primary-300 dark:text-primary-200" />
-          </button>
-        </div>
+        <button
+          className="cursor-pointer rounded-full p-1 hover:bg-primary-50 dark:hover:bg-primary-600"
+          onClick={() => onDelete(item.id)}
+        >
+          <XMarkIcon className="size-5 text-primary-300 dark:text-primary-200" />
+        </button>
       </div>
     </div>
   )

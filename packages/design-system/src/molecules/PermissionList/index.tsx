@@ -14,7 +14,7 @@ export default function PermissionList({
   return (
     <div>
       <BoxTitle>{title}</BoxTitle>
-      <div className="border-t border-primary-200 dark:border-primary-300">
+      <div className="border-t border-primary-50 dark:border-primary-300">
         <ul>
           {list.map((item) => (
             <li key={item.id}>

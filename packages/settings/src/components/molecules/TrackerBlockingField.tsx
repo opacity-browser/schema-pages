@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import MessageManager from "../../managers/MessageManager"
 import CheckboxField from "design-system/atoms/CheckboxField"
+import MessageManager from "../../managers/MessageManager"
 
 export default function TrackerBlockingField({
   label,

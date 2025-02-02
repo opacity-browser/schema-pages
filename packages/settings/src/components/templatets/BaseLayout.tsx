@@ -14,7 +14,7 @@ export default function BaseLayout({
 }) {
   return (
     <div className={clsx("w-full h-full min-w-[768px]")}>
-      <div className="fixed w-64 h-full border-r border-gray-200 bg-background z-10">
+      <div className="fixed w-64 h-full border-r border-gray-200 bg-background z-10 overflow-auto">
         <Sidebar i18n={strings} />
         <p className="sticky top-full px-6 py-4 text-xs text-primary-500">
           {strings["version"] ? `v${strings["version"]}` : ""}
