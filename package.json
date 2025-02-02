@@ -1,13 +1,14 @@
 {
   "name": "schema-page",
-  "version": "1.0.0",
+  "version": "1.0.10",
   "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/opacity-browser/schema-page.git"
   },
-  "author": "false",
+  "author": "falsy",
   "license": "Apache License 2.0",
+  "homepage": "https://github.com/opacity-browser/schema-page#readme",
   "bugs": {
     "url": "https://github.com/opacity-browser/schema-page/issues"
   },
@@ -18,7 +19,10 @@
     "storybook": "yarn workspace design-system run storybook",
     "start:error": "yarn workspace errors run start",
     "start:newTab": "yarn workspace new-tab run start",
-    "start:settings": "yarn workspace settings run start"
+    "start:settings": "yarn workspace settings run start",
+    "build:errors": "yarn workspace errors run build",
+    "build:newTab": "yarn workspace new-tab run build",
+    "build:settings": "yarn workspace settings run build"
   },
   "dependencies": {
     "jotai": "^2.11.1",
@@ -48,6 +52,5 @@
     "typescript": "^5.7.3",
     "vite": "^6.0.7"
   },
-  "homepage": "https://github.com/opacity-browser/schema-page#readme",
   "packageManager": "yarn@4.2.2"
 }
