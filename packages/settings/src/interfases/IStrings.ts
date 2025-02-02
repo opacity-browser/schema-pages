@@ -10,7 +10,7 @@ export interface IStrings {
   "Search Engine": string
   "Screen Mode": string
   "Retention Period": string
-  "View More": string
+  "Show More": string
   Delete: string
   Cancel: string
   Notification: string

@@ -13,21 +13,21 @@ import {
 import Button from "design-system/atoms/Button"
 import CancelButton from "design-system/atoms/CancelButton"
 
-export default function SearchHistory() {
+export default function VisitHistory() {
   const messageManager = new MessageManager()
   const { strings, getStrings } = useStrings()
 
   const [firstYearMonth, setFirstYearMonth] = useState("")
   const [yearMonth, setYearMonth] = useState(getYearMonth())
-  const [searchHistories, setSearchHistories] = useState<
+  const [visitHistories, setVisitHistories] = useState<
     Array<{
       yearMonth: string
       list: IHistoryItem[]
     }>
   >([])
 
-  const getSearchHistories = async (isReset: boolean = false) => {
-    const res = await messageManager.getSearchHistory(yearMonth)
+  const getVisitHistories = async (isReset: boolean = false) => {
+    const res = await messageManager.getVisitHistory(yearMonth)
     if (res === "error") return
 
     setFirstYearMonth(res.firstDate)
@@ -35,7 +35,7 @@ export default function SearchHistory() {
       (a, b) =>
         getDateObj(b.createDate).getTime() - getDateObj(a.createDate).getTime()
     )
-    const newSearchHistories: Array<{
+    const newVisitHistories: Array<{
       yearMonth: string
       list: IHistoryItem[]
     }> = isReset
@@ -46,18 +46,18 @@ export default function SearchHistory() {
           }
         ]
       : [
-          ...searchHistories,
+          ...visitHistories,
           {
             yearMonth: yearMonth,
             list: res.list
           }
         ]
 
-    setSearchHistories(newSearchHistories)
+    setVisitHistories(newVisitHistories)
   }
 
   useEffect(() => {
-    getSearchHistories()
+    getVisitHistories()
   }, [yearMonth])
 
   useEffect(() => {
@@ -69,15 +69,15 @@ export default function SearchHistory() {
   }
 
   const handleClickClearAllBtn = async () => {
-    const res = await messageManager.deleteAllSearchHistory()
+    const res = await messageManager.deleteAllVisitHistory()
     if (res === "error") return
-    getSearchHistories(true)
+    getVisitHistories(true)
   }
 
   const handleClickDeleteBtn = async (id: string) => {
-    const res = await messageManager.deleteSearchHistory(id)
+    const res = await messageManager.deleteVisitHistory(id)
     if (res === "error") return
-    const newSearchHistories = searchHistories.map((d) => {
+    const newVisitHistories = visitHistories.map((d) => {
       return {
         ...d,
         list: d.list.filter((item: IHistoryItem) => {
@@ -85,24 +85,24 @@ export default function SearchHistory() {
         })
       }
     })
-    setSearchHistories(newSearchHistories)
+    setVisitHistories(newVisitHistories)
   }
 
   return (
     <BaseLayout strings={strings}>
       <div className={clsx("max-w-6xl mx-auto px-8 pt-6 pb-12")}>
         <h2 className="text-xl/8 mb-6 flex items-center justify-between">
-          {strings["Search History"]}
+          {strings["Visit History"]}
           <CancelButton onClick={handleClickClearAllBtn} size="medium">
             {strings["Clear All"]}
           </CancelButton>
         </h2>
         <div className="border-t border-gray-200 pt-6">
-          {searchHistories.map((searchHistory) => (
-            <div className="mb-6" key={searchHistory.yearMonth}>
+          {visitHistories.map((visitHistory) => (
+            <div className="mb-6" key={visitHistory.yearMonth}>
               <HistoryList
-                title={searchHistory.yearMonth}
-                list={searchHistory.list}
+                title={visitHistory.yearMonth}
+                list={visitHistory.list}
                 onDelete={handleClickDeleteBtn}
               />
             </div>

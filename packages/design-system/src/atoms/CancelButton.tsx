@@ -18,7 +18,7 @@ export default function CancelButton({
       case "small":
         return `py-1 px-2 text-xs rounded-sm ${className}`
       case "medium":
-        return `py-2 px-3 text-sm rounded-md ${className}`
+        return `py-1.5 px-2.5 text-sm rounded-md ${className}`
       case "large":
         return `py-2 px-4 text-lg rounded-lg ${className}`
     }

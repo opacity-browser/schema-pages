@@ -12,10 +12,9 @@ export default function BaseLayout({
   strings: IStrings
   children: ReactNode
 }) {
-  console.log(strings)
   return (
-    <div className={clsx("w-full h-full")}>
-      <div className="fixed w-64 h-full border-r border-gray-200 bg-background">
+    <div className={clsx("w-full h-full min-w-[768px]")}>
+      <div className="fixed w-64 h-full border-r border-gray-200 bg-background z-10">
         <Sidebar i18n={strings} />
         <p className="sticky top-full px-6 py-4 text-xs text-primary-500">
           {strings["version"] ? `v${strings["version"]}` : ""}

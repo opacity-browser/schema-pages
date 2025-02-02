@@ -12,15 +12,15 @@ export default function HistoryItem({
   return (
     <div
       className={clsx(
-        "w-full text-sm border-b border-primary-200 dark:border-primary-300 py-4",
+        "w-full text-sm border-b border-primary-50/80 dark:border-primary-300 py-2",
         "text-primary dark:text-primary-50"
       )}
     >
-      <div className={clsx("flex gap-2 items-center")}>
+      <div className={clsx("flex gap-4 items-center")}>
         <p className="truncate">{item.createDate}</p>
         <div className="flex flex-1 min-w-0 max-w-full">
           {item.url ? (
-            <div className="flex qflex-1 min-w-0 gap-1 items-center">
+            <div className="flex flex-1 min-w-0 gap-2 items-center">
               <a
                 href={item.url}
                 target="_blank"
@@ -34,15 +34,15 @@ export default function HistoryItem({
               </span>
             </div>
           ) : (
-            item.title
+            <p className="min-w-0 truncate">{item.title}</p>
           )}
         </div>
         <div>
           <button
-            className="cursor-pointer rounded-full p-1 hover:bg-gray-300 dark:hover:bg-primary-600"
+            className="cursor-pointer rounded-full p-1 hover:bg-primary-50 dark:hover:bg-primary-600"
             onClick={() => onDelete(item.id)}
           >
-            <XMarkIcon className="size-5 text-primary-600 dark:text-primary-200" />
+            <XMarkIcon className="size-5 text-primary-300 dark:text-primary-200" />
           </button>
         </div>
       </div>

@@ -14,7 +14,7 @@ const stringsAtom = atom<IStrings>({
   "Search Engine": "Search Engine",
   "Screen Mode": "Screen Mode",
   "Retention Period": "Retention Period",
-  "View More": "View More",
+  "Show More": "Show More",
   Delete: "Delete",
   Cancel: "Cancel",
   Notification: "Notification",

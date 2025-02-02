@@ -9,7 +9,7 @@ export default function Sidebar({ i18n }: { i18n: IStrings }) {
     <div>
       <div className="flex items-center gap-2 p-6 border-b border-gray-200 mb-4">
         <Logo className="size-6 invert" />
-        <h1 className="text-lg">{i18n["Settings"]}</h1>
+        <h1 className="text-lg/8">{i18n["Settings"]}</h1>
       </div>
       <nav className="flex-1 overflow-y-auto text-sm">
         <ul>
@@ -33,7 +33,7 @@ export default function Sidebar({ i18n }: { i18n: IStrings }) {
                   "block w-full py-2.5 px-3 rounded-md",
                   "hover:bg-primary-50/50",
                   location.pathname === path
-                    ? "text-primary"
+                    ? "text-primary font-medium"
                     : "text-primary-500"
                 )}
               >

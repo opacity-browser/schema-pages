@@ -1,6 +1,7 @@
 import PostMessage from "adapters/PostMessage"
 import { isDev } from "../constants"
 import { IStrings } from "../interfases/IStrings"
+import { IHistoryItem } from "design-system/molecules/HistoryList/interface"
 
 export default class MessageManager {
   postMessage: PostMessage
@@ -24,7 +25,7 @@ export default class MessageManager {
           "Search Engine": "Search Engine",
           "Screen Mode": "Screen Mode",
           "Retention Period": "Retention Period",
-          "View More": "View More",
+          "Show More": "Show More",
           Delete: "Delete",
           Cancel: "Cancel",
           Notification: "Notification",
@@ -313,6 +314,125 @@ export default class MessageManager {
     return this.postMessage.request<"success" | "error">(
       "updateTrackerBlocking",
       isBlocking.toString()
+    )
+  }
+
+  getSearchHistory(
+    yearMonth: string
+  ): Promise<{ firstDate: string; list: IHistoryItem[] } | "error"> {
+    if (isDev) {
+      return new Promise((resolve) =>
+        resolve({
+          firstDate: "2024-03",
+          list: [
+            {
+              id: "a",
+              title:
+                "keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword keyword",
+              createDate: "2024-03-01 12:00:00"
+            },
+            {
+              id: "b",
+              title: "keyword",
+              createDate: "2024-03-01 12:00:00"
+            },
+            {
+              id: "c",
+              title: "keyword keyword ",
+              createDate: "2024-03-03 12:00:00"
+            }
+          ]
+        })
+      )
+    }
+
+    return this.postMessage.request<
+      { firstDate: string; list: IHistoryItem[] } | "error"
+    >("getSearchHistory", yearMonth)
+  }
+
+  deleteSearchHistory(id: string): Promise<"success" | "error"> {
+    if (isDev) {
+      return new Promise((resolve) => resolve("success"))
+    }
+
+    return this.postMessage.request<"success" | "error">(
+      "deleteSearchHistory",
+      id
+    )
+  }
+
+  deleteAllSearchHistory(): Promise<"success" | "error"> {
+    if (isDev) {
+      return new Promise((resolve) => resolve("success"))
+    }
+
+    return this.postMessage.request<"success" | "error">(
+      "deleteAllSearchHistory"
+    )
+  }
+
+  getVisitHistory(
+    yearMonth: string
+  ): Promise<{ firstDate: string; list: IHistoryItem[] } | "error"> {
+    if (isDev) {
+      return new Promise((resolve) =>
+        resolve({
+          firstDate: "2024-03",
+          list: [
+            {
+              id: "a",
+              title:
+                "Opacity Opacity Opacity Opacity Opacity Opacity Opacity Opacity Opacity",
+              url: "https://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.devhttps://opacity.dev",
+              createDate: "2024-03-01 12:00:00"
+            },
+            {
+              id: "b",
+              title: "Opacity",
+              url: "https://opacity.dev",
+              createDate: "2024-03-01 12:00:00"
+            },
+            {
+              id: "c",
+              title: "Opacity2",
+              url: "https://opacity.dev",
+              createDate: "2024-03-02 12:00:00"
+            },
+            {
+              id: "d",
+              title: "Opacity3",
+              url: "https://opacity.dev",
+              createDate: "2024-03-02 12:00:00"
+            }
+          ]
+        })
+      )
+    }
+
+    return this.postMessage.request<
+      { firstDate: string; list: IHistoryItem[] } | "error"
+    >("getVisitHistory", yearMonth)
+  }
+
+  deleteVisitHistory(id: string): Promise<"success" | "error"> {
+    if (isDev) {
+      return new Promise((resolve) => resolve("success"))
+    }
+
+    return this.postMessage.request<"success" | "error">(
+      "deleteVisitHistory",
+      id
+    )
+  }
+
+  deleteAllVisitHistory(): Promise<"success" | "error"> {
+    if (isDev) {
+      return new Promise((resolve) => resolve("success"))
+    }
+
+    return this.postMessage.request<"success" | "error">(
+      "deleteAllVisitHistory"
     )
   }
 }

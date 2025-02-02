@@ -14,7 +14,7 @@ export default function HistoryList({
   return (
     <div>
       <BoxTitle>{title}</BoxTitle>
-      <div className="border-t border-primary-200 dark:border-primary-400">
+      <div className="border-t border-primary-50 dark:border-primary-400">
         <ul>
           {list.map((item) => (
             <li key={item.id}>

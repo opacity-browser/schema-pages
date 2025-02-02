@@ -5,9 +5,9 @@ import MessageManager from "../../managers/MessageManager"
 import useStrings from "../../hooks/useStrings"
 
 export default function LanguageField({ label }: { label: string }) {
+  const messageManager = new MessageManager()
   const { getStrings } = useStrings()
 
-  const messageManager = new MessageManager()
   const [language, setLanguage] = useState<IListboxItem>({
     id: "",
     name: ""
