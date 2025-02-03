@@ -27,7 +27,7 @@ export default function SearchHistory() {
   >([])
 
   const getSearchHistories = async () => {
-    const res = await messageManager.getSearchHistory(yearMonth)
+    const res = await messageManager.getSearchHistoryList(yearMonth)
     if (res === "error") return
 
     setFirstYearMonth(res.firstDate)

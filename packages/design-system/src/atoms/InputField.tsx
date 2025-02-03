@@ -18,7 +18,7 @@ export default function InputField({
             {label}
           </Label>
           {description && (
-            <Description className="text-sm/6 text-primary-300 dark:text-primary-200">
+            <Description className="text-sm/6 text-primary-300 dark:text-primary-300">
               {description}
             </Description>
           )}

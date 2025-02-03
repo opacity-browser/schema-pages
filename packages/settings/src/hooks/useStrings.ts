@@ -4,7 +4,6 @@ import MessageManager from "../managers/MessageManager"
 
 const stringsAtom = atom<IStrings>({
   lang: "en",
-  headTitle: "Settings",
   Settings: "Settings",
   General: "General",
   "Search History": "Search History",
@@ -40,7 +39,9 @@ const stringsAtom = atom<IStrings>({
   Hindi: "Hindi",
   Norwegian: "Norwegian",
   "Blocks unnecessary ads and trackers using DuckDuckGo’s tracking protection list along with additional rules.":
-    "Blocks unnecessary ads and trackers using DuckDuckGo’s tracking protection list along with additional rules."
+    "Blocks unnecessary ads and trackers using DuckDuckGo’s tracking protection list along with additional rules.",
+  "The changes will take effect after restarting the app.":
+    "The changes will take effect after restarting the app."
 })
 
 export default function useStrings() {
@@ -51,6 +52,7 @@ export default function useStrings() {
     const res = await messageManager.getStrings()
     if (res === "error") return
     setStrings(res)
+    document.documentElement.lang = res["lang"]
   }
 
   return { strings, getStrings }

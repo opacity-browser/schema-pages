@@ -1,3 +1,4 @@
+import { format, parse } from "date-fns"
 import { IHistoryItem } from "./interface"
 import HistoryItem from "./HistoryItem"
 import BoxTitle from "../../atoms/BoxTitle"
@@ -13,9 +14,12 @@ export default function HistoryList({
   emptyMessage: string
   onDelete: (id: string) => void
 }) {
+  const date = parse(title, "yyyy-MM", new Date())
+  const formattedDate = format(date, "MMM yyyy")
+
   return (
     <div>
-      <BoxTitle>{title}</BoxTitle>
+      <BoxTitle>{formattedDate}</BoxTitle>
       <div className="border-t border-primary-50 dark:border-primary-600">
         {list.length === 0 && <p className="py-2 text-sm/7">{emptyMessage}</p>}
         {list.length > 0 && (

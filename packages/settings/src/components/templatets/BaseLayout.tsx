@@ -1,8 +1,6 @@
-import { cloneElement, ReactNode, useEffect, useState } from "react"
+import { ReactNode } from "react"
 import clsx from "clsx"
-import MessageManager from "../../managers/MessageManager"
 import { IStrings } from "../../interfases/IStrings"
-import DocumentMeta from "../atoms/DocumentMeta"
 import Sidebar from "../organisms/Sidebar"
 
 export default function BaseLayout({
@@ -23,7 +21,6 @@ export default function BaseLayout({
       <main className="w-full h-full pl-64 bg-white dark:bg-background-dark">
         {children}
       </main>
-      <DocumentMeta title={strings.headTitle} />
     </div>
   )
 }

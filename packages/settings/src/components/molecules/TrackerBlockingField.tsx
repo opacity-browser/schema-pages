@@ -15,12 +15,14 @@ export default function TrackerBlockingField({
 
   const handleChange = async (checked: boolean) => {
     const res = await messageManager.updateTrackerBlocking(checked)
+    console.log(res)
     if (res === "error") return
     setTrackerBlocking(checked)
   }
 
   const getTrackerBlocking = async () => {
     const res = await messageManager.getTrackerBlocking()
+    console.log(res)
     if (res === "error") return
     setTrackerBlocking(res)
   }

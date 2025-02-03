@@ -3,6 +3,11 @@ import { isDev } from "../constants"
 import { IStrings } from "../interfases/IStrings"
 import { IHistoryItem } from "design-system/molecules/HistoryList/interface"
 import { IPermissionItem } from "design-system/molecules/PermissionList/interface"
+import {
+  getLanguageName,
+  LanguageCode,
+  LanguageName
+} from "../helpers/language"
 
 export default class MessageManager {
   postMessage: PostMessage
@@ -16,7 +21,6 @@ export default class MessageManager {
       return new Promise((resolve) =>
         resolve({
           lang: "en",
-          headTitle: "Settings",
           Settings: "Settings",
           General: "General",
           "Search History": "Search History",
@@ -52,7 +56,9 @@ export default class MessageManager {
           Hindi: "Hindi",
           Norwegian: "Norwegian",
           "Blocks unnecessary ads and trackers using DuckDuckGo’s tracking protection list along with additional rules.":
-            "Blocks unnecessary ads and trackers using DuckDuckGo’s tracking protection list along with additional rules."
+            "Blocks unnecessary ads and trackers using DuckDuckGo’s tracking protection list along with additional rules.",
+          "The changes will take effect after restarting the app.":
+            "The changes will take effect after restarting the app."
         })
       )
     }
@@ -63,79 +69,46 @@ export default class MessageManager {
     )
   }
 
-  updateLanguage(language: string): Promise<"success" | "error"> {
+  updateLanguage(languageCode: LanguageCode): Promise<"success" | "error"> {
     if (isDev) {
       return new Promise((resolve) => resolve("success"))
     }
 
     return this.postMessage.request<"success" | "error">(
       "updateLanguage",
-      language
+      languageCode
     )
   }
 
-  getLanguage(): Promise<{ id: string; name: string } | "error"> {
+  async getLanguage(): Promise<{ id: string; name: string } | "error"> {
     if (isDev) {
       return new Promise((resolve) =>
         resolve({
-          id: "English",
+          id: "en",
           name: "English"
         })
       )
     }
 
-    return this.postMessage.request<{ id: string; name: string } | "error">(
-      "getLanguage"
-    )
+    const langCode = await this.postMessage.request<LanguageCode>("getLanguage")
+    return {
+      id: langCode,
+      name: getLanguageName(langCode)
+    }
   }
 
-  getLanguageList(): Promise<Array<{ id: string; name: string }> | "error"> {
-    if (isDev) {
-      return new Promise((resolve) =>
-        resolve([
-          {
-            id: "English",
-            name: "English"
-          },
-          {
-            id: "Norwegian",
-            name: "Norwegian"
-          },
-          {
-            id: "Hindi",
-            name: "Hindi"
-          },
-          {
-            id: "Korean",
-            name: "Korean"
-          },
-          {
-            id: "Chinese",
-            name: "Chinese"
-          },
-          {
-            id: "German",
-            name: "German"
-          },
-          {
-            id: "Japanese",
-            name: "Japanese"
-          },
-          {
-            id: "Spanish",
-            name: "Spanish"
-          },
-          {
-            id: "French",
-            name: "French"
-          }
-        ])
-      )
-    }
-
-    return this.postMessage.request<
-      Array<{ id: string; name: string }> | "error"
-    >("getLanguageList")
+  getLanguageList(): LanguageName[] {
+    return [
+      "English",
+      "Norwegian",
+      "Hindi",
+      "Korean",
+      "Chinese",
+      "German",
+      "Japanese",
+      "Spanish",
+      "French"
+    ]
   }
 
   getScreenMode(): Promise<{ id: string; name: string } | "error"> {
@@ -318,7 +291,7 @@ export default class MessageManager {
     )
   }
 
-  getSearchHistory(
+  getSearchHistoryList(
     yearMonth: string
   ): Promise<{ firstDate: string; list: IHistoryItem[] } | "error"> {
     if (isDev) {
@@ -349,7 +322,7 @@ export default class MessageManager {
 
     return this.postMessage.request<
       { firstDate: string; list: IHistoryItem[] } | "error"
-    >("getSearchHistory", yearMonth)
+    >("getSearchHistoryList", yearMonth)
   }
 
   deleteSearchHistory(id: string): Promise<"success" | "error"> {
@@ -373,7 +346,7 @@ export default class MessageManager {
     )
   }
 
-  getVisitHistory(
+  getVisitHistoryList(
     yearMonth: string
   ): Promise<{ firstDate: string; list: IHistoryItem[] } | "error"> {
     if (isDev) {
@@ -413,7 +386,7 @@ export default class MessageManager {
 
     return this.postMessage.request<
       { firstDate: string; list: IHistoryItem[] } | "error"
-    >("getVisitHistory", yearMonth)
+    >("getVisitHistoryList", yearMonth)
   }
 
   deleteVisitHistory(id: string): Promise<"success" | "error"> {

@@ -1,6 +1,5 @@
 export interface IStrings {
   lang: string
-  headTitle: string
   Settings: string
   General: string
   "Search History": string
@@ -35,4 +34,5 @@ export interface IStrings {
   Hindi: string
   Norwegian: string
   "Blocks unnecessary ads and trackers using DuckDuckGo’s tracking protection list along with additional rules.": string
+  "The changes will take effect after restarting the app.": string
 }

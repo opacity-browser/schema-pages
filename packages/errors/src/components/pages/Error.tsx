@@ -43,7 +43,7 @@ export default function Error() {
         isInit ? "" : "hidden"
       )}
     >
-      <div className="mt-24">
+      <div className="mt-[16vh] min-h-72">
         <ErrorMessage
           title={strings.title}
           message={strings.message}

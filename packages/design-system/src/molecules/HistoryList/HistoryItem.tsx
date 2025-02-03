@@ -1,3 +1,4 @@
+import { parse, format } from "date-fns"
 import clsx from "clsx"
 import { XMarkIcon } from "@heroicons/react/24/outline"
 import { IHistoryItem } from "./interface"
@@ -9,15 +10,20 @@ export default function HistoryItem({
   item: IHistoryItem
   onDelete: (id: string) => void
 }) {
+  const date = parse(item.createDate, "yyyy-MM-dd HH:mm:ss", new Date())
+  const formattedDate = format(date, "MMM d, hh:mm a")
+
   return (
     <div
       className={clsx(
         "w-full text-sm/7 border-b border-primary-50/80 dark:border-primary-600/80 py-2",
-        "text-primary dark:text-primary-50"
+        "text-primary dark:text-white"
       )}
     >
       <div className={clsx("flex gap-4 items-center")}>
-        <p className="truncate">{item.createDate}</p>
+        <p className="truncate text-xs text-primary-600 dark:text-primary-100">
+          {formattedDate}
+        </p>
         <div className="flex flex-1 min-w-0 max-w-full">
           {item.url ? (
             <div className="flex flex-1 min-w-0 gap-2 items-center">
@@ -29,7 +35,7 @@ export default function HistoryItem({
               >
                 <p className="truncate min-w-0">{item.title}</p>
               </a>
-              <span className="truncate min-w-0 text-xs text-primary-200 dark:text-primary-300">
+              <span className="truncate min-w-0 text-xs text-primary-300 ">
                 {item.url}
               </span>
             </div>

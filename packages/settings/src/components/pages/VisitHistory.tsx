@@ -27,7 +27,7 @@ export default function VisitHistory() {
   >([])
 
   const getVisitHistories = async () => {
-    const res = await messageManager.getVisitHistory(yearMonth)
+    const res = await messageManager.getVisitHistoryList(yearMonth)
     if (res === "error") return
 
     setFirstYearMonth(res.firstDate)
