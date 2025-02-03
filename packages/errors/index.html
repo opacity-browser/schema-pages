@@ -2,6 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <title>Errors</title>
+    <script>
+      const searchParams = new URLSearchParams(location.search)
+      document.head.getElementsByTagName("title")[0].innerHTML =
+        searchParams.get("title")
+      document.documentElement.lang = searchParams.get("lang")
+    </script>
   </head>
   <body>
     <div id="root"></div>

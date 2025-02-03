@@ -4,19 +4,15 @@ import clsx from "clsx"
 import ErrorMessage from "design-system/atoms/ErrorMessage"
 import { IStrings } from "../../interfases/IStrings"
 import MessageManager from "../../managers/MessageManager"
-import DocumentMeta from "../atoms/DocumentMeta"
 
 export default function Error() {
   const { search } = useLocation()
-  const searchParams = new URLSearchParams(search)
-  const errorType = searchParams.get("errorType")
-  const decodeURL = atob(searchParams.get("url") || "")
   const messageManager = new MessageManager()
+  const searchParams = new URLSearchParams(search)
+  const errorType = searchParams.get("type")
 
   const [isInit, setIsInit] = useState(false)
   const [strings, setStrings] = useState<IStrings>({
-    lang: "en",
-    headTitle: "Unknown error",
     title: "Unknown error",
     message: "An unknown error occurred.",
     buttonText: "Refresh"
@@ -28,13 +24,12 @@ export default function Error() {
       setIsInit(true)
       return
     }
-    document.documentElement.lang = strings.lang
     setStrings(strings)
     setIsInit(true)
   }
 
   const handleClickRefresh = () => {
-    if (decodeURL) messageManager.replacePage(decodeURL)
+    window.location.reload()
   }
 
   useEffect(() => {
@@ -56,7 +51,6 @@ export default function Error() {
           onClick={handleClickRefresh}
         />
       </div>
-      <DocumentMeta title={strings.headTitle} />
     </div>
   )
 }

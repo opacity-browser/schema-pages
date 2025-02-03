@@ -15,5 +15,13 @@ export default defineConfig({
     port: 4000,
     open: true,
     historyApiFallback: true
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: "assets/main.js",
+        assetFileNames: "assets/main.[ext]"
+      }
+    }
   }
 })

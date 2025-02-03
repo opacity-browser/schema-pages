@@ -13,8 +13,6 @@ export default class MessageManager {
     if (isDev) {
       return new Promise((resolve) =>
         resolve({
-          lang: "en",
-          headTitle: "Unknown error",
           title: "Unknown error",
           message: "An unknown error occurred.",
           buttonText: "Refresh"
@@ -23,13 +21,5 @@ export default class MessageManager {
     }
 
     return this.postMessage.request<IStrings | "error">("getPageStrings", type)
-  }
-
-  replacePage(url: string): void {
-    if (isDev) {
-      return
-    }
-
-    this.postMessage.request("replacePage", url)
   }
 }
