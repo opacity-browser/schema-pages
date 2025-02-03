@@ -18,7 +18,7 @@ export default function BaseLayout({
           {strings["version"] ? `v${strings["version"]}` : ""}
         </p>
       </div>
-      <main className="w-full h-full pl-64 bg-white dark:bg-background-dark">
+      <main className="w-full h-full pl-64 bg-white dark:bg-background-dark overflow-auto">
         {children}
       </main>
     </div>
