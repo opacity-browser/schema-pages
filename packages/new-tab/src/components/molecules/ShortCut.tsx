@@ -26,7 +26,7 @@ export default function Shortcut({
   }, [])
 
   const handleAddFavorite = async (name: string, address: string) => {
-    await messageManager.addFavorite(name, address)
+    await messageManager.cratedFavorite(name, address)
     getFavoriteList()
   }
 
@@ -35,7 +35,9 @@ export default function Shortcut({
     name: string,
     address: string
   ) => {
-    await messageManager.editFavorite(id, name, address)
+    console.log("A")
+    await messageManager.updateFavorite(id, name, address)
+    console.log("C")
     getFavoriteList()
   }
 

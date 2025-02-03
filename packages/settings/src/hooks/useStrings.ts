@@ -28,7 +28,7 @@ const stringsAtom = atom<IStrings>({
   "Learn More": "Learn More",
   "Clear All": "Clear All",
   Library: "Library",
-  version: "1.0.10",
+  version: "1.1.0",
   Korean: "Korean",
   English: "English",
   German: "German",

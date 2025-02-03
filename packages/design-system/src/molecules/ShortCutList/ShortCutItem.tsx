@@ -17,7 +17,7 @@ export default function ShortCutItem({
   i18n: Ii18n
 }) {
   return (
-    <div className="relative size-28 bg-gray-100 hover:bg-gray-200 transition-colors rounded-lg cursor-pointer flex items-center justify-center group dark:bg-primary-800 dark:hover:bg-primary-900">
+    <div className="relative size-28 bg-gray-100 hover:bg-gray-200/80 transition-colors rounded-lg cursor-pointer flex items-center justify-center group dark:bg-primary-800/50 dark:hover:bg-primary-900/50">
       <a
         className="absolute w-full h-full z-10"
         href={address}

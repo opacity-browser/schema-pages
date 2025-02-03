@@ -61,7 +61,7 @@ export default function ShortCutList({
           if (i === listLen)
             return (
               <li key={i}>
-                <div className="relative size-28 bg-gray-100 hover:bg-gray-200 transition-colors rounded-lg cursor-pointer dark:bg-primary-800 dark:hover:bg-primary-900">
+                <div className="relative size-28 bg-gray-100 hover:bg-gray-200/80 transition-colors rounded-lg cursor-pointer dark:bg-primary-800/50 dark:hover:bg-primary-900/50">
                   <div
                     className="absolute inset-0 flex items-center justify-center"
                     onClick={() => handleClickDropdown("", "add")}
@@ -91,7 +91,7 @@ export default function ShortCutList({
           const { id, title, address } = list[i]
 
           return (
-            <li key={id}>
+            <li key={id + title + address}>
               <ShortCutItem
                 id={id}
                 title={title}
@@ -102,6 +102,7 @@ export default function ShortCutList({
               />
               <ShortCutDialog
                 dialogTitle={i18n["Edit Favorite"]}
+                id={id}
                 title={title}
                 address={address}
                 isOpen={isOpen && openDialogId === id}

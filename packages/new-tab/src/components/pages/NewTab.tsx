@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
 import clsx from "clsx"
+import Logo from "design-system/atoms/Logo"
 import { IStrings } from "../../interfases/IStrings"
 import MessageManager from "../../managers/MessageManager"
-import DocumentMeta from "../atoms/DocumentMeta"
-import Logo from "design-system/atoms/Logo"
 import Shortcut from "../molecules/ShortCut"
 
 export default function NewTab() {
@@ -11,8 +10,6 @@ export default function NewTab() {
 
   const [isInit, setIsInit] = useState(false)
   const [strings, setStrings] = useState<IStrings>({
-    lang: "en",
-    headTitle: "New Tab",
     "Add Favorite": "Add Favorite",
     "Edit Favorite": "Edit Favorite",
     Title: "Title",
@@ -30,7 +27,6 @@ export default function NewTab() {
       return
     }
 
-    document.documentElement.lang = res.lang
     setStrings(res)
     setIsInit(true)
   }
@@ -52,7 +48,6 @@ export default function NewTab() {
         </figure>
         <Shortcut className="mb-14" i18n={strings} />
       </div>
-      <DocumentMeta title={strings.headTitle} />
     </div>
   )
 }

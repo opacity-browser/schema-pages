@@ -58,7 +58,7 @@ export default function ShortCutDialog({
       className="relative z-10 focus:outline-none"
       onClose={handleClickClose}
     >
-      <div className="fixed inset-0 z-10 w-screen overflow-y-auto bg-black/10 dark:bg-black/40">
+      <div className="fixed inset-0 z-10 w-screen overflow-y-auto bg-black/5 dark:bg-black/20">
         <div className="flex min-h-full items-center justify-center p-4">
           <DialogPanel
             transition

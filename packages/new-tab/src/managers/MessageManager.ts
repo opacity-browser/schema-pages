@@ -14,8 +14,6 @@ export default class MessageManager {
     if (isDev) {
       return new Promise((resolve) =>
         resolve({
-          lang: "en",
-          headTitle: "New Tab",
           "Add Favorite": "Add Favorite",
           "Edit Favorite": "Edit Favorite",
           Title: "Title",
@@ -58,13 +56,13 @@ export default class MessageManager {
     return this.postMessage.request<IFavorite[] | "error">("getFavoriteList")
   }
 
-  addFavorite(title: string, address: string): Promise<"success" | "error"> {
+  cratedFavorite(title: string, address: string): Promise<"success" | "error"> {
     if (isDev) {
       return new Promise((resolve) => resolve("success"))
     }
 
     return this.postMessage.request<"success" | "error">(
-      "addFavorite",
+      "cratedFavorite",
       JSON.stringify({
         title,
         address
@@ -72,7 +70,7 @@ export default class MessageManager {
     )
   }
 
-  editFavorite(
+  updateFavorite(
     id: string,
     title: string,
     address: string
@@ -80,9 +78,9 @@ export default class MessageManager {
     if (isDev) {
       return new Promise((resolve) => resolve("success"))
     }
-
+    console.log("B")
     return this.postMessage.request<"success" | "error">(
-      "editFavorite",
+      "updateFavorite",
       JSON.stringify({
         id,
         title,
