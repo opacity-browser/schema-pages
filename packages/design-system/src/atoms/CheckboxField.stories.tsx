@@ -20,9 +20,6 @@ const meta = {
     layout: "centered"
   },
   argTypes: {}
-  // args: {
-  //   children: "CheckboxField"
-  // }
 } satisfies Meta<typeof CheckboxField>
 
 export default meta

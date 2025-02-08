@@ -1,13 +1,33 @@
 import { Meta, StoryObj } from "@storybook/react/*"
 import InputField from "./InputField"
-import Selectbox from "./Selectbox"
+import Listbox from "./Listbox"
 
 const meta = {
   title: "Atoms/InputField",
   component: () => {
     return (
       <InputField label="Label" description="Description">
-        <Selectbox />
+        <Listbox
+          list={[
+            {
+              id: "1",
+              name: "Option 1"
+            },
+            {
+              id: "2",
+              name: "Option 2"
+            },
+            {
+              id: "3",
+              name: "Option 3"
+            }
+          ]}
+          selected={{
+            id: "1",
+            name: "Option 1"
+          }}
+          onChange={() => {}}
+        />
       </InputField>
     )
   },

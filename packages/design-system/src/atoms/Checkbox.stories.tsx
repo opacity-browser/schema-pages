@@ -21,9 +21,6 @@ const meta = {
       action: "change"
     }
   }
-  // args: {
-  //   children: "Checkbox"
-  // }
 } satisfies Meta<typeof Checkbox>
 
 export default meta
