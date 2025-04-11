@@ -27,7 +27,7 @@ export default function PermissionItem({
         </p>
         <div className="flex flex-1 min-w-0 max-w-full items-center">
           <a
-            href={item.domain}
+            href={`https://${item.domain}`}
             target="_blank"
             rel="noreferrer"
             className="truncate flex min-w-0"

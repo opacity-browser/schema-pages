@@ -64,6 +64,7 @@ export const Default: Story = {
         createDate: "2024-03-02 12:00:00"
       }
     ],
-    onDelete: () => {}
+    onDelete: () => {},
+    emptyMessage: "There is no domain with permissions set."
   }
 }
