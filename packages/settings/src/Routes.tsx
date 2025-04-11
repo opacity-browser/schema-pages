@@ -1,7 +1,7 @@
 import { HashRouter, Route, Routes as ReactRouters } from "react-router"
 import General from "./components/pages/General"
 import SearchHistory from "./components/pages/SearchHistory"
-import VisitHistory from "./components/pages/VIsitHistory"
+import VisitHistory from "./components/pages/VisitHistory"
 import Permissions from "./components/pages/Permissions"
 import Library from "./components/pages/Library"
 
